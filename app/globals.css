@@ -1,0 +1,1040 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🚀 高级主题系统 */
+:root {
+  /* 颜色变量 */
+  --color-primary: #9333ea;
+  --color-primary-dark: #7c3aed;
+  --color-secondary: #ec4899;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #06b6d4;
+
+  /* 背景颜色 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+
+  /* 文本颜色 */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+
+  /* 边框颜色 */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* 动画时长 */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* 暗色主题 */
+.dark {
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --bg-tertiary: #0f172a;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+}
+
+/* 高对比度模式 */
+.high-contrast {
+  --color-primary: #000000;
+  --text-primary: #000000;
+  --bg-primary: #ffffff;
+  --border-primary: #000000;
+}
+
+/* 减少动画模式 */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* 屏幕阅读器优化 */
+.screen-reader-optimized *:focus {
+  outline: 3px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* 高级主题系统 */
+:root {
+  /* 颜色变量 */
+  --color-primary: #9333ea;
+  --color-primary-dark: #7c3aed;
+  --color-secondary: #ec4899;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #06b6d4;
+
+  /* 背景颜色 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+
+  /* 文本颜色 */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+
+  /* 边框颜色 */
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* 动画时长 */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* 字体大小 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+}
+
+/* 暗色主题 */
+.dark {
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --bg-tertiary: #0f172a;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+}
+
+/* 高对比度模式 */
+.high-contrast {
+  --color-primary: #000000;
+  --color-secondary: #000000;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --border-primary: #000000;
+}
+
+/* 减少动画模式 */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* 屏幕阅读器优化 */
+.screen-reader-optimized {
+  /* 增强焦点指示器 */
+  *:focus {
+    outline: 3px solid var(--color-primary) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* 字体大小类 */
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-base {
+  font-size: var(--font-size-base);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/* Focus styles for better accessibility */
+*:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 2px;
+}
+
+/* 📱 移动端优先容器类 */
+.container-custom {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.75rem; /* 12px - 更紧凑的移动端间距 */
+  padding-right: 0.75rem;
+}
+
+/* 小屏手机优化 (375px+) */
+@media (min-width: 375px) {
+  .container-custom {
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem;
+  }
+}
+
+/* 平板竖屏 (640px+) */
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem;
+  }
+}
+
+/* 平板横屏 (768px+) */
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem;
+  }
+}
+
+/* 桌面端 (1024px+) */
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 3rem; /* 48px */
+    padding-right: 3rem;
+  }
+}
+
+/* 大屏桌面 (1280px+) */
+@media (min-width: 1280px) {
+  .container-custom {
+    padding-left: 4rem; /* 64px */
+    padding-right: 4rem;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 📱 移动端优先组件类 */
+@layer components {
+  /* 卡片组件 - 移动端优化 */
+  .card {
+    @apply bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-lg;
+    /* 移动端更紧凑的内边距 */
+    padding: 1rem; /* 16px */
+    /* 移动端触摸优化 */
+    min-height: 44px; /* iOS推荐最小触摸目标 */
+  }
+
+  /* 平板及以上设备的卡片内边距 */
+  @media (min-width: 768px) {
+    .card {
+      padding: 1.5rem; /* 24px */
+    }
+  }
+
+  /* 桌面端卡片内边距 */
+  @media (min-width: 1024px) {
+    .card {
+      padding: 2rem; /* 32px */
+    }
+  }
+
+  /* 主要按钮 - 移动端优化 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center border border-transparent rounded-lg shadow-lg text-white bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300;
+    /* 移动端按钮尺寸 */
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+    font-size: 0.875rem; /* 14px */
+    min-height: 44px; /* iOS推荐的最小触摸目标 */
+  }
+
+  /* 平板及以上的按钮尺寸 */
+  @media (min-width: 768px) {
+    .btn-primary {
+      padding: 0.875rem 1.5rem; /* 14px 24px */
+      font-size: 1rem; /* 16px */
+      @apply transform hover:scale-105;
+    }
+  }
+
+  /* 次要按钮 - 移动端优化 */
+  .btn-outline {
+    @apply inline-flex items-center justify-center border-2 border-white rounded-md text-white bg-white/10 backdrop-blur-sm hover:bg-white hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all duration-300;
+    padding: 0.75rem 1rem; /* 12px 16px */
+    font-size: 0.875rem; /* 14px */
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .btn-outline {
+      padding: 0.75rem 1.25rem; /* 12px 20px */
+      font-size: 1rem; /* 16px */
+      @apply transform hover:scale-105;
+    }
+  }
+
+  /* 辅助按钮 - 移动端优化 */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center border border-transparent rounded-lg shadow-lg text-white bg-gradient-to-r from-secondary-600 to-primary-600 hover:from-secondary-700 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition-all duration-300;
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+    font-size: 0.875rem; /* 14px */
+    min-height: 44px;
+  }
+
+  @media (min-width: 768px) {
+    .btn-secondary {
+      padding: 0.875rem 1.5rem; /* 14px 24px */
+      font-size: 1rem; /* 16px */
+      @apply transform hover:scale-105;
+    }
+  }
+
+  /* 禁用按钮 */
+  .btn-disabled {
+    @apply inline-flex items-center justify-center border border-gray-300 rounded-lg text-gray-500 bg-gray-100 cursor-not-allowed;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+  }
+  
+  /* 📱 移动端优先标题样式 */
+  .section-title {
+    @apply font-bold text-neutral-800 mb-4;
+    font-size: 1.5rem; /* 24px - 移动端 */
+    line-height: 1.3;
+  }
+
+  @media (min-width: 640px) {
+    .section-title {
+      font-size: 1.75rem; /* 28px - 小平板 */
+      margin-bottom: 1.25rem; /* 20px */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 2rem; /* 32px - 平板 */
+      margin-bottom: 1.5rem; /* 24px */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-title {
+      font-size: 2.25rem; /* 36px - 桌面 */
+      margin-bottom: 2rem; /* 32px */
+    }
+  }
+
+  .section-subtitle {
+    @apply font-semibold text-neutral-700 mb-3;
+    font-size: 1.125rem; /* 18px - 移动端 */
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .section-subtitle {
+      font-size: 1.25rem; /* 20px - 平板+ */
+      margin-bottom: 1rem; /* 16px */
+    }
+  }
+
+  /* Enhanced card styles */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-purple-pink {
+    @apply bg-gradient-to-br from-primary-700 via-primary-600 to-secondary-600;
+  }
+
+  .gradient-red-orange {
+    @apply bg-gradient-to-br from-red-500 to-orange-500;
+  }
+
+  .gradient-green-teal {
+    @apply bg-gradient-to-br from-green-500 to-teal-500;
+  }
+
+  .gradient-blue-indigo {
+    @apply bg-gradient-to-br from-blue-500 to-indigo-500;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  /* NSAID Article specific styles */
+  .mechanism-diagram {
+    @apply bg-blue-50 border border-blue-200 rounded-lg p-6 my-6 text-center;
+  }
+
+  .mechanism-diagram p {
+    @apply text-blue-800 font-semibold text-lg mb-2;
+  }
+
+  .treatment-steps {
+    @apply bg-purple-50 border border-purple-200 rounded-lg p-6 my-6;
+  }
+
+  .treatment-steps p {
+    @apply text-purple-800 mb-4 last:mb-0;
+  }
+
+  .treatment-steps strong {
+    @apply text-purple-900 font-bold;
+  }
+
+  .treatment-recommendation {
+    @apply bg-green-50 border border-green-200 rounded-lg p-4 my-4;
+  }
+
+  .treatment-recommendation p {
+    @apply text-green-800 mb-2 last:mb-0;
+  }
+
+  /* 📱 文章页面移动端优化 */
+  .article-content {
+    /* 移动端文字优化 */
+    line-height: 1.7;
+    word-break: break-word;
+  }
+
+  .article-content h1,
+  .article-content h2,
+  .article-content h3,
+  .article-content h4,
+  .article-content h5,
+  .article-content h6 {
+    scroll-margin-top: 80px; /* 为固定头部留出空间 */
+  }
+
+  /* 移动端表格优化 */
+  @media (max-width: 768px) {
+    .article-content table {
+      font-size: 0.875rem;
+    }
+
+    .article-content th,
+    .article-content td {
+      padding: 0.5rem !important;
+    }
+  }
+
+  /* 代码块移动端优化 */
+  .article-content pre {
+    @apply text-sm overflow-x-auto;
+    max-width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .article-content pre {
+      font-size: 0.75rem;
+      padding: 0.75rem;
+    }
+  }
+
+  /* 引用块移动端优化 */
+  .article-content blockquote {
+    @apply border-l-4 border-primary-400 pl-4 py-2 bg-primary-50 italic my-4 rounded-r-lg;
+  }
+
+  @media (max-width: 640px) {
+    .article-content blockquote {
+      @apply pl-3 py-3 text-sm;
+    }
+  }
+
+  /* 列表移动端优化 */
+  .article-content ul,
+  .article-content ol {
+    @apply space-y-2;
+  }
+
+  @media (max-width: 640px) {
+    .article-content ul,
+    .article-content ol {
+      @apply space-y-1 text-sm;
+    }
+  }
+
+  /* 图片移动端优化 */
+  .article-content img {
+    @apply rounded-lg shadow-sm max-w-full h-auto;
+  }
+
+  /* 文本截断工具类 */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .treatment-recommendation strong {
+    @apply text-green-900 font-bold;
+  }
+}
+
+/* Custom slider styles */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 12px;
+  border-radius: 6px;
+}
+
+/* Pain scale slider with gradient background */
+input[type="range"].pain-scale {
+  background: linear-gradient(to right,
+    #10b981 0%,
+    #22c55e 20%,
+    #eab308 40%,
+    #f97316 60%,
+    #ef4444 80%,
+    #dc2626 100%);
+  height: 12px;
+  border-radius: 6px;
+}
+
+/* Prevent text overflow in pain scale cards */
+.pain-scale-container {
+  overflow: hidden;
+}
+
+.pain-scale-container .text-sm {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+}
+
+/* Mobile responsive pain scale labels */
+@media (max-width: 640px) {
+  .pain-scale-container .text-sm {
+    font-size: 0.625rem;
+  }
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: #e5e7eb;
+  height: 12px;
+  border-radius: 6px;
+}
+
+input[type="range"].pain-scale::-webkit-slider-track {
+  background: linear-gradient(to right,
+    #10b981 0%,
+    #22c55e 20%,
+    #eab308 40%,
+    #f97316 60%,
+    #ef4444 80%,
+    #dc2626 100%);
+  height: 12px;
+  border-radius: 6px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: 3px solid #dc2626;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-track {
+  background: #e5e7eb;
+  height: 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+input[type="range"].pain-scale::-moz-range-track {
+  background: linear-gradient(to right,
+    #10b981 0%,
+    #22c55e 20%,
+    #eab308 40%,
+    #f97316 60%,
+    #ef4444 80%,
+    #dc2626 100%);
+  height: 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: 3px solid #dc2626;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 移动端特定优化 */
+@media (max-width: 767px) {
+  /* 移动端文本选择优化 */
+  * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* 允许文本内容被选择 */
+  p, span, div[class*="text"], h1, h2, h3, h4, h5, h6 {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  /* 移动端滚动优化 */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  /* 移动端点击反馈优化 */
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+    touch-action: manipulation;
+  }
+
+  /* 移动端输入框优化 */
+  input, textarea, select {
+    font-size: 16px; /* 防止iOS缩放 */
+    -webkit-appearance: none;
+    border-radius: 0.5rem; /* 移动端友好的圆角 */
+    min-height: 44px; /* iOS推荐最小触摸目标 */
+    padding: 0.75rem 1rem; /* 更舒适的内边距 */
+  }
+
+  /* 移动端表单元素间距优化 */
+  .form-group {
+    margin-bottom: 1.5rem; /* 24px - 移动端更大间距 */
+  }
+
+  /* 移动端单选框和复选框优化 */
+  input[type="radio"], input[type="checkbox"] {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 0.75rem;
+  }
+
+  /* 移动端标签优化 */
+  label {
+    display: flex;
+    align-items: center;
+    min-height: 44px; /* 确保足够的触摸目标 */
+    padding: 0.5rem 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* 📱 移动端横屏优化 */
+@media (max-width: 767px) and (orientation: landscape) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* 横屏时减少垂直间距 */
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+}
+
+/* 📱 超小屏设备优化 (320px-374px) */
+@media (max-width: 374px) {
+  .container-custom {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .btn-primary, .btn-secondary, .btn-outline {
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+    min-height: 40px;
+  }
+
+  /* 超小屏网格优化 */
+  .grid-cols-2 {
+    grid-template-columns: 1fr; /* 强制单列 */
+  }
+
+  /* 超小屏文字大小调整 */
+  .text-3xl {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .text-2xl {
+    font-size: 1.25rem; /* 20px */
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Performance optimizations */
+.mobile-touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Focus improvements */
+.focus-visible:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent layout shift */
+img, video {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Better button states */
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Improved form elements */
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Better link accessibility */
+a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* 📱 高对比度移动端优化 */
+@media (prefers-contrast: high) and (max-width: 767px) {
+  .btn-primary, .btn-secondary {
+    border: 2px solid currentColor;
+  }
+
+  .card {
+    border: 1px solid var(--border-primary);
+  }
+}
+
+/* 📱 移动端专用工具类 */
+@media (max-width: 767px) {
+  /* 移动端安全区域 */
+  .mobile-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* 移动端全宽按钮 */
+  .mobile-full-width {
+    width: 100% !important;
+  }
+
+  /* 移动端紧凑间距 */
+  .mobile-compact {
+    padding: 0.5rem !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  /* 移动端大触摸目标 */
+  .mobile-touch-target {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  /* 移动端隐藏元素 */
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  /* 移动端显示元素 */
+  .mobile-show {
+    display: block !important;
+  }
+
+  /* 移动端表单优化 */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  /* 移动端选项优化 */
+  .mobile-option-item {
+    min-height: 48px;
+    padding: 0.75rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-option-item:hover {
+    background-color: rgb(250 245 255);
+    border-color: rgb(196 181 253);
+  }
+
+  .mobile-option-item:active {
+    background-color: rgb(243 232 255);
+    transform: scale(0.98);
+  }
+
+  /* 移动端按钮优化 */
+  .mobile-button {
+    min-height: 48px;
+    padding: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+  }
+
+  .mobile-button:active {
+    transform: scale(0.95);
+  }
+
+  /* 移动端输入框优化 */
+  input[type="radio"], input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+  }
+
+  /* 移动端文本优化 */
+  .mobile-text-compact {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* 移动端间距优化 */
+  .mobile-spacing-tight {
+    margin-bottom: 0.5rem;
+  }
+
+  .mobile-spacing-normal {
+    margin-bottom: 1rem;
+  }
+
+  /* 移动端滑块优化 */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px !important;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Purple theme enhancements for constitution test */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced purple gradient backgrounds */
+.gradient-purple-light {
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+}
+
+/* Custom purple range slider styling */
+input[type="range"].pain-scale::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+}
+
+input[type="range"].pain-scale::-webkit-slider-thumb:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+input[type="range"].pain-scale::-moz-range-thumb {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Purple button enhancements */
+.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.btn-purple:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
