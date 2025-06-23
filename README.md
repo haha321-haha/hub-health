@@ -1,4 +1,4 @@
-# Period Hub v2 Clean 🌸
+# Period Hub health v2 Clean 🌸
 
 > 全新的、干净的经期健康平台 - 重新设计的架构，避免技术债务
 
