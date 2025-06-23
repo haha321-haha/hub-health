@@ -167,7 +167,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 | 角色 | 信息 |
 |------|------|
 | **开发者** | [@haha321-haha](https://github.com/haha321-haha) |
-| **项目地址** | https://github.com/haha321-haha/v2-clean-fixed.git |
+| **项目地址** | (https://github.com/haha321-haha/hub-health.git)|
 | **邮箱** | tiyibaofu@outlook.com |
 
 ## 📞 联系我们 | Contact
@@ -176,7 +176,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 | 联系方式 | 链接/地址 | 用途 |
 |----------|-----------|------|
-| 🐛 **GitHub Issues** | [提交问题](https://github.com/haha321-haha/vhub-health issues) | Bug报告、功能建议 |
+| 🐛 **GitHub Issues** | [提交问题](https://github.com/haha321-haha/hub-health issues) | Bug报告、功能建议 |
 | 👨‍💻 **GitHub Profile** | [@haha321-haha](https://github.com/haha321-haha) | 查看更多项目 |
 | 📧 **邮箱联系** | tiyibaofu@outlook.com | 商务合作、技术咨询 |
 | 🌐 **项目主页** | https://periodhub.health | 在线体验平台 |
