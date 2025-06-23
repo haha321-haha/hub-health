@@ -1,0 +1,62 @@
+{
+  "name": "periodhub-health",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate-pdfs": "node scripts/generate-pdfs.js",
+    "deploy:vercel": "./scripts/deploy.sh vercel",
+    "deploy:github": "./scripts/deploy.sh github",
+    "deploy:static": "./scripts/deploy.sh static",
+    "check:deployment": "node scripts/check-deployment.js",
+    "build:static": "cp next.config.static.js next.config.js && npm run build",
+    "preview": "npm run build && npm run start",
+    "validate:translations": "node scripts/validate-translations.js",
+    "migrate:translations": "node scripts/migrate-translations.js",
+    "fix:translations": "npm run migrate:translations && npm run validate:translations",
+    "test:translations": "jest tests/translation-system.test.js",
+    "test:translations:e2e": "jest tests/e2e/translation-e2e.test.js",
+    "quality:translations": "node scripts/translation-quality-check.js",
+    "check:translations": "npm run fix:translations && npm run test:translations && npm run quality:translations"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "gray-matter": "^4.0.3",
+    "immer": "^10.1.1",
+    "lucide-react": "^0.294.0",
+    "next": "14.2.5",
+    "next-intl": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "sharp": "^0.33.0",
+    "styled-jsx": "^5.1.7",
+    "tailwind-merge": "^2.0.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.55.0",
+    "eslint-config-next": "^14.0.4",
+    "glob": "^11.0.2",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "puppeteer": "^21.0.0",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.3"
+  }
+}

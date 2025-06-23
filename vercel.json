@@ -1,0 +1,71 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "functions": {
+    "app/**/*.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_BASE_URL": "https://periodhub.health",
+    "NODE_ENV": "production",
+    "NEXT_TELEMETRY_DISABLED": "1"
+  },
+  "regions": ["hkg1", "sin1", "nrt1"],
+  "redirects": [
+    {
+      "source": "/zh/nsaid-medications",
+      "destination": "/zh/articles/nsaid-menstrual-pain-professional-guide",
+      "permanent": true
+    },
+    {
+      "source": "/en/nsaid-medications", 
+      "destination": "/en/articles/nsaid-menstrual-pain-professional-guide",
+      "permanent": true
+    },
+    {
+      "source": "/zh/articles/nsaid-medications",
+      "destination": "/zh/articles/nsaid-menstrual-pain-professional-guide", 
+      "permanent": true
+    },
+    {
+      "source": "/en/articles/nsaid-medications",
+      "destination": "/en/articles/nsaid-menstrual-pain-professional-guide",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options", 
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
+}
