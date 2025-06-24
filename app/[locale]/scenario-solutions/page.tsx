@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Briefcase,
   Car,
@@ -35,6 +36,34 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
   
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
+
+  // 场景图片映射
+  const scenarioImages: Record<string, { filename: string; alt: string }> = {
+    office: {
+      filename: 'scenario-office.jpg',
+      alt: 'Professional woman managing menstrual discomfort at office workspace'
+    },
+    commute: {
+      filename: 'scenario-commuting.jpg',
+      alt: 'Woman managing period pain during daily commute on public transport'
+    },
+    exercise: {
+      filename: 'scenario-exercise.jpg',
+      alt: 'Woman adapting exercise routine during menstruation in gym setting'
+    },
+    sleep: {
+      filename: 'scenario-sleeping.jpg',
+      alt: 'Woman using comfort techniques for better sleep during menstruation'
+    },
+    social: {
+      filename: 'scenario-dating.jpg',
+      alt: 'Woman confidently managing period during social gathering or date'
+    },
+    lifeStages: {
+      filename: 'scenario-family.jpg',
+      alt: 'Women of different life stages sharing menstrual health experiences'
+    }
+  };
 
   const scenarios = [
     {
@@ -94,7 +123,7 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12" data-page="scenario-solutions">
       {/* Page Header */}
       <header className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
@@ -192,14 +221,16 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
               key={scenario.id}
               className={`card group cursor-pointer transition-all duration-300 ${scenario.hoverColor} border-2 border-transparent hover:border-primary-200`}
             >
-              {/* Scenario Image Placeholder */}
-              <div className="mb-6">
-                <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-gray-400 mb-2">📷</div>
-                    <p className="text-sm text-gray-500">{scenario.title}</p>
-                  </div>
-                </div>
+              {/* Scenario Image */}
+              <div className="mb-6 relative overflow-hidden rounded-lg">
+                <Image
+                  src={`/images/scenarios/${scenarioImages[scenario.id].filename}`}
+                  alt={scenarioImages[scenario.id].alt}
+                  width={600}
+                  height={400}
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
               </div>
 
               <div className={`w-16 h-16 flex items-center justify-center rounded-full ${scenario.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>

@@ -189,7 +189,7 @@ export default async function LifeStagesScenarioPage({ params: { locale } }: Pro
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12" data-page="scenario-lifestages">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm text-neutral-600">
         <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600 transition-colors">

@@ -198,7 +198,7 @@ export default async function SocialScenarioPage({ params: { locale } }: Props) 
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12" data-page="scenario-social">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm text-neutral-600">
         <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600 transition-colors">
@@ -330,7 +330,7 @@ export default async function SocialScenarioPage({ params: { locale } }: Props) 
                 <p className="text-blue-800 font-medium mb-2">
                   {locale === 'zh' ? '话术示例：' : 'Script Example:'}
                 </p>
-                <p className="text-blue-700 italic">"{strategy.excuse}"</p>
+                <p className="text-blue-700 italic">&ldquo;{strategy.excuse}&rdquo;</p>
               </div>
             </div>
           ))}
