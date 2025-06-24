@@ -65,8 +65,8 @@
   "hero": {
     "title": "Professional Menstrual Health Management Platform",
     "subtitle": "Scientific guidance and caring support to help every woman navigate their menstrual cycle with confidence and health",
-    "cta": "Start Exploring",
-    "learnMore": "Learn More",
+    "cta": "Free 2-Minute Health Assessment",
+    "learnMore": "Browse Articles",
     "features": {
       "articles": "22 Professional Articles",
       "tools": "4 Interactive Tools",
@@ -639,7 +639,7 @@
       },
       "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners should do 3-4 cycles.",
       "timeUnit": "s",
-      "description": "[EN] 基于科学验证的4-7-8呼吸法，通过调节神经系统快速缓解疼痛。无需下载，立即开始练习。",
+      "description": "Based on scientifically validated 4-7-8 breathing method, quickly relieve pain through nervous system regulation. No download required, start practicing immediately.",
       "usageTips": {
         "title": "Usage Tips:",
         "bestTiming": {
