@@ -1038,3 +1038,123 @@ input[type="range"].pain-scale::-moz-range-thumb {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
 }
+
+/* 🔧 Scenario Solutions 页面布局修复 */
+/* 为 scenario-solutions 页面添加适当的容器样式 */
+[data-page="scenario-solutions"] {
+  padding-left: 0.75rem; /* 12px - 移动端 */
+  padding-right: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* 小屏手机优化 (375px+) */
+@media (min-width: 375px) {
+  [data-page="scenario-solutions"] {
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem;
+  }
+}
+
+/* 平板竖屏 (640px+) */
+@media (min-width: 640px) {
+  [data-page="scenario-solutions"] {
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem;
+  }
+}
+
+/* 平板横屏 (768px+) */
+@media (min-width: 768px) {
+  [data-page="scenario-solutions"] {
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem;
+  }
+}
+
+/* 桌面端 (1024px+) */
+@media (min-width: 1024px) {
+  [data-page="scenario-solutions"] {
+    padding-left: 3rem; /* 48px */
+    padding-right: 3rem;
+  }
+}
+
+/* 大屏桌面 (1280px+) */
+@media (min-width: 1280px) {
+  [data-page="scenario-solutions"] {
+    padding-left: 4rem; /* 64px */
+    padding-right: 4rem;
+    max-width: 1280px;
+  }
+}
+
+/* 移动端安全区域适配 */
+@media (max-width: 767px) {
+  [data-page="scenario-solutions"] {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
+
+/* 🔧 各个情景页面布局修复 */
+/* 为所有情景页面添加统一的响应式布局 */
+[data-page^="scenario-"] {
+  padding-left: 0.75rem; /* 12px - 移动端 */
+  padding-right: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* 小屏手机优化 (375px+) */
+@media (min-width: 375px) {
+  [data-page^="scenario-"] {
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem;
+  }
+}
+
+/* 平板竖屏 (640px+) */
+@media (min-width: 640px) {
+  [data-page^="scenario-"] {
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem;
+  }
+}
+
+/* 平板横屏 (768px+) */
+@media (min-width: 768px) {
+  [data-page^="scenario-"] {
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem;
+  }
+}
+
+/* 桌面端 (1024px+) */
+@media (min-width: 1024px) {
+  [data-page^="scenario-"] {
+    padding-left: 3rem; /* 48px */
+    padding-right: 3rem;
+  }
+}
+
+/* 大屏桌面 (1280px+) */
+@media (min-width: 1280px) {
+  [data-page^="scenario-"] {
+    padding-left: 4rem; /* 64px */
+    padding-right: 4rem;
+    max-width: 1280px;
+  }
+}
+
+/* 移动端安全区域适配 - 所有情景页面 */
+@media (max-width: 767px) {
+  [data-page^="scenario-"] {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
