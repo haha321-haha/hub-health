@@ -1,7 +1,5 @@
 import createMiddleware from 'next-intl/middleware';
-
-// 定义支持的语言
-const locales = ['zh', 'en'] as const;
+import { locales } from './i18n';
 
 export default createMiddleware({
   // A list of all locales that are supported
