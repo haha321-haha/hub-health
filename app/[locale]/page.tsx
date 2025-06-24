@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Locale, locales } from '@/i18n/request';
-import Hero from '@/src/components/layout/Hero';
+import Hero from '@/components/layout/Hero';
 
 // Generate metadata for the page
 export async function generateMetadata({
