@@ -149,18 +149,17 @@ npm run lint
 - **Jest**: 单元测试
 - **Lighthouse**: 性能监控
 
-## 🤝 贡献指南
+⚠️ 版权声明
+Copyright © 2025 [haha321-haha]. All Rights Reserved.
 
-1. Fork项目
-2. 创建功能分支
-3. 提交更改
-4. 推送到分支
-5. 创建Pull Request
+本项目仅供学习和个人使用。未经作者明确书面许可，不得：
 
-## 📄 许可证
+将代码用于商业用途
+修改或分发本项目
+基于本项目创建衍生作品
+如需使用，请联系：[tiyibaofu@outlook.com]
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
 
 ## 👥 团队 | Team
 
