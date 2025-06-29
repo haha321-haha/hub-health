@@ -1,4 +1,4 @@
-# Period Hub health v2 Clean 🌸
+# Period Hub health  🌸
 
 > 全新的、干净的经期健康平台 - 重新设计的架构，避免技术债务
 
@@ -43,7 +43,7 @@ Period Hub v2 是一个专注于经期健康的综合性平台，旨在为年轻
 ## 📁 项目结构
 
 ```
-periodhub-v2-clean/
+hub-health
 ├── app/                    # Next.js App Router
 │   ├── [locale]/          # 国际化路由
 │   │   ├── page.tsx       # 首页
