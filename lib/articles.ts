@@ -74,7 +74,7 @@ export function getArticleBySlug(slug: string, locale: string = 'en'): Article |
       slug,
       title: data.title || '',
       title_zh: data.title_zh,
-      date: data.date || '',
+      date: data.date || data.publishDate || '',
       summary: data.summary || '',
       summary_zh: data.summary_zh,
       tags: data.tags || [],

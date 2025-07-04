@@ -60,10 +60,7 @@
     "startNow": "Start Now",
     "comingSoon": "Coming Soon",
     "importantNote": "Important Note",
-    "medicalDisclaimer": "This information is for educational purposes only and is not intended to replace professional medical advice. Always consult with a healthcare provider for medical concerns.",
-    "navigation": {
-      "backToArticles": "Back to Articles"
-    }
+    "medicalDisclaimer": "This information is for educational purposes only and is not intended to replace professional medical advice. Always consult with a healthcare provider for medical concerns."
   },
   "hero": {
     "title": "Professional Menstrual Health Management Platform",
@@ -71,8 +68,8 @@
     "cta": "Free 2-Minute Health Assessment",
     "learnMore": "Browse Articles",
     "features": {
-      "articles": "{count} Professional Articles",
-      "tools": "5 Interactive Tools",
+      "articles": "22 Professional Articles",
+      "tools": "4 Interactive Tools",
       "support": "24/7 Online Support",
       "articlesDesc": "Professional Medical Guidance",
       "toolsDesc": "Smart Assessment Tools",
@@ -184,8 +181,6 @@
           "physicalTherapyDesc": "Explore scientific applications of massage, stretching, exercise and other natural physical therapies",
           "essentialOils": "Essential Oils Aromatherapy Guide for Menstrual Pain",
           "essentialOilsDesc": "Understanding the application and precautions of essential oil aromatherapy in menstrual pain relief",
-          "herbalTea": "Effective Herbal Tea for Menstrual Pain Relief",
-          "herbalTeaDesc": "Explore the application and preparation methods of traditional herbal teas in menstrual pain relief",
           "traditionalMethods": "Global Traditional Menstrual Pain Relief Methods",
           "traditionalMethodsDesc": "Explore traditional wisdom for menstrual pain relief from cultures around the world",
           "zhanZhuang": "Zhan Zhuang & Baduanjin for Menstrual Pain Relief",
@@ -217,31 +212,7 @@
           "painDifferential": "Menstrual Pain vs Other Abdominal Pain Guide",
           "painDifferentialDesc": "Learn to distinguish important characteristics between menstrual pain and other abdominal pain",
           "faqExpert": "Menstrual Pain FAQ: Expert Answers",
-          "faqExpertDesc": "Professional doctors answer common questions and misconceptions about menstrual pain",
-          "insuranceCoverage": "Complete Guide to US Medical Insurance Coverage for Menstrual Pain Treatment (2025 Revised Edition)",
-          "insuranceCoverageDesc": "Comprehensive guide to US medical insurance coverage for menstrual pain treatment based on the latest ACA policies, covering insurance selection strategies, claims tips, cost optimization, and rights protection",
-          "researchProgress2024": "2024 Menstrual Pain Research Progress Report: Evidence-Based Medicine and Clinical Translation",
-          "researchProgress2024Desc": "2024 menstrual pain research progress report based on PubMed database, FDA approval information, and published studies, covering new pathological mechanism discoveries and innovative treatment breakthroughs",
-          "lifecycleAnalysis": "Complete Analysis of Women's Lifecycle Menstrual Pain Characteristics: North American Scientific Management Guide",
-          "lifecycleAnalysisDesc": "Based on the latest clinical guidelines from ACOG, The Menopause Society, and NIH, providing North American women with scientific menstrual pain management plans throughout their lifecycle"
-        }
-      },
-      "nutritionHealth": {
-        "title": "Nutrition & Health",
-        "description": "Scientific nutrition guidance and healthy lifestyle recommendations",
-        "articles": {
-          "stressManagement": "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological",
-          "stressManagementDesc": "Evidence-based menstrual stress management guide based on the latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions",
-          "antiInflammatory": "Anti-Inflammatory Diet Guide for Menstrual Pain Relief",
-          "antiInflammatoryDesc": "Scientific anti-inflammatory dietary strategies to reduce menstrual inflammation and pain through nutritional regulation",
-          "magnesiumGuide": "Comprehensive Guide to Magnesium and Gut Health",
-          "magnesiumGuideDesc": "In-depth understanding of magnesium's important role in menstrual health and gut health management",
-          "periodRecipes": "Period-Friendly Recipes",
-          "periodRecipesDesc": "Nutritional recipes specifically designed for menstruation to alleviate discomfort symptoms",
-          "sleepQuality": "Comprehensive Menstrual Sleep Quality Improvement Guide: Evidence-Based Medical Methods",
-          "sleepQualityDesc": "Evidence-based menstrual sleep improvement guide based on the latest research from AASM, ACOG, and NIH, providing a systematic 21-day sleep quality enhancement plan",
-          "preventiveCare": "Complete Menstrual Preventive Care Plan: Evidence-Based Medical Guidance",
-          "preventiveCareDesc": "Evidence-based preventive care strategies for North American women based on the latest research from ACOG, NIH, and FDA, covering comprehensive full-cycle care plans"
+          "faqExpertDesc": "Professional doctors answer common questions and misconceptions about menstrual pain"
         }
       },
       "specializedGuides": {
@@ -255,238 +226,148 @@
           "readingList": "Recommended Reading List",
           "readingListDesc": "Curated recommendations for menstrual health-related books, research and resources"
         }
-      },
-      "longTermManagement": {
-        "title": "Long-term Management",
-        "description": "Building sustainable healthy lifestyle and long-term management strategies"
       }
+    },
+    "pdfCenter": {
+      "title": "PDF Resource Download Center",
+      "description": "Download professionally crafted PDF guides, forms, and tools to help you better manage your menstrual health. All resources are available in both Chinese and English.",
+      "downloads": {
+        "painTracking": {
+          "title": "Pain Tracking Form",
+          "description": "Record and analyze your pain patterns to provide important reference for medical diagnosis"
+        },
+        "nutritionPlan": {
+          "title": "Menstrual Nutrition Plan",
+          "description": "Scientific menstrual nutrition guidance to help alleviate symptoms and promote overall health"
+        },
+        "campusEmergency": {
+          "title": "Campus Emergency Checklist",
+          "description": "Student-specific menstrual emergency handling guide and essential items checklist"
+        },
+        "magnesiumGuide": {
+          "title": "Magnesium & Gut Health Guide",
+          "description": "In-depth understanding of magnesium's important role in menstrual health and supplementation methods"
+        },
+        "naturalTherapy": {
+          "title": "Natural Therapy Assessment",
+          "description": "Evaluate and choose natural therapies and conditioning plans suitable for you"
+        },
+        "healthyHabits": {
+          "title": "Healthy Habits Checklist",
+          "description": "Establish daily life habits and routines beneficial to menstrual health"
+        },
+        "complicationsManagement": {
+          "title": "Complications Management Guide",
+          "description": "Professional guidance for identifying and managing menstrual pain-related complications"
+        },
+        "parentCommunication": {
+          "title": "Parent Communication Guide",
+          "description": "Guidance to help parents communicate effectively with teenagers about menstrual health"
+        },
+        "teacherCollaboration": {
+          "title": "Teacher Collaboration Handbook",
+          "description": "Practical handbook for teachers on how to support students' menstrual health management"
+        },
+        "teacherHealthManual": {
+          "title": "Teacher Health Manual",
+          "description": "Menstrual health education resources and guidance for educators"
+        },
+        "zhanZhuangGuide": {
+          "title": "Zhan Zhuang & Baduanjin Illustrated Guide",
+          "description": "Application guidance of traditional Chinese health exercises in menstrual health management"
+        },
+        "specificManagement": {
+          "title": "Specific Menstrual Pain Management Guide",
+          "description": "Personalized management strategies and treatment plans for different types of menstrual pain"
+        }
+      },
+      "additionalNote": "More professional PDF resources are being created, stay tuned!",
+      "viewAllDownloads": "View All Downloads"
+    },
+    "downloadsPage": {
+      "title": "PDF Resource Download Center",
+      "description": "Download professionally crafted PDF guides, forms, and tools to help you better manage your menstrual health. All resources are available in both Chinese and English.",
+      "stats": {
+        "totalResources": "Professional Resources",
+        "categories": "Categories",
+        "languages": "Language Versions"
+      },
+      "categories": {
+        "managementTools": {
+          "title": "Management Tools",
+          "description": "Practical tracking forms, assessment tools, and management guides"
+        },
+        "healthManagement": {
+          "title": "Health Management",
+          "description": "Nutrition guidance, healthy habits, and professional medical guides"
+        },
+        "communicationGuidance": {
+          "title": "Communication Guidance",
+          "description": "Communication and collaboration guides for parents, teachers, and schools"
+        }
+      },
+      "resources": {
+        "painTracking": {
+          "title": "Pain Tracking Form",
+          "description": "Record and analyze your pain patterns to provide important reference for medical diagnosis"
+        },
+        "nutritionPlan": {
+          "title": "Menstrual Nutrition Plan",
+          "description": "Scientific menstrual nutrition guidance to help alleviate symptoms and promote overall health"
+        },
+        "campusEmergency": {
+          "title": "Campus Emergency Checklist",
+          "description": "Student-specific menstrual emergency handling guide and essential items checklist"
+        },
+        "magnesiumGuide": {
+          "title": "Magnesium & Gut Health Guide",
+          "description": "In-depth understanding of magnesium's important role in menstrual health and supplementation methods"
+        },
+        "naturalTherapy": {
+          "title": "Natural Therapy Assessment",
+          "description": "Evaluate and choose natural therapies and conditioning plans suitable for you"
+        },
+        "healthyHabits": {
+          "title": "Healthy Habits Checklist",
+          "description": "Establish daily life habits and routines beneficial to menstrual health"
+        },
+        "complicationsManagement": {
+          "title": "Complications Management Guide",
+          "description": "Professional guidance for identifying and managing menstrual pain-related complications"
+        },
+        "parentCommunication": {
+          "title": "Parent Communication Guide",
+          "description": "Guidance to help parents communicate effectively with teenagers about menstrual health"
+        },
+        "teacherCollaboration": {
+          "title": "Teacher Collaboration Handbook",
+          "description": "Practical handbook for teachers on how to support students' menstrual health management"
+        },
+        "teacherHealthManual": {
+          "title": "Teacher Health Manual",
+          "description": "Menstrual health education resources and guidance for educators"
+        },
+        "specificManagement": {
+          "title": "Specific Menstrual Pain Management Guide",
+          "description": "Personalized management strategies and treatment plans for different types of menstrual pain"
+        },
+        "zhanZhuangGuide": {
+          "title": "Zhan Zhuang & Baduanjin Illustrated Guide",
+          "description": "Application guidance of traditional Chinese health exercises in menstrual health management"
+        }
+      },
+      "backToArticles": "Back to Articles"
     },
     "cta": {
-      "title": "[EN] 准备好开始您的健康之旅了吗？",
-      "subtitle": "[EN] 使用我们的互动工具，获得个性化的健康建议和管理方案",
-      "button": "[EN] 探索互动工具"
+      "title": "Ready to Start Your Health Journey?",
+      "subtitle": "Use our interactive tools to get personalized health advice and management solutions",
+      "button": "Explore Interactive Tools"
     },
     "stats": {
-      "articles": "[EN] 专业文章",
-      "categories": "[EN] 主题分类",
-      "evidenceBased": "[EN] 循证内容"
+      "articles": "Professional Articles",
+      "categories": "Topic Categories",
+      "evidenceBased": "Evidence-Based Content"
     }
-  },
-  "pdfCenter": {
-    "meta": {
-      "title": "PDF Download Center - Period Hub",
-      "description": "Professional menstrual health PDF resource download center, providing management tools, health guides, communication guidance and educational resources",
-      "keywords": "menstrual health,PDF download,health management,women's health,period guide"
-    },
-    "search": {
-      "placeholder": "Search 49 resources... Try: pain, relief, nutrition, exercise, medical, communication",
-      "placeholderShort": "Search resources...",
-      "keywords": {
-        "pain": "pain",
-        "relief": "relief", 
-        "nutrition": "nutrition",
-        "exercise": "exercise",
-        "medical": "medical",
-        "communication": "communication"
-      },
-      "suggestions": "Try keywords: pain, relief, nutrition, exercise, medical, communication",
-      "helpText": "Search through 49 professional resources",
-      "ariaLabel": "Search health resources"
-    },
-    "title": "PDF Download Center",
-    "description": "Professional menstrual health PDF resource library, providing practical management tools, scientific health guides, effective communication skills and comprehensive educational resources. All resources are free to download and support bilingual Chinese and English.",
-    "success": {
-      "title": "PDF Download Center is Ready!",
-      "message": "We have carefully prepared 12 professional PDF resources for you, covering 4 core categories, supporting bilingual Chinese and English downloads. Each resource has been carefully crafted by our professional team to ensure scientific and practical content.",
-      "status": "System Running Normally"
-    },
-    "stats": {
-      "totalResources": "Total Resources",
-      "categories": "Categories",
-      "languages": "Languages Supported",
-      "featured": "Featured Resources",
-      "showing": "Showing",
-      "resources": "resources"
-    },
-    "categories": {
-      "managementTools": {
-        "title": "Management Tools",
-        "description": "Practical menstrual management and tracking tools"
-      },
-      "healthManagement": {
-        "title": "Health Management",
-        "description": "Scientific health management guidance programs"
-      },
-      "communicationGuidance": {
-        "title": "Communication Guidance",
-        "description": "Effective communication skills and advice"
-      },
-      "educationalResources": {
-        "title": "Educational Resources",
-        "description": "Comprehensive menstrual health educational materials"
-      }
-    },
-    "resources": {
-      "painTrackingForm": {
-        "title": "Pain Tracking Form",
-        "description": "Professional pain recording and analysis tool to help you better understand pain patterns"
-      },
-      "cycleCalendar": {
-        "title": "Menstrual Calendar",
-        "description": "Personalized menstrual tracking calendar to predict and manage your menstrual cycle"
-      },
-      "symptomDiary": {
-        "title": "Symptom Diary",
-        "description": "Detailed symptom recording template providing important reference for medical diagnosis"
-      },
-      "naturalTherapyAssessment": {
-        "title": "Natural Therapy Assessment",
-        "description": "Personalized natural therapy selection guide to find the most suitable conditioning plan for you"
-      },
-      "nutritionGuide": {
-        "title": "Nutrition Guide",
-        "description": "Complete menstrual nutrition supplement guide, scientific diet to improve menstrual discomfort"
-      },
-      "exerciseRoutine": {
-        "title": "Exercise Routine",
-        "description": "Exercise plan designed specifically for menstruation, relieve pain and improve health"
-      },
-      "doctorConsultationGuide": {
-        "title": "Doctor Consultation Guide",
-        "description": "Complete guide for effective communication with doctors to get better medical services"
-      },
-      "familyCommunicationTips": {
-        "title": "Family Communication Tips",
-        "description": "Practical advice and tips for communicating menstrual topics with family and friends"
-      },
-      "workplaceSupportGuide": {
-        "title": "Workplace Support Guide",
-        "description": "Strategies and methods for gaining understanding and support in the workplace"
-      },
-      "menstrualHealthBasics": {
-        "title": "Menstrual Health Basics",
-        "description": "Comprehensive menstrual health knowledge handbook, complete guide from basics to advanced"
-      },
-      "teenGuide": {
-        "title": "Teen Guide",
-        "description": "Menstrual health education resources designed specifically for teenage girls"
-      },
-      "mythsFactsGuide": {
-        "title": "Myths & Facts Guide",
-        "description": "Debunk common menstrual myths and learn scientific menstrual health knowledge"
-      }
-    },
-    "filter": {
-      "title": "Filter",
-      "categories": "Filter by Category",
-      "allCategories": "All Categories",
-      "items": "items",
-      "category": "Category",
-      "clearAll": "Clear Filters",
-      "activeFilters": "Active Filters"
-    },
-    "viewMode": {
-      "grid": "Grid View",
-      "list": "List View"
-    },
-    "empty": {
-      "title": "No Related Resources Found",
-      "searchMessage": "Please try searching with other keywords",
-      "filterMessage": "Please adjust filter conditions or browse other categories",
-      "resetFilters": "Reset Filters"
-    },
-    "footer": {
-      "description": "All PDF resources have been reviewed by our professional team to ensure content accuracy and practicality.",
-      "totalDownloads": "Total Downloads",
-      "lastUpdated": "Last Updated",
-      "rating": "User Rating"
-    }
-  },
-  "downloadsPage": {
-    "title": "PDF Resource Download Center",
-    "description": "Download professionally crafted PDF guides, forms, and tools to help you better manage your menstrual health. All resources are available in both Chinese and English.",
-    "stats": {
-      "totalResources": "Professional Resources",
-      "categories": "Categories",
-      "languages": "Language Versions"
-    },
-    "categories": {
-      "managementTools": {
-        "title": "Management Tools",
-        "description": "Practical tracking forms, assessment tools, and management guides"
-      },
-      "healthManagement": {
-        "title": "Health Management",
-        "description": "Nutrition guidance, healthy habits, and professional medical guides"
-      },
-      "communicationGuidance": {
-        "title": "Communication Guidance",
-        "description": "Communication and collaboration guides for parents, teachers, and schools"
-      },
-      "educationalResources": {
-        "title": "Educational Resources",
-        "description": "Professional health education resources for educators"
-      }
-    },
-    "resources": {
-      "painTrackingForm": {
-        "title": "Pain Tracking Form",
-        "description": "Record and analyze your pain patterns to provide important reference for medical diagnosis"
-      },
-      "menstrualCycleNutritionPlan": {
-        "title": "Menstrual Nutrition Plan",
-        "description": "Scientific menstrual nutrition guidance to help alleviate symptoms and promote overall health"
-      },
-      "campusEmergencyChecklist": {
-        "title": "Campus Emergency Checklist",
-        "description": "Student-specific menstrual emergency handling guide and essential items checklist"
-      },
-      "magnesiumGutHealthGuide": {
-        "title": "Magnesium & Gut Health Guide",
-        "description": "In-depth understanding of magnesium's important role in menstrual health and supplementation methods"
-      },
-      "naturalTherapyAssessment": {
-        "title": "Natural Therapy Assessment",
-        "description": "Evaluate and choose natural therapies and conditioning plans suitable for you"
-      },
-      "healthyHabitsChecklist": {
-        "title": "Healthy Habits Checklist",
-        "description": "Establish daily life habits and routines beneficial to menstrual health"
-      },
-      "menstrualPainComplicationsManagement": {
-        "title": "Complications Management Guide",
-        "description": "Professional guidance for identifying and managing menstrual pain-related complications"
-      },
-      "parentCommunicationGuide": {
-        "title": "Parent Communication Guide",
-        "description": "Guidance to help parents communicate effectively with teenagers about menstrual health"
-      },
-      "teacherCollaborationHandbook": {
-        "title": "Teacher Collaboration Handbook",
-        "description": "Practical handbook for teachers on how to support students' menstrual health management"
-      },
-      "teacherHealthManual": {
-        "title": "Teacher Health Manual",
-        "description": "Menstrual health education resources and guidance for educators"
-      },
-      "usInsuranceQuickReference": {
-        "title": "US Medical Insurance Quick Reference Card",
-        "description": "Quick reference guide for US menstrual pain treatment insurance coverage, including cost comparisons, appeal processes, and emergency contacts"
-      },
-      "recommendedReadingList": {
-        "title": "Recommended Reading List",
-        "description": "Curated selection of books, articles, and research materials related to menstrual health"
-      },
-      "specificMenstrualPainManagementGuide": {
-        "title": "Specific Menstrual Pain Management Guide",
-        "description": "Personalized management strategies and treatment plans for different types of menstrual pain"
-      },
-      "zhanZhuangBaduanjinIllustratedGuide": {
-        "title": "Zhan Zhuang & Baduanjin Illustrated Guide",
-        "description": "Application guidance of traditional Chinese health exercises in menstrual health management"
-      }
-    },
-    "backToArticles": "Back to Articles"
   },
   "articleList": {
     "publishedOn": "Published on {date, date, long}",
@@ -502,10 +383,6 @@
   "therapiesPage": {
     "title": "Relief Therapies",
     "description": "Discover various therapies and methods to manage and alleviate period pain."
-  },
-  "SpecialTherapiesPage": {
-    "title": "Special Therapies",
-    "description": "Explore specialized therapies and treatment methods for comprehensive menstrual health management."
   },
   "therapyList": {
     "lastUpdated": "Last updated on {date, date, long}",
@@ -634,7 +511,6 @@
           "title": "Assessment Results",
           "yourScore": "Your Score",
           "severity": "Severity",
-          "riskLevel": "Risk Level",
           "summary": "Summary",
           "recommendations": "Recommendations",
           "timeframe": "Timeframe:",
@@ -1266,75 +1142,7 @@
       "description": "Intelligently record and predict your menstrual cycle",
       "feature1": "Smart cycle prediction",
       "feature2": "Symptom tracking",
-      "feature3": "Data analysis",
-      "tabs": {
-        "record": "[EN] 记录",
-        "history": "[EN] 历史",
-        "prediction": "[EN] 预测"
-      },
-      "record": {
-        "startTitle": "[EN] 开始记录新周期",
-        "startDescription": "[EN] 记录您的月经周期，获得智能预测和健康建议",
-        "startButton": "[EN] 开始记录新周期",
-        "recordingTitle": "[EN] 记录当前周期",
-        "startDate": "[EN] 开始日期",
-        "startDateHint": "[EN] 选择月经开始的日期",
-        "flowTitle": "[EN] 经血量",
-        "flowOptions": {
-          "light": "[EN] 少量",
-          "medium": "[EN] 中等",
-          "heavy": "[EN] 大量"
-        },
-        "symptomsTitle": "[EN] 症状记录",
-        "symptoms": {
-          "abdominalPain": "[EN] 腹痛",
-          "backPain": "[EN] 腰痛",
-          "headache": "[EN] 头痛",
-          "breastTenderness": "[EN] 乳房胀痛",
-          "moodSwings": "[EN] 情绪波动",
-          "fatigue": "[EN] 疲劳",
-          "nausea": "[EN] 恶心",
-          "bloating": "[EN] 腹胀",
-          "insomnia": "[EN] 失眠",
-          "appetiteChanges": "[EN] 食欲变化",
-          "skinChanges": "[EN] 皮肤变化",
-          "other": "[EN] 其他"
-        },
-        "endDate": "[EN] 结束日期",
-        "endDateHint": "[EN] 选择月经结束的日期（可选）",
-        "notesTitle": "[EN] 备注",
-        "notesPlaceholder": "[EN] 记录任何额外信息...",
-        "endCycleButton": "[EN] 结束当前周期",
-        "cancelButton": "[EN] 取消"
-      },
-      "history": {
-        "title": "[EN] 历史记录",
-        "noRecords": "[EN] 暂无记录，开始记录您的第一个周期吧！",
-        "ongoing": "[EN] 进行中",
-        "flow": "[EN] 经血量",
-        "symptoms": "[EN] 症状",
-        "notes": "[EN] 备注",
-        "days": "[EN] 天"
-      },
-      "prediction": {
-        "title": "[EN] 智能预测",
-        "noData": "[EN] 需要至少2个完整周期才能进行预测",
-        "nextPeriod": "[EN] 下次月经",
-        "ovulation": "[EN] 排卵期",
-        "daysLeft": "[EN] 还有 {days} 天",
-        "today": "[EN] 今天",
-        "daysPast": "[EN] 已过 {days} 天",
-        "statistics": "[EN] 周期统计",
-        "avgCycleLength": "[EN] 平均周期长度",
-        "accuracy": "[EN] 预测准确度",
-        "recordedCycles": "[EN] 记录周期数",
-        "recommendations": "[EN] 健康建议",
-        "shortCycle": "[EN] 您的周期较短，建议咨询医生",
-        "longCycle": "[EN] 您的周期较长，建议咨询医生",
-        "irregularCycle": "[EN] 周期不规律，建议继续记录以提高预测准确度",
-        "ovulationTip": "[EN] 排卵期前后是受孕的最佳时机",
-        "lifestyleTip": "[EN] 保持规律作息和健康饮食有助于周期稳定"
-      }
+      "feature3": "Data analysis"
     },
     "symptomChecker": {
       "title": "Symptom Checker",
@@ -1634,7 +1442,6 @@
         "title": "Assessment Results",
         "yourScore": "Your Score",
         "severity": "Severity",
-        "riskLevel": "Risk Level",
         "summary": "Summary",
         "recommendations": "Recommendations",
         "timeframe": "Timeframe:",
@@ -1800,98 +1607,5 @@
       "support": "Support Requests",
       "supportTime": "Within 12 hours"
     }
-  },
-  "articles": {
-    "insuranceGuide": {
-      "formula": {
-        "title": "Healthcare Insurance Cost Calculation Formula",
-        "mainFormula": "Out-of-pocket cost = Deductible + (Total cost - Deductible) × Coinsurance rate",
-        "ariaLabel": "Healthcare insurance out-of-pocket cost calculation formula, including deductible and coinsurance rate calculation",
-        "variables": {
-          "symbols": {
-            "outOfPocket": "Out-of-pocket cost",
-            "deductible": "Deductible",
-            "totalCost": "Total cost",
-            "coinsuranceRate": "Coinsurance rate"
-          },
-          "descriptions": {
-            "outOfPocket": "The total amount you will ultimately pay",
-            "deductible": "The fixed amount you pay before insurance starts covering costs",
-            "totalCost": "The total cost of medical services",
-            "coinsuranceRate": "The percentage of costs you pay after meeting your deductible"
-          }
-        },
-        "calculator": {
-          "title": "Out-of-Pocket Cost Calculator",
-          "subtitle": "Enter your insurance information to calculate expected out-of-pocket costs",
-          "inputs": {
-            "deductibleLabel": "Deductible",
-            "deductiblePlaceholder": "Enter deductible amount",
-            "totalCostLabel": "Total Cost",
-            "totalCostPlaceholder": "Enter total medical service cost",
-            "coinsuranceLabel": "Coinsurance Rate (%)",
-            "coinsurancePlaceholder": "Enter coinsurance percentage"
-          },
-          "result": {
-            "title": "Your Expected Out-of-Pocket Cost",
-            "amount": "${amount}",
-            "breakdown": "Cost Breakdown",
-            "deductiblePortion": "Deductible portion: ${amount}",
-            "coinsurancePortion": "Coinsurance portion: ${amount}",
-            "totalAmount": "Total out-of-pocket cost: ${amount}"
-          },
-          "validation": {
-            "deductibleRequired": "Please enter deductible amount",
-            "totalCostRequired": "Please enter total cost",
-            "coinsuranceRequired": "Please enter coinsurance rate",
-            "positiveNumberRequired": "Please enter a positive number",
-            "validPercentageRequired": "Please enter a percentage between 0-100"
-          }
-        },
-        "steps": {
-          "title": "Cost Calculation Steps",
-          "subtitle": "Understand how your out-of-pocket cost is calculated",
-          "step1": {
-            "number": "1",
-            "title": "Determine Deductible",
-            "description": "The fixed amount you pay first",
-            "example": "Example: $1,000"
-          },
-          "step2": {
-            "number": "2",
-            "title": "Calculate Excess Amount",
-            "description": "Total cost minus deductible",
-            "formula": "Excess amount = Total cost - Deductible",
-            "example": "$5,000 - $1,000 = $4,000"
-          },
-          "step3": {
-            "number": "3",
-            "title": "Apply Coinsurance Rate",
-            "description": "Excess amount multiplied by your share percentage",
-            "formula": "Coinsurance cost = Excess amount × Coinsurance rate",
-            "example": "$4,000 × 20% = $800"
-          },
-          "finalResult": {
-            "title": "Calculate Final Result",
-            "description": "Deductible + Coinsurance portion",
-            "formula": "Total out-of-pocket cost = Deductible + Coinsurance cost",
-            "example": "$1,000 + $800 = $1,800",
-            "conclusion": "This is the total amount you need to pay"
-          }
-        }
-      }
-    }
-  },
-  "teenHealth": {
-    "meta": {
-      "title": "Teen Health Guide",
-      "description": "Educational resources designed for teenagers about menstrual health, providing scientific and practical period management knowledge"
-    }
-  },
-  "embeddedPainAssessment": {
-    "title": "Pain Assessment Tool",
-    "description": "Quickly assess your pain level",
-    "loading": "Loading...",
-    "error": "Failed to load, please refresh the page and try again"
   }
 }
