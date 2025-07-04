@@ -36,8 +36,8 @@ export default function Footer() {
               <Link href={`/${locale}/medical-disclaimer`} className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
                 {locale === 'en' ? 'Medical Disclaimer' : '医疗免责声明'}
               </Link>
-              <Link href={`/${locale}/articles`} className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
-                {locale === 'en' ? 'Articles' : '文章PDF下载中心'}
+              <Link href={`/${locale}/downloads`} className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
+                {locale === 'en' ? 'PDF Download Center' : '文章PDF下载中心'}
               </Link>
               <Link href={`/${locale}/natural-therapies`} className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
                 {locale === 'en' ? 'Natural Therapies' : '平时调理'}

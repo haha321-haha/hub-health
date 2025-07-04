@@ -27,7 +27,7 @@ export default function DownloadButton({ filename, className = '' }: DownloadBut
     }
 
     // Open the document in a new tab
-    window.open(`/downloads/${actualFilename}`, '_blank', 'noopener,noreferrer');
+    window.open(`/pdf-files/${actualFilename}`, '_blank', 'noopener,noreferrer');
   };
 
   return (

@@ -17,7 +17,7 @@ export default function Header() {
   const navigation = [
     { name: locale === 'en' ? 'Home' : '首页', href: `/${locale}` },
     { name: locale === 'en' ? 'Interactive Solutions' : '互动解决方案', href: `/${locale}/interactive-tools` },
-    { name: locale === 'en' ? 'Articles & Downloads' : '文章PDF下载中心', href: `/${locale}/articles` },
+    { name: locale === 'en' ? 'PDF Download Center' : '文章PDF下载中心', href: `/${locale}/downloads` },
     { name: locale === 'en' ? 'Scenario Solutions' : '场景解决方案', href: `/${locale}/scenario-solutions` },
     // { name: locale === 'en' ? '🚀 Framework Demo' : '🚀 框架演示', href: `/${locale}/framework-demo` }, // 暂时隐藏 - 可快速恢复
     { name: locale === 'en' ? 'Natural Care' : '平时调理', href: `/${locale}/natural-therapies` },
@@ -47,6 +47,10 @@ export default function Header() {
   const isActive = (href: string) => {
     if (href === `/${locale}`) {
       return pathname === href;
+    }
+    // 简化：downloads页面匹配articles或downloads路径
+    if (href.includes('/downloads')) {
+      return pathname.includes('/articles') || pathname.includes('/downloads');
     }
     return pathname.startsWith(href);
   };

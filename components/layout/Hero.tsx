@@ -4,7 +4,11 @@ import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
 
-export default function Hero() {
+interface HeroProps {
+  articleCount?: number;
+}
+
+export default function Hero({ articleCount = 33 }: HeroProps) {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -47,7 +51,7 @@ export default function Hero() {
           <div className="grid md:grid-cols-3 gap-6 text-white">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
               <div className="text-3xl mb-3">📚</div>
-              <h3 className="font-semibold text-lg mb-2">{t('hero.features.articles')}</h3>
+              <h3 className="font-semibold text-lg mb-2">{t('hero.features.articles', { count: articleCount })}</h3>
               <p className="text-white/80">{t('hero.features.articlesDesc')}</p>
             </div>
             
