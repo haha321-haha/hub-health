@@ -52,6 +52,7 @@ export interface Messages {
         title: string;
         yourScore: string;
         severity: string;
+        riskLevel: string;
         summary: string;
         recommendations: string;
         timeframe: string;
