@@ -1,7 +1,9 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Locale, locales } from '@/i18n/request';
+import { ArrowLeft, Download } from 'lucide-react';
+import { Locale, locales } from '@/i18n';
+import SimplePDFCenter from '@/components/SimplePDFCenter';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -12,8 +14,15 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'downloadsPage' });
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: locale === 'zh'
+      ? `文章PDF下载中心 - Period Hub 经期健康专业资源`
+      : `Articles PDF Download Center - Period Hub Professional Menstrual Health Resources`,
+    description: locale === 'zh'
+      ? `Period Hub文章PDF下载中心，49个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载`
+      : `Period Hub Articles PDF Download Center, 49 curated menstrual health resources, intelligently categorized by urgency, bilingual download support`,
+    keywords: locale === 'zh'
+      ? '经期健康,PDF下载,痛经缓解,文章资源,Period Hub'
+      : 'menstrual health,PDF download,period pain relief,article resources,Period Hub',
   };
 }
 
@@ -27,219 +36,75 @@ export default async function DownloadsPage({
 }: {
   params: { locale: Locale }
 }) {
-  // Enable static rendering
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: 'downloadsPage' });
-
-  // Complete PDF resources data (12 resources)
-  const pdfResources = [
-    {
-      id: 'pain-tracking-form',
-      title: t('resources.painTracking.title'),
-      description: t('resources.painTracking.description'),
-      filename: 'pain-tracking-form.pdf',
-      icon: '📊',
-      category: 'management-tools'
-    },
-    {
-      id: 'nutrition-plan',
-      title: t('resources.nutritionPlan.title'),
-      description: t('resources.nutritionPlan.description'),
-      filename: 'menstrual-cycle-nutrition-plan.pdf',
-      icon: '🥗',
-      category: 'health-management'
-    },
-    {
-      id: 'campus-emergency',
-      title: t('resources.campusEmergency.title'),
-      description: t('resources.campusEmergency.description'),
-      filename: 'campus-emergency-checklist.pdf',
-      icon: '🏫',
-      category: 'communication-guidance'
-    },
-    {
-      id: 'magnesium-guide',
-      title: t('resources.magnesiumGuide.title'),
-      description: t('resources.magnesiumGuide.description'),
-      filename: 'magnesium-gut-health-menstrual-pain-guide.pdf',
-      icon: '💊',
-      category: 'health-management'
-    },
-    {
-      id: 'natural-therapy',
-      title: t('resources.naturalTherapy.title'),
-      description: t('resources.naturalTherapy.description'),
-      filename: 'natural-therapy-assessment.pdf',
-      icon: '🌿',
-      category: 'management-tools'
-    },
-    {
-      id: 'healthy-habits',
-      title: t('resources.healthyHabits.title'),
-      description: t('resources.healthyHabits.description'),
-      filename: 'healthy-habits-checklist.pdf',
-      icon: '✅',
-      category: 'management-tools'
-    },
-    {
-      id: 'complications-management',
-      title: t('resources.complicationsManagement.title'),
-      description: t('resources.complicationsManagement.description'),
-      filename: 'menstrual-pain-complications-management.pdf',
-      icon: '🏥',
-      category: 'health-management'
-    },
-    {
-      id: 'parent-communication',
-      title: t('resources.parentCommunication.title'),
-      description: t('resources.parentCommunication.description'),
-      filename: 'parent-communication-guide.pdf',
-      icon: '👨‍👩‍👧',
-      category: 'communication-guidance'
-    },
-    {
-      id: 'teacher-collaboration',
-      title: t('resources.teacherCollaboration.title'),
-      description: t('resources.teacherCollaboration.description'),
-      filename: 'teacher-collaboration-handbook.pdf',
-      icon: '👩‍🏫',
-      category: 'communication-guidance'
-    },
-    {
-      id: 'teacher-health-manual',
-      title: t('resources.teacherHealthManual.title'),
-      description: t('resources.teacherHealthManual.description'),
-      filename: 'teacher-health-manual.pdf',
-      icon: '📚',
-      category: 'communication-guidance'
-    },
-    {
-      id: 'specific-management',
-      title: t('resources.specificManagement.title'),
-      description: t('resources.specificManagement.description'),
-      filename: 'specific-menstrual-pain-management-guide.pdf',
-      icon: '🎯',
-      category: 'management-tools'
-    },
-    {
-      id: 'zhan-zhuang-guide',
-      title: t('resources.zhanZhuangGuide.title'),
-      description: t('resources.zhanZhuangGuide.description'),
-      filename: 'zhan-zhuang-baduanjin-illustrated-guide.pdf',
-      icon: '🧘‍♀️',
-      category: 'health-management'
-    }
-  ];
-
-  // Group resources by category
-  const categories = {
-    'management-tools': {
-      title: t('categories.managementTools.title'),
-      description: t('categories.managementTools.description'),
-      color: 'from-blue-500 to-cyan-500'
-    },
-    'health-management': {
-      title: t('categories.healthManagement.title'),
-      description: t('categories.healthManagement.description'),
-      color: 'from-green-500 to-emerald-500'
-    },
-    'communication-guidance': {
-      title: t('categories.communicationGuidance.title'),
-      description: t('categories.communicationGuidance.description'),
-      color: 'from-purple-500 to-pink-500'
-    }
-  };
-
-  const groupedResources = Object.entries(categories).map(([categoryId, categoryInfo]) => ({
-    ...categoryInfo,
-    id: categoryId,
-    resources: pdfResources.filter(resource => resource.category === categoryId)
-  }));
+  const bannerText = locale === 'zh'
+    ? '🎉 全新PDF下载中心 - 49个精选资源，移动端优化体验，基于紧急程度智能分类'
+    : '🎉 New PDF Download Center - 49 curated resources, mobile-optimized experience, urgency-based smart categorization';
 
   return (
-    <div className="min-h-screen py-12 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-      <div className="container mx-auto px-4 max-w-7xl">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            {t('title')}
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100">
+      {/* 🎉 新版本标识横幅 */}
+      <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-3 text-center text-sm font-medium">
+        {bannerText}
+      </div>
+
+      <div className="container mx-auto px-4 py-8">
+
+
+        {/* 页面标题区域 */}
+        <header className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg">
+            <Download className="w-8 h-8 text-white" />
+          </div>
+          
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            {locale === 'zh' ? '📚 文章PDF下载中心' : '📚 Articles PDF Download Center'}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t('description')}
+
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
+            {locale === 'zh'
+              ? '49个精选资源，基于紧急程度智能分类。从立即缓解到长期管理，为您的经期健康提供全方位支持。'
+              : '49 curated resources, intelligently categorized by urgency. From immediate relief to long-term management, providing comprehensive support for your menstrual health.'
+            }
           </p>
-        </div>
-
-        {/* Statistics */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="text-4xl font-bold text-purple-600 mb-2">12</div>
-            <div className="text-gray-600">{t('stats.totalResources')}</div>
-          </div>
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="text-4xl font-bold text-pink-600 mb-2">3</div>
-            <div className="text-gray-600">{t('stats.categories')}</div>
-          </div>
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="text-4xl font-bold text-blue-600 mb-2">2</div>
-            <div className="text-gray-600">{t('stats.languages')}</div>
-          </div>
-        </div>
-
-        {/* Resource Categories */}
-        <div className="space-y-12">
-          {groupedResources.map((category) => (
-            <div key={category.id} className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg">
-              {/* Category Header */}
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-3">{category.title}</h2>
-                <p className="text-lg text-gray-600">{category.description}</p>
-              </div>
-
-              {/* Resources Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.resources.map((resource) => (
-                  <div key={resource.id} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div className="text-4xl mb-4">{resource.icon}</div>
-                    <h3 className="font-bold text-gray-900 mb-3 text-lg">
-                      {resource.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 text-sm">
-                      {resource.description}
-                    </p>
-                    <div className="flex gap-2">
-                      <a
-                        href={`/downloads/${resource.filename}`}
-                        className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-300 text-center"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {locale === 'zh' ? '中文版' : 'English'}
-                      </a>
-                      <a
-                        href={`/downloads/${resource.filename.replace('.pdf', `-${locale === 'zh' ? 'en' : 'zh'}.pdf`)}`}
-                        className="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-all duration-300 text-center"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {locale === 'zh' ? 'English' : '中文版'}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          
+          {/* 快速统计 */}
+          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-600">36</div>
+              <div className="text-sm text-gray-500">{locale === 'zh' ? '专业文章' : 'Expert Articles'}</div>
             </div>
-          ))}
-        </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-pink-600">13</div>
+              <div className="text-sm text-gray-500">{locale === 'zh' ? '实用PDF' : 'Practical PDFs'}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-indigo-600">2</div>
+              <div className="text-sm text-gray-500">{locale === 'zh' ? '语言版本' : 'Languages'}</div>
+            </div>
+          </div>
+        </header>
 
-        {/* Back to Articles */}
-        <div className="mt-16 text-center">
-          <Link
-            href={`/${locale}/articles`}
-            className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
-          >
-            {t('backToArticles')}
-          </Link>
+        {/* 🚀 简化版PDF中心组件 - 修复空白页面问题 */}
+        <SimplePDFCenter locale={locale} />
+
+        {/* 💡 用户反馈组件 */}
+        <div className="fixed bottom-4 right-4 z-50 max-w-xs">
+          <div className="bg-blue-600 text-white p-4 rounded-xl shadow-lg border border-blue-500">
+            <div className="text-sm font-bold mb-2">
+              {locale === 'zh' ? '💡 体验新版下载中心' : '💡 Try New Download Center'}
+            </div>
+            <div className="text-xs mb-3 opacity-90">
+              {locale === 'zh'
+                ? '移动端优化 • 智能搜索 • 紧急模式 • 49个精选资源'
+                : 'Mobile Optimized • Smart Search • Emergency Mode • 49 Curated Resources'
+              }
+            </div>
+            <button className="bg-white text-blue-600 px-3 py-2 rounded-lg text-xs w-full font-medium hover:bg-gray-50 transition-colors">
+              {locale === 'zh' ? '反馈体验效果' : 'Share Feedback'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

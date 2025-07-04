@@ -14,6 +14,7 @@ import StructuredData from '@/components/StructuredData';
 import ArticleInteractions from '@/components/ArticleInteractions';
 import ReadingProgress from '@/components/ReadingProgress';
 import TableOfContents from '@/components/TableOfContents';
+import MarkdownWithMermaid from '@/components/MarkdownWithMermaid';
 
 // Types
 type Locale = 'en' | 'zh';
@@ -64,7 +65,7 @@ function getArticleBySlug(slug: string, locale: string = 'en'): Article | null {
       slug,
       title: data.title || '',
       title_zh: data.title_zh,
-      date: data.date || '',
+      date: data.date || data.publishDate || '',
       summary: data.summary || '',
       summary_zh: data.summary_zh,
       tags: data.tags || [],
@@ -99,6 +100,7 @@ function getRelatedArticles(currentSlug: string, locale: string = 'en', limit: n
 export async function generateStaticParams() {
   const locales: Locale[] = ['en', 'zh'];
   const articleSlugs = [
+    // 现有文章保持不变
     '5-minute-period-pain-relief',
     'anti-inflammatory-diet-period-pain',
     'comprehensive-iud-guide',
@@ -106,8 +108,12 @@ export async function generateStaticParams() {
     'essential-oils-aromatherapy-menstrual-pain-guide',
     'global-traditional-menstrual-pain-relief',
     'heat-therapy-complete-guide',
+    'herbal-tea-menstrual-pain-relief',
     'hidden-culprits-of-menstrual-pain',
+    'home-natural-menstrual-pain-relief',
     'magnesium-gut-health-comprehensive-guide',
+    'menstrual-nausea-relief-guide',
+    'menstrual-pain-accompanying-symptoms-guide',
     'menstrual-pain-complications-management',
     'menstrual-pain-faq-expert-answers',
     'menstrual-pain-medical-guide',
@@ -115,12 +121,25 @@ export async function generateStaticParams() {
     'natural-physical-therapy-comprehensive-guide',
     'nsaid-menstrual-pain-professional-guide',
     'period-friendly-recipes',
+    'personal-menstrual-health-profile',
     'recommended-reading-list',
     'specific-menstrual-pain-management-guide',
+    'comprehensive-menstrual-sleep-quality-guide',
+    'menstrual-pain-research-progress-2024',
+    'menstrual-preventive-care-complete-plan',
+    'menstrual-stress-management-complete-guide',
     'understanding-your-cycle',
+    'us-menstrual-pain-insurance-coverage-guide',
     'when-to-see-doctor-period-pain',
     'when-to-seek-medical-care-comprehensive-guide',
-    'zhan-zhuang-baduanjin-for-menstrual-pain-relief'
+    'womens-lifecycle-menstrual-pain-analysis',
+    'zhan-zhuang-baduanjin-for-menstrual-pain-relief',
+
+    // 🔧 添加缺失的文章slug（修复404错误）
+    'ginger-menstrual-pain-relief-guide',                           // immediate-5
+    'comprehensive-report-non-medical-factors-menstrual-pain',      // management-1 & management-7
+    'period-pain-simulator-accuracy-analysis',                     // management-8
+    'medication-vs-natural-remedies-menstrual-pain'                // management-9
   ];
 
   const params = [];
@@ -216,12 +235,10 @@ export default async function ArticlePage({
   // Check if this is the NSAID article that needs interactive components
   const isNSAIDArticle = slug === 'nsaid-menstrual-pain-professional-guide';
 
-  console.log('🔍 Article page debug:', {
-    slug,
-    isNSAIDArticle,
-    locale,
-    articleTitle: article?.title
-  });
+  // Check if this article contains Mermaid charts
+  const hasMermaidCharts = article.content.includes('```mermaid');
+
+
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://period-hub.com'
   const articleUrl = `${baseUrl}/${locale}/articles/${slug}`
@@ -345,6 +362,12 @@ export default async function ArticlePage({
                   {isNSAIDArticle ? (
                     // For NSAID article, use custom client component
                     <NSAIDContentSimple content={article.content} />
+                  ) : hasMermaidCharts ? (
+                    // For articles with Mermaid charts, use enhanced Markdown component
+                    <MarkdownWithMermaid
+                      content={article.content}
+                      className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700"
+                    />
                   ) : (
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}

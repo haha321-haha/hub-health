@@ -369,9 +369,11 @@ export default function NaturalTherapiesPage({
   ];
 
   return (
-    <div className="space-y-12">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-16 rounded-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="space-y-12">
+          {/* Hero Section */}
+          <section className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-16 rounded-2xl">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -396,12 +398,12 @@ export default function NaturalTherapiesPage({
             </div>
           </div>
         </div>
-      </section>
+          </section>
 
 
 
-      {/* 🆕 痛经自然疗法大全专栏 */}
-      <section className="py-16 bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 rounded-2xl">
+          {/* 🆕 痛经自然疗法大全专栏 */}
+          <section className="py-16 bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 rounded-2xl">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* 专栏标题 */}
@@ -810,12 +812,10 @@ export default function NaturalTherapiesPage({
                   </p>
                   <div className="space-y-2">
                     <a
-                      href={locale === 'zh' ? "/downloads/pain-tracking-form.pdf" : "/downloads/pain-tracking-form-en.pdf"}
+                      href={`/${locale}/downloads/preview/pain-tracking-form`}
                       className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
-                      {locale === 'zh' ? '下载表格' : 'Download Form'}
+                      {locale === 'zh' ? '预览表格' : 'Preview Form'}
                     </a>
                   </div>
                 </div>
@@ -835,12 +835,10 @@ export default function NaturalTherapiesPage({
                   </p>
                   <div className="space-y-2">
                     <a
-                      href={locale === 'zh' ? "/downloads/natural-therapy-assessment.pdf" : "/downloads/natural-therapy-assessment-en.pdf"}
+                      href={`/${locale}/downloads/preview/natural-therapy-assessment`}
                       className="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
-                      {locale === 'zh' ? '下载评估表' : 'Download Assessment'}
+                      {locale === 'zh' ? '预览评估表' : 'Preview Assessment'}
                     </a>
                   </div>
                 </div>
@@ -860,12 +858,10 @@ export default function NaturalTherapiesPage({
                   </p>
                   <div className="space-y-2">
                     <a
-                      href={locale === 'zh' ? "/downloads/menstrual-cycle-nutrition-plan.pdf" : "/downloads/menstrual-cycle-nutrition-plan-en.pdf"}
+                      href={`/${locale}/downloads/preview/menstrual-cycle-nutrition-plan`}
                       className="block w-full text-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
-                      {locale === 'zh' ? '下载营养计划' : 'Download Nutrition Plan'}
+                      {locale === 'zh' ? '预览营养计划' : 'Preview Nutrition Plan'}
                     </a>
                   </div>
                 </div>
@@ -887,10 +883,10 @@ export default function NaturalTherapiesPage({
             </div>
           </div>
         </div>
-      </section>
+          </section>
 
-      {/* Core Conditioning Principles */}
-      <section className="py-16 bg-white">
+          {/* Core Conditioning Principles */}
+          <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
@@ -972,10 +968,10 @@ export default function NaturalTherapiesPage({
             </div>
           </div>
         </div>
-      </section>
+          </section>
 
-      {/* Four Pillars of Conditioning */}
-      <section className="py-16 bg-gray-100 rounded-2xl">
+          {/* Four Pillars of Conditioning */}
+          <section className="py-16 bg-gray-100 rounded-2xl">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
@@ -1715,19 +1711,21 @@ export default function NaturalTherapiesPage({
             </div>
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="bg-primary-50 border-l-4 border-primary-500 p-4 rounded-r-lg">
-        <p className="text-neutral-700">
-          <strong className="text-primary-700">
-            {locale === 'zh' ? '免责声明：' : 'Disclaimer:'}
-          </strong>
-          {locale === 'zh'
-            ? '有关自然疗法的信息仅供教育目的。它不旨在替代专业医疗建议。如有任何健康问题或在改变健康方案之前，请务必咨询医疗保健提供者。'
-            : 'The information on natural therapies is for educational purposes only. It is not intended to replace professional medical advice. Always consult with a healthcare provider for any health concerns or before making any changes to your health regimen.'
-          }
-        </p>
-      </section>
+          <section className="bg-primary-50 border-l-4 border-primary-500 p-4 rounded-r-lg">
+            <p className="text-neutral-700">
+              <strong className="text-primary-700">
+                {locale === 'zh' ? '免责声明：' : 'Disclaimer:'}
+              </strong>
+              {locale === 'zh'
+                ? '有关自然疗法的信息仅供教育目的。它不旨在替代专业医疗建议。如有任何健康问题或在改变健康方案之前，请务必咨询医疗保健提供者。'
+                : 'The information on natural therapies is for educational purposes only. It is not intended to replace professional medical advice. Always consult with a healthcare provider for any health concerns or before making any changes to your health regimen.'
+              }
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

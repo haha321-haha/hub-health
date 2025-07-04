@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Locale, locales } from '@/i18n/request';
+import { Locale, locales } from '@/i18n';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -372,21 +372,23 @@ export default function ReliefMethodsPage({
   ];
 
   return (
-    <div className="space-y-12">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-neutral-600">
-        <Link href={`/${locale}`} className="hover:text-primary-600">
-          {locale === 'zh' ? '首页' : 'Home'}
-        </Link>
-        <span className="mx-2">›</span>
-        <Link href={`/${locale}/health-guide`} className="hover:text-primary-600">
-          {locale === 'zh' ? '痛经健康指南' : 'Health Guide'}
-        </Link>
-        <span className="mx-2">›</span>
-        <span className="text-neutral-800">
-          {locale === 'zh' ? 'A-Z缓解方法' : 'A-Z Relief Methods'}
-        </span>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="space-y-12">
+          {/* Breadcrumb */}
+          <nav className="text-sm text-neutral-600">
+            <Link href={`/${locale}`} className="hover:text-primary-600">
+              {locale === 'zh' ? '首页' : 'Home'}
+            </Link>
+            <span className="mx-2">›</span>
+            <Link href={`/${locale}/health-guide`} className="hover:text-primary-600">
+              {locale === 'zh' ? '痛经健康指南' : 'Health Guide'}
+            </Link>
+            <span className="mx-2">›</span>
+            <span className="text-neutral-800">
+              {locale === 'zh' ? 'A-Z缓解方法' : 'A-Z Relief Methods'}
+            </span>
+          </nav>
 
       {/* Page Header */}
       <header className="text-center">
@@ -543,16 +545,18 @@ export default function ReliefMethodsPage({
           {locale === 'zh' ? '上一章：理解痛经' : 'Previous: Understanding Pain'}
         </Link>
         
-        <Link 
-          href={`/${locale}/health-guide/lifestyle`}
-          className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
-        >
-          {locale === 'zh' ? '下一章：生活方式管理' : 'Next: Lifestyle Management'}
-          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </section>
+          <Link
+            href={`/${locale}/health-guide/lifestyle`}
+            className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
+          >
+            {locale === 'zh' ? '下一章：生活方式管理' : 'Next: Lifestyle Management'}
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </section>
+        </div>
+      </div>
     </div>
   );
 }

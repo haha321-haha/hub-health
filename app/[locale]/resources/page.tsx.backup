@@ -1,0 +1,250 @@
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Locale, locales } from '@/i18n';
+
+// Generate metadata for the page
+export async function generateMetadata({
+  params: { locale }
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
+  // Enable static rendering for metadata
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: 'downloadsPage' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
+
+// Generate static params for all supported locales
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function DownloadsPage({
+  params: { locale }
+}: {
+  params: { locale: Locale }
+}) {
+  // Enable static rendering
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: 'downloadsPage' });
+
+  // Complete PDF resources data (12 resources)
+  const pdfResources = [
+    {
+      id: 'pain-tracking-form',
+      title: t('resources.painTracking.title'),
+      description: t('resources.painTracking.description'),
+      filename: 'pain-tracking-form.pdf',
+      icon: '📊',
+      category: 'management-tools'
+    },
+    {
+      id: 'nutrition-plan',
+      title: t('resources.nutritionPlan.title'),
+      description: t('resources.nutritionPlan.description'),
+      filename: 'menstrual-cycle-nutrition-plan.pdf',
+      icon: '🥗',
+      category: 'health-management'
+    },
+    {
+      id: 'campus-emergency',
+      title: t('resources.campusEmergency.title'),
+      description: t('resources.campusEmergency.description'),
+      filename: 'campus-emergency-checklist.pdf',
+      icon: '🏫',
+      category: 'communication-guidance'
+    },
+    {
+      id: 'magnesium-guide',
+      title: t('resources.magnesiumGuide.title'),
+      description: t('resources.magnesiumGuide.description'),
+      filename: 'magnesium-gut-health-menstrual-pain-guide.pdf',
+      icon: '💊',
+      category: 'health-management'
+    },
+    {
+      id: 'natural-therapy',
+      title: t('resources.naturalTherapy.title'),
+      description: t('resources.naturalTherapy.description'),
+      filename: 'natural-therapy-assessment.pdf',
+      icon: '🌿',
+      category: 'management-tools'
+    },
+    {
+      id: 'healthy-habits',
+      title: t('resources.healthyHabits.title'),
+      description: t('resources.healthyHabits.description'),
+      filename: 'healthy-habits-checklist.pdf',
+      icon: '✅',
+      category: 'management-tools'
+    },
+    {
+      id: 'complications-management',
+      title: t('resources.complicationsManagement.title'),
+      description: t('resources.complicationsManagement.description'),
+      filename: 'menstrual-pain-complications-management.pdf',
+      icon: '🏥',
+      category: 'health-management'
+    },
+    {
+      id: 'parent-communication',
+      title: t('resources.parentCommunication.title'),
+      description: t('resources.parentCommunication.description'),
+      filename: 'parent-communication-guide.pdf',
+      icon: '👨‍👩‍👧',
+      category: 'communication-guidance'
+    },
+    {
+      id: 'teacher-collaboration',
+      title: t('resources.teacherCollaboration.title'),
+      description: t('resources.teacherCollaboration.description'),
+      filename: 'teacher-collaboration-handbook.pdf',
+      icon: '👩‍🏫',
+      category: 'communication-guidance'
+    },
+    {
+      id: 'teacher-health-manual',
+      title: t('resources.teacherHealthManual.title'),
+      description: t('resources.teacherHealthManual.description'),
+      filename: 'teacher-health-manual.pdf',
+      icon: '📚',
+      category: 'communication-guidance'
+    },
+    {
+      id: 'specific-management',
+      title: t('resources.specificManagement.title'),
+      description: t('resources.specificManagement.description'),
+      filename: 'specific-menstrual-pain-management-guide.pdf',
+      icon: '🎯',
+      category: 'management-tools'
+    },
+    {
+      id: 'zhan-zhuang-guide',
+      title: t('resources.zhanZhuangGuide.title'),
+      description: t('resources.zhanZhuangGuide.description'),
+      filename: 'zhan-zhuang-baduanjin-illustrated-guide.pdf',
+      icon: '🧘‍♀️',
+      category: 'health-management'
+    }
+  ];
+
+  // Group resources by category
+  const categories = {
+    'management-tools': {
+      title: t('categories.managementTools.title'),
+      description: t('categories.managementTools.description'),
+      color: 'from-blue-500 to-cyan-500'
+    },
+    'health-management': {
+      title: t('categories.healthManagement.title'),
+      description: t('categories.healthManagement.description'),
+      color: 'from-green-500 to-emerald-500'
+    },
+    'communication-guidance': {
+      title: t('categories.communicationGuidance.title'),
+      description: t('categories.communicationGuidance.description'),
+      color: 'from-purple-500 to-pink-500'
+    }
+  };
+
+  const groupedResources = Object.entries(categories).map(([categoryId, categoryInfo]) => ({
+    ...categoryInfo,
+    id: categoryId,
+    resources: pdfResources.filter(resource => resource.category === categoryId)
+  }));
+
+  return (
+    <div className="min-h-screen py-12 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            {t('title')}
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            {t('description')}
+          </p>
+        </div>
+
+        {/* Statistics */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <div className="text-4xl font-bold text-purple-600 mb-2">12</div>
+            <div className="text-gray-600">{t('stats.totalResources')}</div>
+          </div>
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <div className="text-4xl font-bold text-pink-600 mb-2">3</div>
+            <div className="text-gray-600">{t('stats.categories')}</div>
+          </div>
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <div className="text-4xl font-bold text-blue-600 mb-2">2</div>
+            <div className="text-gray-600">{t('stats.languages')}</div>
+          </div>
+        </div>
+
+        {/* Resource Categories */}
+        <div className="space-y-12">
+          {groupedResources.map((category) => (
+            <div key={category.id} className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg">
+              {/* Category Header */}
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-3">{category.title}</h2>
+                <p className="text-lg text-gray-600">{category.description}</p>
+              </div>
+
+              {/* Resources Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {category.resources.map((resource) => (
+                  <div key={resource.id} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div className="text-4xl mb-4">{resource.icon}</div>
+                    <h3 className="font-bold text-gray-900 mb-3 text-lg">
+                      {resource.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 text-sm">
+                      {resource.description}
+                    </p>
+                    <div className="flex gap-2">
+                      <a
+                        href={`/downloads/${resource.filename}`}
+                        className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-300 text-center"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {locale === 'zh' ? '中文版' : 'English'}
+                      </a>
+                      <a
+                        href={`/downloads/${resource.filename.replace('.pdf', `-${locale === 'zh' ? 'en' : 'zh'}.pdf`)}`}
+                        className="flex-1 border border-purple-600 text-purple-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-50 transition-all duration-300 text-center"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {locale === 'zh' ? 'English' : '中文版'}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Back to Articles */}
+        <div className="mt-16 text-center">
+          <Link
+            href={`/${locale}/articles`}
+            className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+          >
+            {t('backToArticles')}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

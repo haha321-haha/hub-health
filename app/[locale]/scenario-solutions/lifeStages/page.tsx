@@ -275,9 +275,7 @@ export default async function LifeStagesScenarioPage({ params: { locale } }: Pro
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Link
-                    href={`/downloads/campus-emergency-checklist${locale === 'en' ? '-en' : ''}.html`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/${locale}/downloads/preview/campus-emergency-checklist`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
@@ -292,9 +290,7 @@ export default async function LifeStagesScenarioPage({ params: { locale } }: Pro
                   </Link>
 
                   <Link
-                    href={`/downloads/parent-communication-guide${locale === 'en' ? '-en' : ''}.html`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/${locale}/downloads/preview/parent-communication-guide`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
@@ -309,9 +305,7 @@ export default async function LifeStagesScenarioPage({ params: { locale } }: Pro
                   </Link>
 
                   <Link
-                    href={`/downloads/teacher-health-manual${locale === 'en' ? '-en' : ''}.html`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/${locale}/downloads/preview/teacher-health-manual`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
@@ -326,9 +320,7 @@ export default async function LifeStagesScenarioPage({ params: { locale } }: Pro
                   </Link>
 
                   <Link
-                    href={`/downloads/teacher-collaboration-handbook${locale === 'en' ? '-en' : ''}.html`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/${locale}/downloads/preview/teacher-collaboration-handbook`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />

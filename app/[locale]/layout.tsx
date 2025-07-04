@@ -3,12 +3,12 @@ import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-// 强制动态渲染 - 解决next-intl静态预渲染冲突
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
+// 移除强制动态渲染配置，允许静态路由生成
+// export const dynamic = 'force-dynamic';
+// export const revalidate = 0;
+// export const fetchCache = 'force-no-store';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -16,8 +16,8 @@ import { AppProvider } from '../../components/AppProvider';
 
 import '../globals.css';
 
-// 支持的语言列表
-const locales = ['zh', 'en'] as const;
+// 导入支持的语言列表
+import { locales, Locale } from '@/i18n';
 
 // Font configuration
 const inter = Inter({
@@ -104,10 +104,10 @@ export async function generateMetadata({
   };
 }
 
-// 注释掉静态参数生成，强制动态渲染
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }));
-// }
+// 恢复静态参数生成，允许路由预渲染
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({
   children,
@@ -122,13 +122,13 @@ export default async function LocaleLayout({
   }
 
   // 启用静态渲染
-  setRequestLocale(locale);
+  unstable_setRequestLocale(locale as Locale);
 
   // 获取该语言的翻译消息
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className={`scroll-smooth ${inter.variable}`}>
+    <html lang={locale} className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning={true}>
       <head>
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />

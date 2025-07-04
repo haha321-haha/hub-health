@@ -4,7 +4,8 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
-export const runtime = 'nodejs';
+// 移除可能导致Vercel部署错误的runtime配置
+// export const runtime = 'nodejs';
 export const preferredRegion = 'auto';
 
 // 导出配置对象供其他文件使用
@@ -12,6 +13,7 @@ export const dynamicConfig = {
   dynamic: 'force-dynamic' as const,
   revalidate: 0,
   fetchCache: 'force-no-store' as const,
-  runtime: 'nodejs' as const,
+  // 移除runtime配置以避免Vercel部署错误
+  // runtime: 'nodejs' as const,
   preferredRegion: 'auto' as const,
 };

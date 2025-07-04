@@ -694,7 +694,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
                         </div>
 
                         <p className="text-sm text-indigo-600 mb-3 leading-relaxed">
-                          "{template.content}"
+                          &ldquo;{template.content}&rdquo;
                         </p>
 
                         <button

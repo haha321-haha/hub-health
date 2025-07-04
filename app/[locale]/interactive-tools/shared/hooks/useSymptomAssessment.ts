@@ -339,11 +339,12 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     return recommendations;
   }, []);
 
-  const completeAssessment = useCallback((t?: any): AssessmentResult | null => {
+  const completeAssessment = useCallback((t?: any, currentLocale?: string): AssessmentResult | null => {
     console.log('completeAssessment called:', {
       currentSession: !!currentSession,
       answersCount: currentSession?.answers.length,
-      questionsCount: questions.length
+      questionsCount: questions.length,
+      currentLocale
     });
 
     if (!currentSession) {
@@ -357,7 +358,9 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
       const score = calculateScore(currentSession.answers, questions);
       const maxScore = questions.reduce((sum, q) => sum + (q.weight * 10), 0);
       const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
-      const isEnglish = currentSession.locale === 'en';
+      // Use the current locale parameter if provided, otherwise fall back to session locale
+      const effectiveLocale = currentLocale || currentSession.locale;
+      const isEnglish = effectiveLocale === 'en';
 
       console.log('Assessment calculation:', {
         score,
@@ -394,7 +397,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
         summary = t ? t('resultMessages.mildSummary') : (isEnglish ? 'Your symptoms are mild and can be improved through lifestyle adjustments.' : '您的症状较轻，可以通过生活方式调整来改善。');
       }
 
-      const recommendations = generateRecommendations(score, percentage, currentSession.answers, t, currentSession.locale);
+      const recommendations = generateRecommendations(score, percentage, currentSession.answers, t, effectiveLocale);
 
       const assessmentResult: AssessmentResult = {
         sessionId: currentSession.id,
@@ -448,7 +451,8 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
       return assessmentResult;
     } catch (err) {
       console.error('Failed to complete assessment:', err);
-      const isEnglish = currentSession?.locale === 'en';
+      const effectiveLocale = currentLocale || currentSession?.locale;
+      const isEnglish = effectiveLocale === 'en';
       setError(t ? t('messages.assessmentFailed') : (isEnglish ? 'An error occurred while completing the assessment. Please try again.' : '评估完成时出现错误，请重试。'));
       return null;
     } finally {

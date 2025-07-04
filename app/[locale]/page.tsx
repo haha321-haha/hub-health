@@ -2,8 +2,9 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Locale, locales } from '@/i18n/request';
+import { Locale, locales } from '@/i18n';
 import Hero from '@/components/layout/Hero';
+import { getAllArticles } from '@/lib/articles';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -35,9 +36,13 @@ export default async function HomePage({
   const t = await getTranslations({ locale, namespace: 'homepage' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
 
+  // Get article count
+  const allArticles = getAllArticles(locale);
+  const articleCount = allArticles.length;
+
   return (
     <div className="min-h-screen">
-      <Hero />
+      <Hero articleCount={articleCount} />
 
       {/* Statistics Infographic Section */}
       <section className="py-16 px-4 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">

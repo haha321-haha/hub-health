@@ -51,6 +51,36 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
     console.log('Result changed:', result);
   }, [result]);
 
+  // 调试当前session和问题
+  useEffect(() => {
+    console.log('Debug info:', {
+      locale,
+      currentSession: currentSession ? {
+        id: currentSession.id,
+        locale: currentSession.locale,
+        answersCount: currentSession.answers.length
+      } : null,
+      currentQuestion: currentQuestion ? {
+        id: currentQuestion.id,
+        title: currentQuestion.title,
+        type: currentQuestion.type
+      } : null,
+      currentQuestionIndex,
+      totalQuestions
+    });
+  }, [locale, currentSession, currentQuestion, currentQuestionIndex, totalQuestions]);
+
+  // 确保locale变化时重置assessment，避免使用错误locale的旧session
+  useEffect(() => {
+    if (currentSession && currentSession.locale !== locale) {
+      console.log('Locale mismatch detected, resetting assessment:', {
+        sessionLocale: currentSession.locale,
+        currentLocale: locale
+      });
+      resetAssessment();
+    }
+  }, [locale, currentSession, resetAssessment]);
+
   const {
     notifications,
     removeNotification,
@@ -60,6 +90,8 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
 
   const handleStartAssessment = () => {
     console.log('Starting assessment with locale:', locale);
+    // Clear any existing session first to ensure fresh start with correct locale
+    resetAssessment();
     startAssessment(locale);
   };
 
@@ -248,7 +280,7 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
 
             <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-6 rounded-lg text-center">
               <h3 className="text-sm font-medium text-gray-600 mb-2">
-                {t('result.severity')}
+                {t('result.riskLevel')}
               </h3>
               <p className="text-xl font-bold text-gray-900">
                 {t(`severity.${result.type}`)}

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { locales } from '@/i18n/request'
+import { locales } from '@/i18n'
 
 // 文章数据 - 从实际文章文件中获取
 const articles = [

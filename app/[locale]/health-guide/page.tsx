@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Locale, locales } from '@/i18n/request';
+import { Locale, locales } from '@/i18n';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -91,19 +91,21 @@ export default async function HealthGuidePage({
   ];
 
   return (
-    <div className="space-y-12">
-      {/* Page Header */}
-      <header className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {locale === 'zh' ? '痛经健康指南' : 'Comprehensive Menstrual Health Guide'}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {locale === 'zh'
-            ? '您的完整痛经健康资源，从基础知识到高级管理策略，帮助您全面了解和管理经期健康。'
-            : 'Your complete menstrual health resource, from basics to advanced management strategies, helping you understand and manage your menstrual health comprehensively.'
-          }
-        </p>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
+        <div className="space-y-12">
+          {/* Page Header */}
+          <header className="text-center">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+              {locale === 'zh' ? '痛经健康指南' : 'Comprehensive Menstrual Health Guide'}
+            </h1>
+            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+              {locale === 'zh'
+                ? '您的完整痛经健康资源，从基础知识到高级管理策略，帮助您全面了解和管理经期健康。'
+                : 'Your complete menstrual health resource, from basics to advanced management strategies, helping you understand and manage your menstrual health comprehensively.'
+              }
+            </p>
+          </header>
 
       {/* Introduction Section */}
       <section className="bg-gradient-to-br from-primary-50 to-neutral-50 p-6 md:p-8 rounded-xl">
@@ -203,18 +205,20 @@ export default async function HealthGuidePage({
         </div>
       </section>
 
-      {/* Medical Disclaimer */}
-      <section className="bg-primary-50 border-l-4 border-primary-500 p-4 rounded-r-lg">
-        <p className="text-neutral-700">
-          <strong className="text-primary-700">
-            {locale === 'zh' ? '医疗免责声明：' : 'Medical Disclaimer:'}
-          </strong>
-          {locale === 'zh'
-            ? '本指南中的信息仅供教育目的，不应替代专业医疗建议、诊断或治疗。如有任何健康问题，请咨询合格的医疗保健提供者。'
-            : 'The information in this guide is for educational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for any health concerns.'
-          }
-        </p>
-      </section>
+          {/* Medical Disclaimer */}
+          <section className="bg-primary-50 border-l-4 border-primary-500 p-4 rounded-r-lg">
+            <p className="text-neutral-700">
+              <strong className="text-primary-700">
+                {locale === 'zh' ? '医疗免责声明：' : 'Medical Disclaimer:'}
+              </strong>
+              {locale === 'zh'
+                ? '本指南中的信息仅供教育目的，不应替代专业医疗建议、诊断或治疗。如有任何健康问题，请咨询合格的医疗保健提供者。'
+                : 'The information in this guide is for educational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for any health concerns.'
+              }
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }
