@@ -23,7 +23,7 @@ featured_image: "/images/articles/comprehensive-iud-guide.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/zh/articles/comprehensive-iud-guide"
 schema_type: "Article"
-reading_time: "25 minutes"
+reading_time: "25分钟"
 reading_time_zh: "25 分钟"
 pdf_available: false
 ---

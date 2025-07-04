@@ -1,14 +1,24 @@
 ---
 title: "痛经医学指南：病因、诊断与科学治疗的完整解析"
-description: "深入解析痛经的医学原理、10大病因分类、专业诊断鉴别方法和科学治疗方案，从前列腺素机制到继发性疾病，为女性提供全面的医学级痛经管理指导。"
+title_en: "Medical Guide to Menstrual Pain: Complete Analysis of Causes, Diagnosis & Scientific Treatment"
+date: "2024-12-19"
+date_en: "2024-12-19"
 summary: "权威医学指南深度解析痛经10大病因，从前列腺素机制到子宫内膜异位症，详细阐述原发性与继发性痛经的鉴别诊断。提供专业疼痛评估方法、标准化治疗流程和就医指征，帮助女性科学认知痛经，实现精准健康管理。"
-category: "医学指南"
+summary_en: "Authoritative medical guide providing in-depth analysis of 10 major causes of menstrual pain, from prostaglandin mechanisms to endometriosis, detailing differential diagnosis between primary and secondary dysmenorrhea. Offers professional pain assessment methods, standardized treatment protocols, and medical consultation guidelines to help women scientifically understand menstrual pain and achieve precise health management."
 tags: ["痛经", "医学诊断", "妇科疾病", "疼痛管理", "女性健康", "医学科普"]
-author: "Period Hub Medical Team"
-publishDate: "2024-12-19"
-lastModified: "2024-12-19"
-featured: true
-readingTime: "20分钟"
+tags_en: ["menstrual pain", "medical diagnosis", "gynecological diseases", "pain management", "women's health", "medical education"]
+category: "医学指导"
+category_en: "medical-guidance"
+seo_title: "痛经医学指南：病因诊断与科学治疗完整解析"
+seo_title_en: "Medical Guide to Menstrual Pain: Complete Analysis of Causes, Diagnosis & Scientific Treatment"
+seo_description: "权威医学指南深度解析痛经10大病因，从前列腺素机制到子宫内膜异位症，详细阐述原发性与继发性痛经的鉴别诊断。"
+seo_description_en: "Authoritative medical guide providing in-depth analysis of 10 major causes of menstrual pain, from prostaglandin mechanisms to endometriosis, detailing differential diagnosis between primary and secondary dysmenorrhea."
+featured_image: "/images/articles/menstrual-pain-medical-guide-featured.jpg"
+author: "periodhub.health 专家团队"
+canonical_url: "/zh/articles/menstrual-pain-medical-guide"
+schema_type: "Article"
+reading_time: "20分钟"
+reading_time_en: "20 minutes"
 ---
 
 # 痛经医学指南：病因、诊断与科学治疗的完整解析

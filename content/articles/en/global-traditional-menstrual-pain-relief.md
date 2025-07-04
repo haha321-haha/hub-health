@@ -1,6 +1,7 @@
 ---
 title: "Global Perspectives on Menstrual Pain Relief: Integrating Traditional Wisdom with Modern Science"
 description: "Comprehensive analysis of 10 major causes of menstrual pain, symptoms, and scientific diagnostic methods. Explore Indian Ayurveda, Traditional Chinese Medicine, and global traditional remedies, combined with top 5 scientifically validated therapies for complete menstrual pain management from cause analysis to long-term solutions."
+summary: "Explore global traditional medicine wisdom, integrating Ayurveda, Traditional Chinese Medicine, and European herbal remedies for menstrual pain relief. From turmeric milk to warming meridian decoctions, from acupuncture points to yoga poses, combined with modern scientific validation to provide safe and effective natural menstrual pain management solutions, achieving perfect integration of traditional wisdom and modern medicine."
 category: "Traditional Therapies"
 tags: ["menstrual pain relief", "ayurveda", "traditional chinese medicine", "natural remedies", "women's health", "holistic healing"]
 author: "Period Hub Health Team"

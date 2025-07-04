@@ -5,7 +5,7 @@ summary: "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、�
 summary_zh: "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、剂量计算与效果优化。包含互动式用药计算器、药物代谢动画演示、副作用管理和个性化治疗方案，助您科学安全地使用NSAIDs缓解痛经。"
 date: "2024-12-19"
 reading_time: "25 min read"
-reading_time_zh: "25分钟阅读"
+reading_time_zh: "25分钟"
 tags: ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专业"]
 tags_zh: ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专业"]
 category: "medical"

@@ -1,24 +1,15 @@
 ---
-title: "Menstrual Pain vs Other Abdominal Pain: 5-Minute Self-Assessment Guide"
-title_en: "Menstrual Pain vs Other Abdominal Pain: 5-Minute Self-Assessment Guide"
-date: "2024-12-19"
-date_en: "2024-12-19"
-summary: "Professional self-assessment guide to quickly distinguish menstrual pain from other abdominal pain causes. Help women accurately identify pain nature through cyclical patterns and accompanying symptoms, timely recognize 7 warning signs to protect health and safety."
-summary_en: "Professional self-assessment guide to quickly distinguish menstrual pain from other abdominal pain causes. Help women accurately identify pain nature through cyclical patterns and accompanying symptoms, timely recognize 7 warning signs to protect health and safety."
-tags: ["menstrual pain assessment", "abdominal pain differential", "warning signs", "gynecological emergency", "pain diagnosis", "health self-check", "medical guidance", "symptom recognition"]
-tags_en: ["menstrual pain assessment", "abdominal pain differential", "warning signs", "gynecological emergency", "pain diagnosis", "health self-check", "medical guidance", "symptom recognition"]
-category: "health-management"
-category_en: "health-management"
-seo_title: "Menstrual Pain vs Other Abdominal Pain: 5-Minute Self-Assessment Guide - Recognize Warning Signs"
-seo_title_en: "Menstrual Pain vs Other Abdominal Pain: 5-Minute Self-Assessment Guide - Recognize Warning Signs"
-seo_description: "Professional guide to distinguish menstrual pain from other abdominal pain. Quickly identify pain nature through cyclical patterns and symptoms, master 7 warning signs, timely recognize when medical care is needed to protect women's health."
-seo_description_en: "Professional guide to distinguish menstrual pain from other abdominal pain. Quickly identify pain nature through cyclical patterns and symptoms, master 7 warning signs, timely recognize when medical care is needed to protect women's health."
-featured_image: "/images/articles/menstrual-pain-differential-diagnosis-featured.jpg"
-author: "periodhub.health Expert Team"
-canonical_url: "/en/articles/menstrual-pain-vs-other-abdominal-pain-guide"
-schema_type: "Article"
-reading_time: "8 minutes"
-reading_time_en: "8 minutes"
+title: "Comprehensive Guide to Menstrual Pain vs Other Abdominal Pain: Recognizing Warning Signs and Making Informed Decisions"
+description: "Authoritative medical guide helping women accurately distinguish menstrual pain from other dangerous abdominal pain, including comparative analysis of heart attacks, acute appendicitis, kidney stones, and 5 major conditions with key warning sign identification and emergency management advice."
+summary: "Detailed comparison of menstrual pain with heart attacks, acute appendicitis, kidney stones, and other common abdominal pain, providing scientific differential diagnosis methods and warning sign identification checklists to help women make correct medical decisions at critical moments."
+category: "Understanding & Education"
+tags: ["menstrual pain identification", "abdominal pain diagnosis", "warning signs", "medical guidance", "emergency management"]
+author: "Period Hub Health Team"
+publishDate: "2024-12-19"
+lastModified: "2024-12-19"
+featured: true
+reading_time: "25 minutes"
+reading_time_zh: "25分钟"
 ---
 
 # Menstrual Pain vs Other Abdominal Pain: 5-Minute Self-Assessment Guide
@@ -233,6 +224,151 @@ Recommend recording the following information:
 - Save examination reports
 - Record medication history
 - Establish family medical history files
+
+## Part V: Self-Assessment Tools
+
+### Pain Assessment Scale
+
+Use the following scale to assess your pain:
+
+**Pain Intensity Score (0-10 points)**:
+- 0 points: No pain
+- 1-3 points: Mild pain, does not affect daily activities
+- 4-6 points: Moderate pain, affects some daily activities
+- 7-9 points: Severe pain, seriously affects daily activities
+- 10 points: Extreme pain, unbearable
+
+**Functional Impact Assessment**:
+- Can you work/study normally?
+- Can you eat normally?
+- Can you sleep normally?
+- Do you need bed rest?
+
+### Decision Flow Chart
+
+<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 24px; border-radius: 16px; margin: 20px 0; border: 2px solid #dee2e6;">
+
+**🚨 Abdominal Pain Emergency Decision Guide**
+
+<div style="background: #fff; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
+#### 🔴 Step 1: Emergency Symptom Screening
+<div style="background: #ffebee; border-left: 4px solid #e53935; padding: 16px; margin: 12px 0; border-radius: 8px;">
+<strong style="color: #c62828; font-size: 18px;">⚡ Abdominal Pain Occurs</strong><br><br>
+<strong style="color: #d32f2f;">❓ Are any of the following symptoms present?</strong>
+<ul style="margin: 12px 0; padding-left: 20px; color: #424242;">
+<li>Chest pain or tightness</li>
+<li>Difficulty breathing or shortness of breath</li>
+<li>Pale complexion, cold sweats</li>
+<li>Confusion or fainting</li>
+</ul>
+
+<div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+<div style="background: #e53935; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+✅ Yes → 🚨 Call 911 Immediately
+</div>
+<div style="background: #6c757d; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+❌ No → Continue to Next Step
+</div>
+</div>
+</div>
+
+#### 🟠 Step 2: Infection Symptom Assessment
+<div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 16px; margin: 12px 0; border-radius: 8px;">
+<strong style="color: #ef6c00; font-size: 18px;">🌡️ Fever Symptom Check</strong><br><br>
+<strong style="color: #f57c00;">❓ Are fever symptoms present?</strong>
+<ul style="margin: 12px 0; padding-left: 20px; color: #424242;">
+<li>Temperature ≥ 38°C (100.4°F)</li>
+<li>Chills or feeling cold</li>
+<li>General fatigue</li>
+</ul>
+
+<div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+<div style="background: #ff9800; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+✅ Yes → ⚠️ Seek Care Within 24hrs
+</div>
+<div style="background: #6c757d; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+❌ No → Continue to Next Step
+</div>
+</div>
+</div>
+
+#### 🟡 Step 3: Cyclical Assessment
+<div style="background: #fffde7; border-left: 4px solid #ffeb3b; padding: 16px; margin: 12px 0; border-radius: 8px;">
+<strong style="color: #f57f17; font-size: 18px;">📅 Menstrual Cycle Correlation</strong><br><br>
+<strong style="color: #f9a825;">❓ Is pain related to menstrual cycle?</strong>
+<ul style="margin: 12px 0; padding-left: 20px; color: #424242;">
+<li>Pain occurs around menstrual period</li>
+<li>Pain pattern similar to previous menstrual pain</li>
+<li>Pain subsides as menstruation ends</li>
+</ul>
+
+<div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+<div style="background: #6c757d; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+❌ No → 💡 Recommend Medical Evaluation
+</div>
+<div style="background: #ffeb3b; color: #424242; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+✅ Yes → Continue to Next Step
+</div>
+</div>
+</div>
+
+#### 🟢 Step 4: Pain Intensity Assessment
+<div style="background: #e8f5e8; border-left: 4px solid #4caf50; padding: 16px; margin: 12px 0; border-radius: 8px;">
+<strong style="color: #2e7d32; font-size: 18px;">📊 Pain Intensity Evaluation</strong><br><br>
+<strong style="color: #388e3c;">❓ Is pain intensity tolerable?</strong>
+<div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin: 12px 0;">
+<strong>Pain Scale Reference (1-10 points):</strong><br>
+• 1-3 points: Mild, doesn't affect daily activities<br>
+• 4-6 points: Moderate, affects some activities<br>
+• 7-10 points: Severe, seriously affects life
+</div>
+
+<div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+<div style="background: #ff5722; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+❌ No (7-10 pts) → 🏥 Seek Immediate Care
+</div>
+<div style="background: #4caf50; color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; flex: 1; min-width: 120px; text-align: center;">
+✅ Yes (1-6 pts) → 🏠 Home Relief
+</div>
+</div>
+</div>
+
+#### 🏠 Home Relief Plan
+<div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 16px; margin: 12px 0; border-radius: 8px;">
+<strong style="color: #1976d2; font-size: 18px;">💊 Safe Relief Measures</strong>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px;">
+<div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0;">
+<strong>🔥 Heat Therapy</strong><br>
+Apply heat to abdomen and lower back for 15-20 minutes
+</div>
+<div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0;">
+<strong>💊 Pain Relief</strong><br>
+Take ibuprofen or other NSAIDs pain medications
+</div>
+<div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0;">
+<strong>😴 Adequate Rest</strong><br>
+Maintain comfortable position, avoid strenuous activity
+</div>
+<div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0;">
+<strong>👁️ Close Monitoring</strong><br>
+Record symptom changes, seek care if necessary
+</div>
+</div>
+</div>
+
+</div>
+
+**⚠️ Important Reminders**:
+<div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 16px; border-radius: 8px; margin: 16px 0;">
+<ul style="margin: 0; padding-left: 20px; color: #856404;">
+<li><strong>If symptoms worsen or new symptoms appear at any time, seek immediate medical care</strong></li>
+<li><strong>If pain pattern differs from previous experiences, recommend medical evaluation</strong></li>
+<li><strong>This guide is for reference only and cannot replace professional medical advice</strong></li>
+</ul>
+</div>
+
+</div>
 
 ## Summary
 

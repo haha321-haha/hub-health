@@ -18,6 +18,7 @@ author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/5-minute-period-pain-relief"
 schema_type: "Article"
 reading_time: "6分钟"
+reading_time_zh: "6分钟"
 reading_time_en: "6 minutes"
 ---
 

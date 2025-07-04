@@ -5,7 +5,7 @@ summary: "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、�
 summary_zh: "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和中医调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。"
 date: "2024-12-19"
 reading_time: "8 min read"
-reading_time_zh: "8分钟阅读"
+reading_time_zh: "8分钟"
 tags: ["阅读推荐", "女性健康", "经期教育", "心理健康"]
 tags_zh: ["阅读推荐", "女性健康", "经期教育", "心理健康"]
 category: "education"
