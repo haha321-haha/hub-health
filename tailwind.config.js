@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',  // 添加超小屏幕断点
+      },
       colors: {
         // 🎨 您选择的紫色系 - 主色调
         primary: {
