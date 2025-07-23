@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { unstable_setRequestLocale } from 'next-intl/server';
 
 // 移除强制动态渲染配置，允许静态路由生成
 // export const dynamic = 'force-dynamic';
@@ -13,6 +12,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { AppProvider } from '../../components/AppProvider';
+import GA4Provider from '../../components/analytics/GA4Provider';
 
 import '../globals.css';
 
@@ -101,6 +101,10 @@ export async function generateMetadata({
         'max-snippet': -1,
       },
     },
+    other: {
+      // Google Search Console 验证
+      'google-site-verification': 'your-verification-code-here',
+    },
   };
 }
 
@@ -122,7 +126,7 @@ export default async function LocaleLayout({
   }
 
   // 启用静态渲染
-  unstable_setRequestLocale(locale as Locale);
+  setRequestLocale(locale as Locale);
 
   // 获取该语言的翻译消息
   const messages = await getMessages({ locale });
@@ -147,13 +151,15 @@ export default async function LocaleLayout({
       </head>
       <body className="antialiased bg-neutral-50 text-neutral-900 flex flex-col min-h-screen">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AppProvider>
-            <Header />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </AppProvider>
+          <GA4Provider>
+            <AppProvider>
+              <Header />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </AppProvider>
+          </GA4Provider>
         </NextIntlClientProvider>
 
         {/* Medical Disclaimer - For compliance and user safety */}

@@ -30,8 +30,6 @@ export default async function DownloadCenterPage({
 }) {
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: 'pdfCenter' });
-  const commonT = await getTranslations({ locale, namespace: 'common' });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100">
@@ -64,11 +62,11 @@ export default async function DownloadCenterPage({
           {/* 快速统计 */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">22</div>
+              <div className="text-2xl font-bold text-purple-600">42</div>
               <div className="text-sm text-gray-500">专业文章</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">16</div>
+              <div className="text-2xl font-bold text-pink-600">24</div>
               <div className="text-sm text-gray-500">实用PDF</div>
             </div>
             <div className="text-center">

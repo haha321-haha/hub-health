@@ -8,7 +8,6 @@ import {
   Shield,
   BarChart3,
   Search,
-  Settings,
   Bell,
   Database,
   Cpu,
@@ -16,10 +15,16 @@ import {
 } from 'lucide-react';
 
 export default function FrameworkDemoPage() {
-  const t = useTranslations();
 
   // 演示数据
-  const [demoData] = useState([
+  const demoData = [
+    { label: '1月', value: 65 },
+    { label: '2月', value: 78 },
+    { label: '3月', value: 90 },
+    { label: '4月', value: 81 },
+    { label: '5月', value: 95 },
+    { label: '6月', value: 88 },
+  ];
     { label: '1月', value: 65 },
     { label: '2月', value: 78 },
     { label: '3月', value: 90 },
@@ -99,6 +104,9 @@ export default function FrameworkDemoPage() {
             </p>
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <p className="text-sm text-gray-600">图表演示区域</p>
+              <div className="mt-2 text-xs text-gray-500">
+                数据: {demoData.map(d => `${d.label}:${d.value}`).join(', ')}
+              </div>
             </div>
           </div>
 

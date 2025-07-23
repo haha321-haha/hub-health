@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import fs from 'fs';
@@ -91,7 +91,7 @@ function getArticleBySlug(slug: string, locale: string = 'en'): Article | null {
 }
 
 // 获取相关文章函数
-function getRelatedArticles(currentSlug: string, locale: string = 'en', limit: number = 3): Article[] {
+function getRelatedArticles(): Article[] {
   // 暂时返回空数组，避免复杂的文件系统操作
   return [];
 }
@@ -158,57 +158,61 @@ export async function generateMetadata({
 }: {
   params: { locale: Locale; slug: string }
 }): Promise<Metadata> {
-  const article = getArticleBySlug(slug, locale);
+  const article = await getArticleBySlug(slug, locale);
   
   if (!article) {
     return {
-      title: 'Article Not Found | periodhub.health',
-      description: 'The requested article could not be found.',
+      title: 'Article Not Found',
+      description: 'The requested article could not be found.'
     };
   }
-
-  const title = locale === 'zh' ? article.title_zh || article.title : article.title;
-  const description = locale === 'zh' ? article.seo_description_zh || article.seo_description : article.seo_description;
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://period-hub.com'
-  const articleUrl = `${baseUrl}/${locale}/articles/${slug}`
+  
+  const title = locale === 'zh' ? (article.title_zh || article.title) : article.title;
+  const description = locale === 'zh' ? (article.summary_zh || article.summary) : article.summary;
+  const seoTitle = locale === 'zh' ? (article.seo_title_zh || title) : (article.seo_title || title);
+  const seoDescription = locale === 'zh' ? (article.seo_description_zh || description) : (article.seo_description || description);
+  const canonicalUrl = article.canonical_url || `/${locale}/articles/${slug}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health';
+  const articleUrl = `${baseUrl}${canonicalUrl}`;
 
   return {
-    title: `${title} | Period Hub`,
-    description: description,
-    keywords: (locale === 'zh' ? article.tags_zh : article.tags)?.join(', '),
+    title: seoTitle,
+    description: seoDescription,
+    keywords: locale === 'zh' ? article.tags_zh : article.tags,
     authors: [{ name: article.author }],
     openGraph: {
-      title: title,
-      description: description,
+      title: seoTitle,
+      description: seoDescription,
       url: articleUrl,
-      siteName: 'Period Hub',
-      images: [
+      type: 'article',
+      publishedTime: article.date,
+      authors: [article.author],
+      images: article.featured_image ? [
         {
-          url: article.featured_image || `${baseUrl}/og-image.jpg`,
+          url: article.featured_image,
           width: 1200,
           height: 630,
           alt: title,
         }
-      ],
-      type: 'article',
-      publishedTime: article.date,
-      modifiedTime: article.date,
-      locale: locale,
-      authors: [article.author],
+      ] : undefined,
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
-      description: description,
-      images: [article.featured_image || `${baseUrl}/og-image.jpg`],
+      title: seoTitle,
+      description: seoDescription,
+      images: article.featured_image ? [article.featured_image] : undefined,
     },
     alternates: {
       canonical: articleUrl,
       languages: {
-        'zh-CN': `${baseUrl}/zh/articles/${slug}`,
         'en-US': `${baseUrl}/en/articles/${slug}`,
+        'zh-CN': `${baseUrl}/zh/articles/${slug}`,
       },
+    },
+    other: {
+      'article:published_time': article.date,
+      'article:author': article.author,
     },
   };
 }
@@ -221,7 +225,7 @@ export default async function ArticlePage({
   setRequestLocale(locale);
 
   const article = getArticleBySlug(slug, locale);
-  const relatedArticles = getRelatedArticles(slug, locale, 3);
+  const relatedArticles = getRelatedArticles(slug);
 
   if (!article) {
     notFound();
@@ -237,8 +241,6 @@ export default async function ArticlePage({
 
   // Check if this article contains Mermaid charts
   const hasMermaidCharts = article.content.includes('```mermaid');
-
-
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://period-hub.com'
   const articleUrl = `${baseUrl}/${locale}/articles/${slug}`

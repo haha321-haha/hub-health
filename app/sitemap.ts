@@ -35,7 +35,7 @@ const mainPages = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://period-hub.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health'
   const currentDate = new Date()
   const sitemapEntries: MetadataRoute.Sitemap = []
 

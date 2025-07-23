@@ -12,6 +12,78 @@ interface PDFPreviewPageProps {
   resourceId: string;
 }
 
+// 新增PDF资源的基本信息映射（与page.tsx保持一致）
+const NEW_PDF_INFO: Record<string, { title: { zh: string; en: string }; filename: string }> = {
+  'emergency-pain-relief-card': {
+    title: { zh: '紧急疼痛缓解卡片', en: 'Emergency Pain Relief Card' },
+    filename: 'emergency-pain-relief-card.pdf'
+  },
+  '5-minute-relief-checklist': {
+    title: { zh: '5分钟快速缓解检查清单', en: '5-Minute Quick Relief Checklist' },
+    filename: '5-minute-relief-checklist.pdf'
+  },
+  'heat-therapy-guide-pdf': {
+    title: { zh: '热疗完整指南PDF版', en: 'Complete Heat Therapy Guide PDF' },
+    filename: 'heat-therapy-guide-pdf.pdf'
+  },
+  'workplace-relief-toolkit': {
+    title: { zh: '职场疼痛缓解工具包', en: 'Workplace Pain Relief Toolkit' },
+    filename: 'workplace-relief-toolkit.pdf'
+  },
+  'monthly-preparation-planner': {
+    title: { zh: '月度准备计划表', en: 'Monthly Preparation Planner' },
+    filename: 'monthly-preparation-planner.pdf'
+  },
+  'stress-management-workbook': {
+    title: { zh: '压力管理工作册', en: 'Stress Management Workbook' },
+    filename: 'stress-management-workbook.pdf'
+  },
+  'sleep-quality-improvement-guide': {
+    title: { zh: '睡眠质量改善指南', en: 'Sleep Quality Improvement Guide' },
+    filename: 'sleep-quality-improvement-guide.pdf'
+  },
+  'menstrual-cycle-education-guide': {
+    title: { zh: '月经周期教育指南', en: 'Menstrual Cycle Education Guide' },
+    filename: 'menstrual-cycle-education-guide.pdf'
+  },
+  'pain-research-summary-2024': {
+    title: { zh: '2024痛经研究摘要', en: '2024 Pain Research Summary' },
+    filename: 'pain-research-summary-2024.pdf'
+  },
+  'medical-consultation-preparation': {
+    title: { zh: '就医咨询准备指南', en: 'Medical Consultation Preparation Guide' },
+    filename: 'medical-consultation-preparation.pdf'
+  },
+  'global-health-perspectives': {
+    title: { zh: '全球健康视角报告', en: 'Global Health Perspectives Report' },
+    filename: 'global-health-perspectives.pdf'
+  },
+  'long-term-health-planner': {
+    title: { zh: '长期健康规划师', en: 'Long-term Health Planner' },
+    filename: 'long-term-health-planner.pdf'
+  },
+  'personal-health-journal': {
+    title: { zh: '个人健康日记模板', en: 'Personal Health Journal Template' },
+    filename: 'personal-health-journal.pdf'
+  },
+  'nutrition-meal-planning-kit': {
+    title: { zh: '营养膳食规划工具包', en: 'Nutrition Meal Planning Kit' },
+    filename: 'nutrition-meal-planning-kit.pdf'
+  },
+  'exercise-routine-builder': {
+    title: { zh: '运动计划构建器', en: 'Exercise Routine Builder' },
+    filename: 'exercise-routine-builder.pdf'
+  },
+  'lifestyle-assessment-toolkit': {
+    title: { zh: '生活方式评估工具包', en: 'Lifestyle Assessment Toolkit' },
+    filename: 'lifestyle-assessment-toolkit.pdf'
+  },
+  'sustainable-health-strategies': {
+    title: { zh: '可持续健康策略指南', en: 'Sustainable Health Strategies Guide' },
+    filename: 'sustainable-health-strategies.pdf'
+  }
+};
+
 export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPageProps) {
   const router = useRouter();
   const [htmlContent, setHtmlContent] = useState<string>('');
@@ -19,15 +91,37 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
   const [error, setError] = useState<string>('');
 
   const resource = getPDFResourceById(resourceId);
+  const newPdfInfo = NEW_PDF_INFO[resourceId];
   const t = useTranslations('downloadsPage.resources');
+
+  // 获取资源标题
+  const getResourceTitle = () => {
+    if (resource) {
+      return t(resource.titleKey);
+    } else if (newPdfInfo) {
+      return locale === 'zh' ? newPdfInfo.title.zh : newPdfInfo.title.en;
+    }
+    return resourceId;
+  };
+
+  // 获取文件名
+  const getFileName = () => {
+    if (resource) {
+      return resource.filename;
+    } else if (newPdfInfo) {
+      return newPdfInfo.filename;
+    }
+    return `${resourceId}.pdf`;
+  };
 
   useEffect(() => {
     console.log('=== PDFPreviewPage useEffect 开始 ===');
     console.log('resourceId:', resourceId);
     console.log('locale:', locale);
     console.log('resource:', resource);
+    console.log('newPdfInfo:', newPdfInfo);
     
-    if (!resource) {
+    if (!resource && !newPdfInfo) {
       console.log('❌ 资源未找到');
       setError('Resource not found');
       setLoading(false);
@@ -35,7 +129,8 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
     }
 
     // 构建HTML文件路径
-    let htmlFilename = resource.filename.replace('.pdf', '.html');
+    const filename = getFileName();
+    let htmlFilename = filename.replace('.pdf', '.html');
     console.log('初始 htmlFilename:', htmlFilename);
     
     if (locale === 'en' && !htmlFilename.includes('-en')) {
@@ -83,13 +178,14 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
         setError(`Failed to load preview content: ${err.message}`);
         setLoading(false);
       });
-  }, [resource, locale]);
+  }, [resource, newPdfInfo, locale]);
 
   const handleDownload = () => {
-    if (!resource) return;
+    if (!resource && !newPdfInfo) return;
 
     // 确定正确的HTML文件名（与预览页面使用相同的逻辑）
-    let htmlFilename = resource.filename.replace('.pdf', '.html');
+    const filename = getFileName();
+    let htmlFilename = filename.replace('.pdf', '.html');
     if (locale === 'en' && !htmlFilename.includes('-en')) {
       htmlFilename = htmlFilename.replace('.html', '-en.html');
     }
@@ -114,7 +210,7 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
   };
 
   const handleShare = async () => {
-    const resourceTitle = resource ? t(resource.titleKey) : '';
+    const resourceTitle = getResourceTitle();
     const shareData = {
       title: `Period Hub - ${resourceTitle}`,
       text: locale === 'zh' ? '推荐这个有用的经期健康资源' : 'Recommended period health resource',
@@ -137,7 +233,7 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
     router.push(`/${locale}/downloads`);
   };
 
-  if (!resource) {
+  if (!resource && !newPdfInfo) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 flex items-center justify-center">
         <div className="text-center">

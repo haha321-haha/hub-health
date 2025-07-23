@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Download, AlertCircle, Clock, Brain, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
 import { Locale, locales } from '@/i18n';
 import OptimizedMobilePDFCenter from '@/components/OptimizedMobilePDFCenter';
 
@@ -11,7 +11,6 @@ export async function generateMetadata({
 }: {
   params: { locale: Locale }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'pdfCenter' });
 
   return {
     title: `文章PDF下载中心 - Period Hub 经期健康专业资源`,
@@ -32,8 +31,6 @@ export default async function ArticlesPDFCenterPage({
 }) {
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: 'pdfCenter' });
-  const commonT = await getTranslations({ locale, namespace: 'common' });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100">
@@ -66,11 +63,11 @@ export default async function ArticlesPDFCenterPage({
           {/* 快速统计 */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">22</div>
+              <div className="text-2xl font-bold text-purple-600">42</div>
               <div className="text-sm text-gray-500">专业文章</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">16</div>
+              <div className="text-2xl font-bold text-pink-600">24</div>
               <div className="text-sm text-gray-500">实用PDF</div>
             </div>
             <div className="text-center">
