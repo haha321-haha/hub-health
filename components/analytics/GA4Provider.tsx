@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import GA4Tracker, { GA4_CONFIG } from '@/lib/analytics/ga4-config';
 
@@ -8,7 +8,7 @@ interface GA4ProviderProps {
   children: React.ReactNode;
 }
 
-export default function GA4Provider({ children }: GA4ProviderProps) {
+function GA4ProviderInner({ children }: GA4ProviderProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -27,4 +27,12 @@ export default function GA4Provider({ children }: GA4ProviderProps) {
   }, [pathname, searchParams]);
 
   return <>{children}</>;
-} 
+}
+
+export default function GA4Provider({ children }: GA4ProviderProps) {
+  return (
+    <Suspense fallback={<>{children}</>}>
+      <GA4ProviderInner>{children}</GA4ProviderInner>
+    </Suspense>
+  );
+}
