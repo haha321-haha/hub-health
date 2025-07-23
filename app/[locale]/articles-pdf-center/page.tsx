@@ -30,6 +30,8 @@ export default async function ArticlesPDFCenterPage({
   params: { locale: Locale }
 }) {
   setRequestLocale(locale);
+  
+  const t = await getTranslations('common');
 
 
   return (
@@ -41,7 +43,7 @@ export default async function ArticlesPDFCenterPage({
           className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium transition-colors group mb-6"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span>{commonT('navigation.backToArticles')}</span>
+          <span>{locale === 'en' ? 'Back to Articles' : '返回文章'}</span>
         </Link>
       </div>
 
