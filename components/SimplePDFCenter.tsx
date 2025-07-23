@@ -5,6 +5,7 @@ import { Search, Clock, AlertCircle, Brain, TrendingUp, Download, Share2, Eye, B
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Locale } from '@/i18n';
+import { SITE_CONFIG } from '@/config/site.config';
 
 interface SimplePDFCenterProps {
   locale: Locale;
@@ -28,6 +29,9 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
   
   // 🌐 翻译系统
   const t = useTranslations('pdfCenter.search');
+  
+  // 计算总资源数
+  const totalResources = SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources;
 
   // 🚀 Phase 1: 修复后的文章ID到slug映射表（基于实际文件）
   const articleIdToSlugMap: Record<string, string> = {
@@ -96,26 +100,45 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
     }
   };
 
-  // 🔧 PDF ID映射：SimplePDFCenter ID -> 预览系统支持的ID
+  // 🔧 PDF ID映射：SimplePDFCenter ID -> 预览系统支持的ID (扩展到30个PDF)
   const pdfIdToPreviewIdMap: Record<string, string> = {
-    // 即时缓解PDF (3个)
+    // 即时缓解PDF (7个：3个现有 + 4个新增)
     'immediate-pdf-1': 'pain-tracking-form',                    // 疼痛追踪表格
     'immediate-pdf-2': 'campus-emergency-checklist',           // 校园紧急检查清单
     'immediate-pdf-3': 'specific-menstrual-pain-management-guide', // 特定痛经管理指南PDF
+    'immediate-pdf-4': 'emergency-pain-relief-card',           // 紧急疼痛缓解卡片
+    'immediate-pdf-5': '5-minute-relief-checklist',            // 5分钟快速缓解检查清单
+    'immediate-pdf-6': 'heat-therapy-guide-pdf',               // 热疗完整指南PDF版
+    'immediate-pdf-7': 'workplace-relief-toolkit',             // 职场疼痛缓解工具包
 
-    // 计划准备PDF (4个)
+    // 计划准备PDF (7个：4个现有 + 3个新增)
     'preparation-pdf-1': 'healthy-habits-checklist',           // 健康习惯检查清单
     'preparation-pdf-2': 'menstrual-cycle-nutrition-plan',     // 经期营养计划
     'preparation-pdf-3': 'magnesium-gut-health-menstrual-pain-guide',         // 镁与肠道健康指南
     'preparation-pdf-4': 'zhan-zhuang-baduanjin-illustrated-guide', // 站桩八段锦图解指南
+    'preparation-pdf-5': 'monthly-preparation-planner',        // 月度准备计划表
+    'preparation-pdf-6': 'stress-management-workbook',         // 压力管理工作册
+    'preparation-pdf-7': 'sleep-quality-improvement-guide',    // 睡眠质量改善指南
 
-    // 学习理解PDF (6个)
+    // 学习理解PDF (10个：6个现有 + 4个新增)
     'learning-pdf-1': 'natural-therapy-assessment',            // 自然疗法评估表
     'learning-pdf-2': 'menstrual-pain-complications-management', // 痛经并发症管理
     'learning-pdf-3': 'teacher-health-manual',                 // 教师健康手册
     'learning-pdf-4': 'teacher-collaboration-handbook',        // 教师协作手册
     'learning-pdf-5': 'parent-communication-guide',            // 家长沟通指南
-    'learning-pdf-6': 'pain-tracking-form'                     // 美国保险快速参考卡 (复用)
+    'learning-pdf-6': 'pain-tracking-form',                    // 美国保险快速参考卡 (复用)
+    'learning-pdf-7': 'menstrual-cycle-education-guide',       // 月经周期教育指南
+    'learning-pdf-8': 'pain-research-summary-2024',            // 2024痛经研究摘要
+    'learning-pdf-9': 'medical-consultation-preparation',      // 就医咨询准备指南
+    'learning-pdf-10': 'global-health-perspectives',           // 全球健康视角报告
+
+    // 长期管理PDF (6个：全新分类)
+    'management-pdf-1': 'long-term-health-planner',            // 长期健康规划师
+    'management-pdf-2': 'personal-health-journal',             // 个人健康日记模板
+    'management-pdf-3': 'nutrition-meal-planning-kit',         // 营养膳食规划工具包
+    'management-pdf-4': 'exercise-routine-builder',            // 运动计划构建器
+    'management-pdf-5': 'lifestyle-assessment-toolkit',        // 生活方式评估工具包
+    'management-pdf-6': 'sustainable-health-strategies'        // 可持续健康策略指南
   };
 
   const handlePDFPreview = (pdfId: string) => {
@@ -347,27 +370,69 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           readTime: locale === 'zh' ? '20分钟' : '20 min read',
           category: 'immediate'
         },
-        // 即时缓解PDF (3个)
+        // 即时缓解PDF (7个：3个现有 + 4个新增)
         {
           id: 'immediate-pdf-1',
           title: locale === 'zh' ? '疼痛追踪表格' : 'Pain Tracking Form',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'immediate'
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['疼痛', '追踪', '记录', '监测', '管理'] : ['pain', 'tracking', 'record', 'monitoring', 'management'],
+          description: locale === 'zh' ? '记录和追踪疼痛程度的专业表格' : 'Professional form for tracking and recording pain levels'
         },
         {
           id: 'immediate-pdf-2',
           title: locale === 'zh' ? '校园紧急检查清单' : 'Campus Emergency Checklist',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'immediate'
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['校园', '紧急', '检查', '学生', '应急'] : ['campus', 'emergency', 'checklist', 'student', 'crisis'],
+          description: locale === 'zh' ? '校园环境中经期紧急情况的应对清单' : 'Emergency response checklist for menstrual situations on campus'
         },
         {
           id: 'immediate-pdf-3',
           title: locale === 'zh' ? '特定痛经管理指南PDF' : 'Specific Pain Management Guide PDF',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'immediate'
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['痛经', '管理', '指南', '治疗', '缓解'] : ['dysmenorrhea', 'management', 'guide', 'treatment', 'relief'],
+          description: locale === 'zh' ? '针对特定痛经类型的专业管理指南' : 'Professional management guide for specific types of dysmenorrhea'
+        },
+        {
+          id: 'immediate-pdf-4',
+          title: locale === 'zh' ? '紧急疼痛缓解卡片' : 'Emergency Pain Relief Card',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['紧急', '缓解', '卡片', '便携', '快速'] : ['emergency', 'relief', 'card', 'portable', 'quick'],
+          description: locale === 'zh' ? '便携式紧急疼痛缓解方法速查卡' : 'Portable quick reference card for emergency pain relief methods'
+        },
+        {
+          id: 'immediate-pdf-5',
+          title: locale === 'zh' ? '5分钟快速缓解检查清单' : '5-Minute Quick Relief Checklist',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['5分钟', '快速', '缓解', '检查', '步骤'] : ['5-minute', 'quick', 'relief', 'checklist', 'steps'],
+          description: locale === 'zh' ? '即时可用的5分钟快速缓解步骤清单' : 'Instant-use 5-minute quick relief step checklist'
+        },
+        {
+          id: 'immediate-pdf-6',
+          title: locale === 'zh' ? '热疗完整指南PDF版' : 'Complete Heat Therapy Guide PDF',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['热疗', '指南', '温热', '治疗', '方法'] : ['heat', 'therapy', 'thermal', 'treatment', 'methods'],
+          description: locale === 'zh' ? '详细的热疗使用方法和注意事项指南' : 'Detailed guide on heat therapy methods and precautions'
+        },
+        {
+          id: 'immediate-pdf-7',
+          title: locale === 'zh' ? '职场疼痛缓解工具包' : 'Workplace Pain Relief Toolkit',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'immediate',
+          keywords: locale === 'zh' ? ['职场', '工作', '缓解', '工具', '办公'] : ['workplace', 'office', 'relief', 'toolkit', 'professional'],
+          description: locale === 'zh' ? '办公环境下的疼痛管理和缓解方案' : 'Pain management and relief solutions for office environments'
         }
       ]
     },
@@ -432,13 +497,15 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           readTime: locale === 'zh' ? '12分钟' : '12 min read',
           category: 'preparation'
         },
-        // 计划准备PDF (4个)
+        // 计划准备PDF (7个：4个现有 + 3个新增)
         {
           id: 'preparation-pdf-1',
           title: locale === 'zh' ? '健康习惯检查清单' : 'Healthy Habits Checklist',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'preparation'
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['健康', '习惯', '检查', '清单', '计划'] : ['health', 'habits', 'checklist', 'planning', 'routine'],
+          description: locale === 'zh' ? '建立健康生活习惯的专业检查清单' : 'Professional checklist for establishing healthy lifestyle habits'
         },
         {
           id: 'preparation-pdf-2',
@@ -446,21 +513,53 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
           category: 'preparation',
-          keywords: locale === 'zh' ? ['营养', '计划', '饮食', '健康', '周期'] : ['nutrition', 'plan', 'diet', 'health', 'cycle']
+          keywords: locale === 'zh' ? ['营养', '计划', '饮食', '健康', '周期'] : ['nutrition', 'plan', 'diet', 'health', 'cycle'],
+          description: locale === 'zh' ? '针对月经周期的个性化营养补充计划' : 'Personalized nutrition plan for menstrual cycle support'
         },
         {
           id: 'preparation-pdf-3',
           title: locale === 'zh' ? '镁与肠道健康指南' : 'Magnesium Gut Health Guide',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'preparation'
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['镁', '肠道', '健康', '矿物质', '补充'] : ['magnesium', 'gut', 'health', 'minerals', 'supplement'],
+          description: locale === 'zh' ? '镁元素与肠道健康的综合指导手册' : 'Comprehensive guide on magnesium and gut health connection'
         },
         {
           id: 'preparation-pdf-4',
           title: locale === 'zh' ? '站桩八段锦图解指南' : 'Zhan Zhuang Baduanjin Illustrated Guide',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'preparation'
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['运动', '八段锦', '站桩', '缓解', '锻炼'] : ['exercise', 'baduanjin', 'qigong', 'relief', 'workout'],
+          description: locale === 'zh' ? '传统八段锦和站桩功法的详细图解教程' : 'Detailed illustrated tutorial for traditional Baduanjin and Zhan Zhuang exercises'
+        },
+        {
+          id: 'preparation-pdf-5',
+          title: locale === 'zh' ? '月度准备计划表' : 'Monthly Preparation Planner',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['月度', '计划', '准备', '管理', '安排'] : ['monthly', 'planning', 'preparation', 'management', 'schedule'],
+          description: locale === 'zh' ? '提前规划经期健康管理的月度计划工具' : 'Monthly planning tool for advance menstrual health management'
+        },
+        {
+          id: 'preparation-pdf-6',
+          title: locale === 'zh' ? '压力管理工作册' : 'Stress Management Workbook',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['压力', '管理', '工作册', '心理', '调节'] : ['stress', 'management', 'workbook', 'mental', 'wellness'],
+          description: locale === 'zh' ? '经期压力管理的实用练习册和指导手册' : 'Practical workbook and guide for menstrual stress management'
+        },
+        {
+          id: 'preparation-pdf-7',
+          title: locale === 'zh' ? '睡眠质量改善指南' : 'Sleep Quality Improvement Guide',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'preparation',
+          keywords: locale === 'zh' ? ['睡眠', '质量', '改善', '休息', '恢复'] : ['sleep', 'quality', 'improvement', 'rest', 'recovery'],
+          description: locale === 'zh' ? '经期睡眠优化的详细指导和实用技巧' : 'Detailed guidance and practical tips for menstrual sleep optimization'
         }
       ]
     },
@@ -566,27 +665,33 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           readTime: locale === 'zh' ? '14分钟' : '14 min read',
           category: 'learning'
         },
-        // 学习理解PDF (6个)
+        // 学习理解PDF (10个：6个现有 + 4个新增)
         {
           id: 'learning-pdf-1',
           title: locale === 'zh' ? '自然疗法评估表' : 'Natural Therapy Assessment',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'learning'
+          category: 'learning',
+          keywords: locale === 'zh' ? ['自然', '疗法', '评估', '表格', '选择'] : ['natural', 'therapy', 'assessment', 'evaluation', 'selection'],
+          description: locale === 'zh' ? '评估和选择适合个人的自然疗法方案' : 'Assessment tool for selecting suitable natural therapy approaches'
         },
         {
           id: 'learning-pdf-2',
           title: locale === 'zh' ? '痛经并发症管理' : 'Pain Complications Management PDF',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'learning'
+          category: 'learning',
+          keywords: locale === 'zh' ? ['并发症', '管理', '医学', '专业', '治疗'] : ['complications', 'management', 'medical', 'professional', 'treatment'],
+          description: locale === 'zh' ? '痛经相关并发症的识别和管理指南' : 'Guide for identifying and managing menstrual pain complications'
         },
         {
           id: 'learning-pdf-3',
           title: locale === 'zh' ? '教师健康手册' : 'Teacher Health Manual',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'learning'
+          category: 'learning',
+          keywords: locale === 'zh' ? ['教师', '健康', '手册', '教育', '工作'] : ['teacher', 'health', 'manual', 'education', 'workplace'],
+          description: locale === 'zh' ? '教育工作者的健康管理和职业保健手册' : 'Health management and occupational wellness manual for educators'
         },
         {
           id: 'learning-pdf-4',
@@ -594,7 +699,8 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
           category: 'learning',
-          keywords: locale === 'zh' ? ['教师', '协作', '沟通', '合作', '指导'] : ['teacher', 'collaboration', 'communication', 'cooperation', 'guidance']
+          keywords: locale === 'zh' ? ['教师', '协作', '沟通', '合作', '指导'] : ['teacher', 'collaboration', 'communication', 'cooperation', 'guidance'],
+          description: locale === 'zh' ? '教师间协作和学生健康支持的指导手册' : 'Guidance manual for teacher collaboration and student health support'
         },
         {
           id: 'learning-pdf-5',
@@ -602,14 +708,53 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
           category: 'learning',
-          keywords: locale === 'zh' ? ['沟通', '家长', '对话', '交流', '指导'] : ['communication', 'parent', 'dialogue', 'conversation', 'guidance']
+          keywords: locale === 'zh' ? ['沟通', '家长', '对话', '交流', '指导'] : ['communication', 'parent', 'dialogue', 'conversation', 'guidance'],
+          description: locale === 'zh' ? '与家长就青春期健康问题进行有效沟通的指南' : 'Guide for effective communication with parents about adolescent health'
         },
         {
           id: 'learning-pdf-6',
           title: locale === 'zh' ? '美国保险快速参考卡' : 'US Insurance Quick Reference',
           type: 'pdf' as const,
           readTime: locale === 'zh' ? 'PDF' : 'PDF',
-          category: 'learning'
+          category: 'learning',
+          keywords: locale === 'zh' ? ['保险', '美国', '参考', '医疗', '覆盖'] : ['insurance', 'USA', 'reference', 'medical', 'coverage'],
+          description: locale === 'zh' ? '美国医疗保险中经期健康服务的快速参考' : 'Quick reference for menstrual health services under US health insurance'
+        },
+        {
+          id: 'learning-pdf-7',
+          title: locale === 'zh' ? '月经周期教育指南' : 'Menstrual Cycle Education Guide',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'learning',
+          keywords: locale === 'zh' ? ['教育', '周期', '生理', '科学', '知识'] : ['education', 'cycle', 'physiology', 'science', 'knowledge'],
+          description: locale === 'zh' ? '全面的月经周期科学教育和健康知识材料' : 'Comprehensive scientific education material about menstrual cycle and health'
+        },
+        {
+          id: 'learning-pdf-8',
+          title: locale === 'zh' ? '2024痛经研究摘要' : '2024 Pain Research Summary',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'learning',
+          keywords: locale === 'zh' ? ['研究', '2024', '最新', '科学', '进展'] : ['research', '2024', 'latest', 'science', 'progress'],
+          description: locale === 'zh' ? '2024年最新痛经研究成果和科学进展汇总' : '2024 latest menstrual pain research findings and scientific progress summary'
+        },
+        {
+          id: 'learning-pdf-9',
+          title: locale === 'zh' ? '就医咨询准备指南' : 'Medical Consultation Preparation Guide',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'learning',
+          keywords: locale === 'zh' ? ['就医', '咨询', '准备', '医生', '问诊'] : ['medical', 'consultation', 'preparation', 'doctor', 'appointment'],
+          description: locale === 'zh' ? '就医前的准备工作和问题清单指导' : 'Guidance for preparation and question checklist before medical appointments'
+        },
+        {
+          id: 'learning-pdf-10',
+          title: locale === 'zh' ? '全球健康视角报告' : 'Global Health Perspectives Report',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'learning',
+          keywords: locale === 'zh' ? ['全球', '视角', '文化', '国际', '比较'] : ['global', 'perspectives', 'cultural', 'international', 'comparative'],
+          description: locale === 'zh' ? '不同文化背景下经期健康管理方法的比较研究' : 'Comparative study of menstrual health management across different cultural backgrounds'
         }
       ]
     },
@@ -686,13 +831,65 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           type: 'article' as const,
           readTime: locale === 'zh' ? '28分钟' : '28 min read',
           category: 'management'
+        },
+        // 长期管理PDF (6个：全新分类)
+        {
+          id: 'management-pdf-1',
+          title: locale === 'zh' ? '长期健康规划师' : 'Long-term Health Planner',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['长期', '健康', '规划', '目标', '计划'] : ['long-term', 'health', 'planning', 'goals', 'strategy'],
+          description: locale === 'zh' ? '年度健康管理和目标设定的专业工具' : 'Professional tool for annual health management and goal setting'
+        },
+        {
+          id: 'management-pdf-2',
+          title: locale === 'zh' ? '个人健康日记模板' : 'Personal Health Journal Template',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['日记', '模板', '记录', '追踪', '个人'] : ['journal', 'template', 'record', 'tracking', 'personal'],
+          description: locale === 'zh' ? '长期健康追踪和记录的日记模板工具' : 'Journal template tool for long-term health tracking and recording'
+        },
+        {
+          id: 'management-pdf-3',
+          title: locale === 'zh' ? '营养膳食规划工具包' : 'Nutrition Meal Planning Kit',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['营养', '膳食', '规划', '工具', '饮食'] : ['nutrition', 'meal', 'planning', 'toolkit', 'diet'],
+          description: locale === 'zh' ? '长期营养管理和膳食规划的实用工具包' : 'Practical toolkit for long-term nutrition management and meal planning'
+        },
+        {
+          id: 'management-pdf-4',
+          title: locale === 'zh' ? '运动计划构建器' : 'Exercise Routine Builder',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['运动', '计划', '构建', '锻炼', '健身'] : ['exercise', 'routine', 'builder', 'workout', 'fitness'],
+          description: locale === 'zh' ? '个性化运动计划制定和执行的指导工具' : 'Guidance tool for creating and implementing personalized exercise routines'
+        },
+        {
+          id: 'management-pdf-5',
+          title: locale === 'zh' ? '生活方式评估工具包' : 'Lifestyle Assessment Toolkit',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['生活方式', '评估', '工具', '健康', '分析'] : ['lifestyle', 'assessment', 'toolkit', 'health', 'analysis'],
+          description: locale === 'zh' ? '全面的生活方式健康评估和优化工具' : 'Comprehensive lifestyle health assessment and optimization tool'
+        },
+        {
+          id: 'management-pdf-6',
+          title: locale === 'zh' ? '可持续健康策略指南' : 'Sustainable Health Strategies Guide',
+          type: 'pdf' as const,
+          readTime: locale === 'zh' ? 'PDF' : 'PDF',
+          category: 'management',
+          keywords: locale === 'zh' ? ['可持续', '策略', '健康', '管理', '长期'] : ['sustainable', 'strategies', 'health', 'management', 'long-term'],
+          description: locale === 'zh' ? '长期可持续健康管理策略的指导手册' : 'Guidance manual for long-term sustainable health management strategies'
         }
-        // 长期管理PDF (0个) - 符合实际配置
       ]
     }
   };
-
-  const totalResources = Object.values(categories).reduce((total, cat) => total + cat.resources.length, 0);
 
   // 🔍 搜索过滤逻辑
   const searchResources = (searchTerm: string): Resource[] => {
@@ -840,12 +1037,12 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
           <input
             type="text"
-            placeholder={t('placeholder')}
+            placeholder={t('placeholder', { totalResources })}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:border-purple-500 focus:outline-none bg-white touch-manipulation"
             aria-label={t('ariaLabel')}
-            title={t('helpText')}
+            title={t('helpText', { totalResources })}
           />
         </div>
         
