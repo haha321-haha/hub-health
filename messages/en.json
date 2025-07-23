@@ -72,8 +72,8 @@
     "learnMore": "Browse Articles",
     "features": {
       "articles": "{count} Professional Articles",
-      "tools": "5 Interactive Tools",
-      "support": "24/7 Online Support",
+      "tools": "{toolsCount} Interactive Tools",
+      "support": "{supportHours}/7 Online Support",
       "articlesDesc": "Professional Medical Guidance",
       "toolsDesc": "Smart Assessment Tools",
       "supportDesc": "Professional Health Support"
@@ -279,7 +279,7 @@
       "keywords": "menstrual health,PDF download,health management,women's health,period guide"
     },
     "search": {
-      "placeholder": "Search 49 resources... Try: pain, relief, nutrition, exercise, medical, communication",
+      "placeholder": "Search {totalResources} resources... Try: pain, relief, nutrition, exercise, medical, communication",
       "placeholderShort": "Search resources...",
       "keywords": {
         "pain": "pain",
@@ -290,7 +290,7 @@
         "communication": "communication"
       },
       "suggestions": "Try keywords: pain, relief, nutrition, exercise, medical, communication",
-      "helpText": "Search through 49 professional resources",
+      "helpText": "Search in {totalResources} expert resources",
       "ariaLabel": "Search health resources"
     },
     "title": "PDF Download Center",

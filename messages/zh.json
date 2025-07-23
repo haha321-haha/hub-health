@@ -72,8 +72,8 @@
     "learnMore": "浏览文章",
     "features": {
       "articles": "{count}篇专业文章",
-      "tools": "5个互动工具",
-      "support": "24/7在线支持",
+      "tools": "{toolsCount}个互动工具",
+      "support": "{supportHours}/7在线支持",
       "articlesDesc": "专业医学指导",
       "toolsDesc": "智能评估工具",
       "supportDesc": "专业健康支持"
@@ -279,7 +279,7 @@
       "keywords": "经期健康,PDF下载,健康管理,女性健康,经期指南"
     },
     "search": {
-      "placeholder": "搜索49个资源... 试试：疼痛、缓解、营养、运动、医学、沟通",
+      "placeholder": "搜索{totalResources}个资源... 试试：疼痛、缓解、营养、运动、医学、沟通",
       "placeholderShort": "搜索资源...",
       "keywords": {
         "pain": "疼痛",
@@ -290,7 +290,7 @@
         "communication": "沟通"
       },
       "suggestions": "试试关键词：疼痛、缓解、营养、运动、医学、沟通",
-      "helpText": "在49个专业资源中搜索",
+      "helpText": "在{totalResources}个专业资源中搜索",
       "ariaLabel": "搜索健康资源"
     },
     "title": "PDF下载中心",
