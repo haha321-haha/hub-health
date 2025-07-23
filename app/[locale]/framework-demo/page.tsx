@@ -25,13 +25,6 @@ export default function FrameworkDemoPage() {
     { label: '5月', value: 95 },
     { label: '6月', value: 88 },
   ];
-    { label: '1月', value: 65 },
-    { label: '2月', value: 78 },
-    { label: '3月', value: 90 },
-    { label: '4月', value: 81 },
-    { label: '5月', value: 95 },
-    { label: '6月', value: 88 },
-  ]);
 
   // 演示功能
   const showDemo = (type: string) => {
