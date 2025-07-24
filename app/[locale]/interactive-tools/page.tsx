@@ -5,6 +5,7 @@ import OptimizedImage from '@/components/ui/OptimizedImage';
 import BreathingExercise from '@/components/BreathingExercise';
 import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User } from 'lucide-react'; // Icons for cards
 import { Locale, locales } from '@/i18n';
+import StructuredData from '@/components/StructuredData';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -108,8 +109,33 @@ export default async function InteractiveToolsPage({
     }
   };
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health';
+  const pageUrl = `${baseUrl}/${locale}/interactive-tools`;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      {/* SEO结构化数据 */}
+      <StructuredData
+        type="healthTopicPage"
+        data={{
+          title: locale === 'zh' ? t('title') : 'Interactive Health Tools - Period Hub',
+          description: locale === 'zh' ? t('description') : 'Interactive health assessment tools for menstrual health management',
+          url: pageUrl,
+          locale: locale === 'zh' ? 'zh-CN' : 'en-US',
+          keywords: [
+            '症状评估',
+            '疼痛追踪',
+            '周期记录',
+            '体质测试',
+            '健康管理',
+            'symptom assessment',
+            'pain tracker',
+            'cycle tracking',
+            'health tools',
+            'menstrual health'
+          ]
+        }}
+      />
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-8 sm:space-y-12 mobile-safe-area">
           {/* Page Header - 移动端优化 */}
