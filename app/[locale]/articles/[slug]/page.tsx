@@ -13,6 +13,7 @@ import NSAIDContentSimple from '@/components/NSAIDContentSimple';
 import StructuredData from '@/components/StructuredData';
 import ArticleInteractions from '@/components/ArticleInteractions';
 import ReadingProgress from '@/components/ReadingProgress';
+import { getArticleBySlug, getRelatedArticles } from '@/lib/articles';
 import TableOfContents from '@/components/TableOfContents';
 import MarkdownWithMermaid from '@/components/MarkdownWithMermaid';
 
@@ -44,57 +45,9 @@ interface Article {
   schema_type?: string;
 }
 
-// 获取文章函数
-function getArticleBySlug(slug: string, locale: string = 'en'): Article | null {
-  try {
-    const articlesDirectory = path.join(process.cwd(), 'content/articles');
-    const articlesPath = locale === 'zh'
-      ? path.join(articlesDirectory, 'zh')
-      : path.join(articlesDirectory, 'en');
+// 使用lib/articles.ts中的函数
 
-    const fullPath = path.join(articlesPath, `${slug}.md`);
-
-    if (!fs.existsSync(fullPath)) {
-      return null;
-    }
-
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug,
-      title: data.title || '',
-      title_zh: data.title_zh,
-      date: data.date || data.publishDate || '',
-      summary: data.summary || '',
-      summary_zh: data.summary_zh,
-      tags: data.tags || [],
-      tags_zh: data.tags_zh,
-      category: data.category || '',
-      category_zh: data.category_zh,
-      author: data.author || '',
-      featured_image: data.featured_image || '',
-      reading_time: data.reading_time || '',
-      reading_time_zh: data.reading_time_zh,
-      content,
-      seo_title: data.seo_title,
-      seo_title_zh: data.seo_title_zh,
-      seo_description: data.seo_description,
-      seo_description_zh: data.seo_description_zh,
-      canonical_url: data.canonical_url,
-      schema_type: data.schema_type,
-    };
-  } catch (error) {
-    console.error('Error reading article:', error);
-    return null;
-  }
-}
-
-// 获取相关文章函数
-function getRelatedArticles(): Article[] {
-  // 暂时返回空数组，避免复杂的文件系统操作
-  return [];
-}
+// 移除本地定义，使用lib/articles.ts中的函数
 
 // Generate static params for all articles
 export async function generateStaticParams() {
@@ -225,7 +178,7 @@ export default async function ArticlePage({
   setRequestLocale(locale);
 
   const article = getArticleBySlug(slug, locale);
-  const relatedArticles = getRelatedArticles(slug);
+  const relatedArticles = getRelatedArticles(slug, locale, 3);
 
   if (!article) {
     notFound();
