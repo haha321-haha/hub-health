@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Locale, locales } from '@/i18n';
 import Hero from '@/components/layout/Hero';
 import { getAllArticles } from '@/lib/articles';
+import StructuredData from '@/components/StructuredData';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -40,8 +41,36 @@ export default async function HomePage({
   const allArticles = getAllArticles(locale);
   const articleCount = allArticles.length;
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health';
+  const articleUrl = `${baseUrl}/${locale}`;
+
   return (
     <div className="min-h-screen">
+      {/* SEO结构化数据 */}
+      <StructuredData
+        type="website"
+        data={{
+          title: locale === 'zh' ? 'Period Hub - 专业的女性月经健康管理平台' : 'Period Hub - Professional Women\'s Menstrual Health Platform',
+          description: locale === 'zh' 
+            ? '专业的女性月经健康管理平台，提供科学的健康评估工具、专业的健康教育内容、个性化的健康建议和多语言支持。'
+            : 'Professional women\'s menstrual health management platform providing scientific health assessment tools, professional health education content, personalized health advice and multilingual support.',
+          url: articleUrl,
+          locale: locale === 'zh' ? 'zh-CN' : 'en-US',
+          keywords: [
+            'period pain relief',
+            'menstrual cramps',
+            'natural remedies',
+            'period management',
+            'women\'s health',
+            'dysmenorrhea treatment',
+            '月经健康',
+            '经期管理',
+            '女性健康',
+            '痛经'
+          ]
+        }}
+      />
+      
       <Hero articleCount={articleCount} />
 
       {/* Statistics Infographic Section */}
