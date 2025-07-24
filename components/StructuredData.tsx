@@ -38,6 +38,12 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           url: `${baseUrl}/logo.png`,
           width: 200,
           height: 60
+        },
+        description: '专业的女性月经健康管理平台',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          availableLanguage: ['zh-CN', 'en-US']
         }
       }
     }
