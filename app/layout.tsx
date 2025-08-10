@@ -9,8 +9,30 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        {/* Google Search Console 验证 */}
-        <meta name="google-site-verification" content="google11a490ed640e7fc6" />
+        {/* Google Search Console 验证 - HTML标记方法 */}
+        <meta name="google-site-verification" content="1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk" />
+        
+        {/* Google AdSense */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5773162579508714"
+          crossOrigin="anonymous"
+        />
+        
+        {/* Google Analytics 4 - 待添加测量ID后启用 */}
+        {/* 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA_ID"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-YOUR_GA_ID');
+            `,
+          }}
+        />
+        */}
         
         {/* Microsoft Clarity */}
         <script
