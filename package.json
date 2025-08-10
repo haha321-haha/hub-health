@@ -10,6 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "pre-deploy": "node scripts/pre-deploy-check.js",
     "generate-pdfs": "node scripts/generate-pdfs.js",
     "deploy:vercel": "./scripts/deploy.sh vercel",
     "deploy:github": "./scripts/deploy.sh github",
@@ -23,7 +25,14 @@
     "test:translations": "jest tests/translation-system.test.js",
     "test:translations:e2e": "jest tests/e2e/translation-e2e.test.js",
     "quality:translations": "node scripts/translation-quality-check.js",
-    "check:translations": "npm run fix:translations && npm run test:translations && npm run quality:translations"
+    "check:translations": "npm run fix:translations && npm run test:translations && npm run quality:translations",
+    "optimize:core-web-vitals": "node scripts/core-web-vitals-optimizer.js",
+    "optimize:images": "node scripts/optimize-images.js",
+    "check:mobile": "node scripts/mobile-responsive-checker.js",
+    "test:performance": "node scripts/performance-test.js",
+    "fix:icons": "node scripts/fix-icons.js",
+    "performance:full": "npm run optimize:core-web-vitals && npm run optimize:images && npm run check:mobile && npm run test:performance",
+    "performance:quick": "npm run optimize:core-web-vitals && npm run test:performance"
   },
   "dependencies": {
     "clsx": "^2.0.0",
@@ -40,7 +49,6 @@
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
-    "sharp": "^0.33.5",
     "styled-jsx": "^5.1.7",
     "tailwind-merge": "^2.0.0",
     "zustand": "^5.0.5"
@@ -60,6 +68,7 @@
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
     "puppeteer": "^21.0.0",
+    "sharp": "^0.34.3",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3"
   }
