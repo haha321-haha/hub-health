@@ -5,11 +5,15 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
+  "theme_color": "#9333ea",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "zh-CN",
-  "categories": ["health", "medical", "lifestyle"],
+  "categories": [
+    "health",
+    "medical",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -22,6 +26,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
