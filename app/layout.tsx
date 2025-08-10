@@ -1,5 +1,5 @@
 import './globals.css';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 // 🚀 Core Web Vitals 优化的根布局
 export const metadata: Metadata = {
@@ -33,18 +33,20 @@ export const metadata: Metadata = {
     title: 'PeriodHub - 专业女性健康管理平台',
     description: '专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。',
   },
-  // 移动端优化
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
+  // 移动端优化 - 已移至单独的 viewport 导出
   // 性能优化
   other: {
     'theme-color': '#9333ea',
     'color-scheme': 'light',
   },
+};
+
+// 🚀 移动端优化 - Next.js 推荐的 viewport 配置
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 // 根级别layout - 必须包含html和body标签

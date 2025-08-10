@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import React from 'react';
 import {
   Rocket,
   Zap,
@@ -15,7 +14,6 @@ import {
 } from 'lucide-react';
 
 export default function FrameworkDemoPage() {
-
   // 演示数据
   const demoData = [
     { label: '1月', value: 65 },
@@ -23,7 +21,7 @@ export default function FrameworkDemoPage() {
     { label: '3月', value: 90 },
     { label: '4月', value: 81 },
     { label: '5月', value: 95 },
-    { label: '6月', value: 88 },
+    { label: '6月', value: 88 }
   ];
 
   // 演示功能
@@ -51,7 +49,6 @@ export default function FrameworkDemoPage() {
 
         {/* 功能演示网格 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-
           {/* Toast通知系统 */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center space-x-3 mb-4">
@@ -118,7 +115,6 @@ export default function FrameworkDemoPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
-
         </div>
 
         {/* 统计卡片 */}
@@ -212,7 +208,6 @@ export default function FrameworkDemoPage() {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );

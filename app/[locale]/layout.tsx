@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -25,6 +25,14 @@ const inter = Inter({
   display: 'swap',
   variable: '--font-inter',
 });
+
+// Generate viewport
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#ffffff',
+};
 
 // Generate metadata
 export async function generateMetadata({
@@ -132,44 +140,26 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning={true}>
-      <head>
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    <div className={`scroll-smooth ${inter.variable} antialiased bg-neutral-50 text-neutral-900 flex flex-col min-h-screen`} suppressHydrationWarning={true}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <GA4Provider>
+          <AppProvider>
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </AppProvider>
+        </GA4Provider>
+      </NextIntlClientProvider>
 
-        {/* Performance optimizations */}
-        <link rel="dns-prefetch" href="https://v3.fal.media" />
-        <link rel="preconnect" href="https://unpkg.com" />
-
-        {/* Favicon and app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-      </head>
-      <body className="antialiased bg-neutral-50 text-neutral-900 flex flex-col min-h-screen">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <GA4Provider>
-            <AppProvider>
-              <Header />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-            </AppProvider>
-          </GA4Provider>
-        </NextIntlClientProvider>
-
-        {/* Medical Disclaimer - For compliance and user safety */}
-        <div className="sr-only">
-          {locale === 'zh'
-            ? '本网站提供的月经健康信息仅供教育目的。内容不能替代专业医疗建议、诊断或治疗。如有任何疑问，请咨询您的医生或其他合格的健康提供者。'
-            : 'This website provides information about menstrual health for educational purposes only. The content is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have.'
-          }
-        </div>
-      </body>
-    </html>
+      {/* Medical Disclaimer - For compliance and user safety */}
+      <div className="sr-only">
+        {locale === 'zh'
+          ? '本网站提供的月经健康信息仅供教育目的。内容不能替代专业医疗建议、诊断或治疗。如有任何疑问，请咨询您的医生或其他合格的健康提供者。'
+          : 'This website provides information about menstrual health for educational purposes only. The content is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have.'
+        }
+      </div>
+    </div>
   );
 }
