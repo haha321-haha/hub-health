@@ -5,11 +5,18 @@ import { Metadata, Viewport } from 'next';
 export const metadata: Metadata = {
   metadataBase: new URL('https://periodhub.health'),
   title: {
-    default: 'PeriodHub - 专业女性健康管理平台',
+    default: 'PeriodHub - 专业痛经缓解方法和月经健康管理平台',
     template: '%s | PeriodHub'
   },
-  description: '专业的女性月经健康管理平台，提供中西医结合的痛经解决方案、健康追踪工具和个性化建议。',
-  keywords: ['女性健康', '月经管理', '痛经缓解', '健康追踪', '中医调理'],
+  description: '提供42篇专业文章、24个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。',
+  keywords: [
+    // 高搜索量核心词
+    '痛经怎么缓解最快方法', '痛经吃什么药最有效', '月经推迟几天算正常', '月经量少是什么原因',
+    // 品牌核心词
+    '痛经缓解', '月经疼痛', '经期健康', '女性健康', '月经健康管理', '经期疼痛怎么办', '中医调理',
+    // 英文关键词
+    'menstrual cramps relief', 'period pain remedies', 'how to stop period pain', 'natural period pain relief'
+  ],
   authors: [{ name: 'PeriodHub Team' }],
   creator: 'PeriodHub',
   publisher: 'PeriodHub',

@@ -32,7 +32,10 @@
     "test:performance": "node scripts/performance-test.js",
     "fix:icons": "node scripts/fix-icons.js",
     "performance:full": "npm run optimize:core-web-vitals && npm run optimize:images && npm run check:mobile && npm run test:performance",
-    "performance:quick": "npm run optimize:core-web-vitals && npm run test:performance"
+    "performance:quick": "npm run optimize:core-web-vitals && npm run test:performance",
+    "seo:optimize": "node scripts/seo-optimizer.js",
+    "seo:analyze": "npm run seo:optimize && echo '📊 SEO分析完成，请查看生成的报告文件'",
+    "seo:full": "npm run seo:analyze && npm run build && echo '🚀 SEO优化和构建完成'"
   },
   "dependencies": {
     "clsx": "^2.0.0",

@@ -1,19 +1,50 @@
 import { MetadataRoute } from 'next'
 import { locales } from '@/i18n'
 
-// 文章数据 - 从实际文章文件中获取
+// 文章数据 - 完整的42篇文章列表
 const articles = [
-  'quick-menstrual-pain-relief-guide',
-  'anti-inflammatory-diet-menstrual-pain',
-  'heat-therapy-complete-guide',
-  'natural-physical-therapy-menstrual-pain',
-  'menstrual-pain-medical-guide',
-  'when-to-see-doctor-menstrual-pain',
-  'specific-situations-menstrual-pain-management',
-  'menstrual-pain-content-evaluation-report',
-  'comprehensive-menstrual-pain-research-summary',
+  '5-minute-period-pain-relief',
+  'anti-inflammatory-diet-period-pain',
+  'comprehensive-iud-guide',
+  'comprehensive-medical-guide-to-dysmenorrhea',
+  'comprehensive-menstrual-sleep-quality-guide',
+  'comprehensive-report-non-medical-factors-menstrual-pain',
+  'effective-herbal-tea-menstrual-pain',
+  'essential-oils-aromatherapy-menstrual-pain-guide',
+  'ginger-menstrual-pain-relief-guide',
   'global-traditional-menstrual-pain-relief',
-  'nsaid-menstrual-pain-professional-guide'
+  'heat-therapy-complete-guide',
+  'herbal-tea-menstrual-pain-relief',
+  'hidden-culprits-of-menstrual-pain',
+  'home-natural-menstrual-pain-relief',
+  'magnesium-gut-health-comprehensive-guide',
+  'medication-vs-natural-remedies-menstrual-pain',
+  'menstrual-back-pain-comprehensive-care-guide',
+  'menstrual-nausea-relief-guide',
+  'menstrual-pain-accompanying-symptoms-guide',
+  'menstrual-pain-back-pain-connection',
+  'menstrual-pain-complications-management',
+  'menstrual-pain-emergency-medication-guide',
+  'menstrual-pain-faq-expert-answers',
+  'menstrual-pain-medical-guide',
+  'menstrual-pain-research-progress-2024',
+  'menstrual-pain-vs-other-abdominal-pain-guide',
+  'menstrual-preventive-care-complete-plan',
+  'menstrual-sleep-quality-improvement-guide',
+  'menstrual-stress-management-complete-guide',
+  'natural-physical-therapy-comprehensive-guide',
+  'nsaid-menstrual-pain-professional-guide',
+  'period-friendly-recipes',
+  'period-pain-simulator-accuracy-analysis',
+  'personal-menstrual-health-profile',
+  'recommended-reading-list',
+  'specific-menstrual-pain-management-guide',
+  'understanding-your-cycle',
+  'us-menstrual-pain-insurance-coverage-guide',
+  'when-to-see-doctor-period-pain',
+  'when-to-seek-medical-care-comprehensive-guide',
+  'womens-lifecycle-menstrual-pain-analysis',
+  'zhan-zhuang-baduanjin-for-menstrual-pain-relief'
 ];
 
 // 交互工具页面
