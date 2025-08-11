@@ -1,5 +1,7 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
+import WebVitalsReporter from '@/components/WebVitalsReporter';
+import PerformanceMonitor from '@/components/PerformanceMonitor';
 
 // 🚀 Core Web Vitals 优化的根布局
 export const metadata: Metadata = {
@@ -164,6 +166,12 @@ export default function RootLayout({
       </head>
       <body className="loading">
         {children}
+        
+        {/* 🚀 SEO优化 - Core Web Vitals监控 */}
+        <WebVitalsReporter />
+        
+        {/* 🚀 SEO优化 - 性能监控 */}
+        <PerformanceMonitor />
         
         {/* 🚀 性能优化 - 页面加载完成后移除loading类 */}
         <script dangerouslySetInnerHTML={{
