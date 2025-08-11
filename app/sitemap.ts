@@ -61,8 +61,34 @@ const mainPages = [
   'articles',
   'interactive-tools',
   'teen-health',
-  'about',
-  'contact'
+  'health-guide',
+  'scenario-solutions',
+  'natural-therapies',
+  'downloads-new',
+  'medical-disclaimer',
+  'privacy-policy',
+  'terms-of-service'
+];
+
+// 健康指南子页面
+const healthGuidePages = [
+  'understanding-pain',
+  'relief-methods',
+  'lifestyle',
+  'medical-care',
+  'myths-facts',
+  'global-perspectives'
+];
+
+// 场景解决方案子页面
+const scenarioPages = [
+  'commute',
+  'office',
+  'exercise',
+  'sleep',
+  'social',
+  'emergency-kit',
+  'lifeStages'
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -78,8 +104,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       sitemapEntries.push({
         url,
         lastModified: currentDate,
-        changeFrequency: page === '' ? 'daily' : page === 'articles' ? 'weekly' : 'monthly',
-        priority: page === '' ? 1.0 : page === 'articles' ? 0.9 : 0.8,
+        changeFrequency: page === '' ? 'daily' : 
+                         page === 'articles' ? 'weekly' :
+                         page === 'interactive-tools' ? 'weekly' : 'monthly',
+        priority: page === '' ? 1.0 : 
+                  page === 'articles' ? 0.9 : 
+                  page === 'interactive-tools' ? 0.9 : 0.7,
+      })
+    })
+
+    // Health guide sub pages
+    healthGuidePages.forEach((page) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/health-guide/${page}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      })
+    })
+
+    // Scenario solutions sub pages
+    scenarioPages.forEach((page) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/scenario-solutions/${page}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.8,
       })
     })
 
@@ -89,7 +139,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${locale}/articles/${article}`,
         lastModified: currentDate,
         changeFrequency: 'monthly',
-        priority: 0.8,
+        priority: 0.7,
       })
     })
 
