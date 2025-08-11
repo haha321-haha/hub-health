@@ -30,6 +30,15 @@ const nextConfig = {
   experimental: {
     optimizeCss: true, // CSS 优化
     optimizePackageImports: ['lucide-react', 'date-fns'], // 包导入优化
+    serverComponentsExternalPackages: ['sharp'], // 优化图片处理
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
 
   // 构建优化
@@ -68,10 +77,22 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
           // 性能头部
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',
+          },
+          {
+            key: 'Link',
+            value: '<https://fonts.googleapis.com>; rel=preconnect; crossorigin=anonymous',
+          },
+          {
+            key: 'Link',
+            value: '<https://fonts.gstatic.com>; rel=preconnect; crossorigin=anonymous',
           },
         ],
       },
@@ -83,6 +104,10 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
+          {
+            key: 'Link',
+            value: '</images/:path*>; rel=preload; as=image; crossorigin=anonymous',
+          },
         ],
       },
       {
@@ -91,6 +116,20 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // 字体缓存优化
+      {
+        source: '/fonts/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Link',
+            value: '</fonts/:path*>; rel=preload; as=font; crossorigin=anonymous',
           },
         ],
       },
