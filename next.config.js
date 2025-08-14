@@ -28,10 +28,11 @@ const nextConfig = {
   compress: true, // 启用 gzip 压缩
   
   // 实验性功能 - 提升性能
+  // 关闭实验特性，避免 dev/runtime 不稳定
   experimental: {
     optimizePackageImports: ['lucide-react'],
-    optimizeCss: true,
-    scrollRestoration: true,
+    // optimizeCss: true,
+    // scrollRestoration: true,
   },
 
   // 构建优化
