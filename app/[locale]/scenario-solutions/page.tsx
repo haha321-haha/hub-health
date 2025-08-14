@@ -123,30 +123,30 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
   ];
 
   return (
-    <div className="space-y-12" data-page="scenario-solutions">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12" data-page="scenario-solutions">
       {/* Page Header */}
-      <header className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+      <header className="text-center py-8 md:py-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-700 mb-4">
           {t('title')}
         </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg text-neutral-600 max-w-3xl mx-auto px-4">
           {t('description')}
         </p>
       </header>
 
       {/* 青少年经期健康专区推广区域 */}
-      <section className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-2xl p-8 mb-8 border border-pink-100 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-pink-200 rounded-full opacity-20 transform translate-x-16 -translate-y-16"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-200 rounded-full opacity-20 transform -translate-x-12 translate-y-12"></div>
+      <section className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-2xl p-4 sm:p-6 md:p-8 mb-6 md:mb-8 border border-pink-100 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-pink-200 rounded-full opacity-20 transform translate-x-12 sm:translate-x-16 -translate-y-12 sm:-translate-y-16"></div>
+        <div className="absolute bottom-0 left-0 w-20 sm:w-24 h-20 sm:h-24 bg-purple-200 rounded-full opacity-20 transform -translate-x-10 sm:-translate-x-12 translate-y-10 sm:translate-y-12"></div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8">
-          <div className="lg:w-2/3">
-            <div className="flex items-center mb-4">
-              <div className="bg-pink-100 rounded-full p-2 mr-3">
-                <Heart className="w-8 h-8 text-pink-600" />
+        <div className="relative z-10 flex flex-col lg:flex-row items-center gap-6 md:gap-8">
+          <div className="w-full lg:w-2/3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center mb-4">
+              <div className="bg-pink-100 rounded-full p-2 mr-0 sm:mr-3 mb-2 sm:mb-0">
+                <Heart className="w-6 sm:w-8 h-6 sm:h-8 text-pink-600" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   {locale === 'zh' ? '🌸 青少年经期健康专区 🌸' : '🌸 Teen Menstrual Health Zone 🌸'}
                 </h2>
                 <p className="text-sm text-pink-600 font-medium">
@@ -154,35 +154,35 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
                 </p>
               </div>
             </div>
-            <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+            <p className="text-gray-700 mb-4 md:mb-6 text-base sm:text-lg leading-relaxed">
               {locale === 'zh'
                 ? '青春期有太多烦恼，而每个月的"那几天"更是让人担心。疼痛、情绪波动、身体变化……别担心，你不是一个人在战斗。我们为你准备了校园应急指南、发育期疼痛管理、情绪支持和沟通技巧，陪你自信地度过每一个经期。'
                 : 'Adolescence brings many worries, and "those days" each month can be especially concerning. Pain, mood swings, body changes... Don\'t worry, you\'re not fighting alone. We\'ve prepared campus emergency guides, developmental pain management, emotional support, and communication skills to help you confidently navigate every period.'
               }
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
                 href={`/${locale}/teen-health`}
-                className="inline-flex items-center bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:from-pink-700 hover:to-purple-700 transition-all transform hover:scale-105"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-pink-600 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:from-pink-700 hover:to-purple-700 transition-all transform hover:scale-105 text-sm sm:text-base"
               >
                 {locale === 'zh' ? '进入专区' : 'Enter Zone'}
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               </Link>
               <Link
                 href={`/${locale}/teen-health/campus-guide`}
-                className="inline-flex items-center bg-white text-pink-600 px-6 py-3 rounded-full font-medium border-2 border-pink-200 hover:bg-pink-50 transition-colors"
+                className="inline-flex items-center justify-center bg-white text-pink-600 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium border-2 border-pink-200 hover:bg-pink-50 transition-colors text-sm sm:text-base"
               >
                 {locale === 'zh' ? '校园应急指南' : 'Campus Emergency Guide'}
               </Link>
             </div>
           </div>
-          <div className="lg:w-1/3">
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-pink-100">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+          <div className="w-full lg:w-1/3 mt-6 lg:mt-0">
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-pink-100">
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center text-sm sm:text-base">
                 <span className="text-pink-500 mr-2">💝</span>
                 {locale === 'zh' ? '我们能帮你什么？' : 'How Can We Help?'}
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {[
                   { icon: '🏫', text: locale === 'zh' ? '校园应急指南' : 'Campus Emergency Guide' },
                   { icon: '🌱', text: locale === 'zh' ? '发育期疼痛管理' : 'Developmental Pain Management' },
@@ -190,8 +190,8 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
                   { icon: '💬', text: locale === 'zh' ? '与家长老师沟通' : 'Communication with Parents & Teachers' },
                   { icon: '👭', text: locale === 'zh' ? '同龄人经验分享' : 'Peer Experience Sharing' }
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center text-sm text-gray-600">
-                    <span className="mr-3 text-lg">{item.icon}</span>
+                  <div key={index} className="flex items-center text-xs sm:text-sm text-gray-600">
+                    <span className="mr-2 sm:mr-3 text-base sm:text-lg">{item.icon}</span>
                     {item.text}
                   </div>
                 ))}
@@ -202,53 +202,53 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
       </section>
 
       {/* Introduction Section */}
-      <section className="bg-gradient-to-br from-primary-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+      <section className="bg-gradient-to-br from-primary-50 to-neutral-50 p-4 sm:p-6 md:p-8 rounded-xl">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-semibold text-neutral-800 mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800 mb-3 sm:mb-4">
             {t('introTitle')}
           </h2>
-          <p className="text-neutral-700 leading-relaxed">
+          <p className="text-neutral-700 leading-relaxed text-sm sm:text-base">
             {t('introText')}
           </p>
         </div>
       </section>
 
       {/* Scenarios Grid */}
-      <section>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {scenarios.map((scenario) => (
             <div
               key={scenario.id}
-              className={`card group cursor-pointer transition-all duration-300 ${scenario.hoverColor} border-2 border-transparent hover:border-primary-200`}
+              className="bg-white rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-200 group cursor-pointer"
             >
               {/* Scenario Image */}
-              <div className="mb-6 relative overflow-hidden rounded-lg">
+              <div className="mb-4 sm:mb-6 relative overflow-hidden rounded-lg">
                 <Image
                   src={`/images/scenarios/${scenarioImages[scenario.id].filename}`}
                   alt={scenarioImages[scenario.id].alt}
                   width={600}
                   height={400}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
               </div>
 
-              <div className={`w-16 h-16 flex items-center justify-center rounded-full ${scenario.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center rounded-full ${scenario.color} mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
                 {scenario.icon}
               </div>
 
-              <h3 className="text-xl font-semibold text-neutral-800 mb-3 group-hover:text-primary-700 transition-colors">
+              <h3 className="text-lg sm:text-xl font-semibold text-neutral-800 mb-2 sm:mb-3 group-hover:text-primary-700 transition-colors">
                 {scenario.title}
               </h3>
 
-              <p className="text-neutral-600 mb-4 leading-relaxed">
+              <p className="text-neutral-600 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">
                 {scenario.description}
               </p>
               
-              <div className="space-y-2 mb-6">
+              <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-6">
                 {scenario.features.map((feature, index) => (
-                  <div key={index} className="flex items-center text-sm text-neutral-700">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                  <div key={index} className="flex items-center text-xs sm:text-sm text-neutral-700">
+                    <CheckCircle className="w-3 sm:w-4 h-3 sm:h-4 text-green-500 mr-2 flex-shrink-0" />
                     <span>{feature}</span>
                   </div>
                 ))}
@@ -256,10 +256,10 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
               
               <Link
                 href={`/${locale}/scenario-solutions/${scenario.id}`}
-                className="flex items-center text-primary-600 font-medium group-hover:text-primary-700 transition-colors"
+                className="flex items-center text-primary-600 font-medium group-hover:text-primary-700 transition-colors text-sm sm:text-base"
               >
                 <span className="mr-2">{commonT('learnMore')}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           ))}
@@ -267,65 +267,65 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
       </section>
 
       {/* Emergency Kit Section */}
-      <section className="bg-gradient-to-br from-red-50 to-orange-50 p-6 md:p-8 rounded-xl">
+      <section className="bg-gradient-to-br from-red-50 to-orange-50 p-4 sm:p-6 md:p-8 rounded-xl">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-4">
-              <Package className="w-8 h-8" />
+          <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-4">
+            <div className="w-12 sm:w-16 h-12 sm:h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center">
+              <Package className="w-6 sm:w-8 h-6 sm:h-8" />
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center mb-2">
-                <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                <span className="text-sm font-medium text-red-700">
+                <Star className="w-4 sm:w-5 h-4 sm:h-5 text-yellow-500 mr-1" />
+                <span className="text-xs sm:text-sm font-medium text-red-700">
                   {locale === 'zh' ? '特别推荐' : 'Special Recommendation'}
                 </span>
               </div>
-              <h2 className="text-2xl font-semibold text-neutral-800">
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800">
                 {locale === 'zh' ? '多场景应急包清单' : 'Multi-Scenario Emergency Kit List'}
               </h2>
             </div>
           </div>
 
-          <p className="text-neutral-700 text-center mb-6 leading-relaxed">
+          <p className="text-neutral-700 text-center mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
             {locale === 'zh'
               ? '从办公室到通勤路上，从运动场到社交聚会，详细的应急包准备清单帮助你在任何场景下都能从容应对经期不适。'
               : 'From office to commute, from sports field to social gatherings, detailed emergency kit preparation lists help you handle period discomfort confidently in any scenario.'
             }
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-white p-4 rounded-lg shadow-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center mb-2">
-                <Briefcase className="w-5 h-5 text-blue-600 mr-2" />
-                <span className="font-medium text-neutral-800">
+                <Briefcase className="w-4 sm:w-5 h-4 sm:h-5 text-blue-600 mr-2" />
+                <span className="font-medium text-neutral-800 text-sm sm:text-base">
                   {locale === 'zh' ? '办公场景' : 'Office Scenario'}
                 </span>
               </div>
-              <p className="text-sm text-neutral-600">
+              <p className="text-xs sm:text-sm text-neutral-600">
                 {locale === 'zh' ? '隐蔽热敷、止痛药、姜茶包...' : 'Discreet heat patches, pain meds, ginger tea...'}
               </p>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center mb-2">
-                <Car className="w-5 h-5 text-green-600 mr-2" />
-                <span className="font-medium text-neutral-800">
+                <Car className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 mr-2" />
+                <span className="font-medium text-neutral-800 text-sm sm:text-base">
                   {locale === 'zh' ? '通勤场景' : 'Commute Scenario'}
                 </span>
               </div>
-              <p className="text-sm text-neutral-600">
+              <p className="text-xs sm:text-sm text-neutral-600">
                 {locale === 'zh' ? '便携暖宝宝、耳机、温水...' : 'Portable warmers, headphones, warm water...'}
               </p>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center mb-2">
-                <Users className="w-5 h-5 text-pink-600 mr-2" />
-                <span className="font-medium text-neutral-800">
+                <Users className="w-4 sm:w-5 h-4 sm:h-5 text-pink-600 mr-2" />
+                <span className="font-medium text-neutral-800 text-sm sm:text-base">
                   {locale === 'zh' ? '社交场景' : 'Social Scenario'}
                 </span>
               </div>
-              <p className="text-sm text-neutral-600">
+              <p className="text-xs sm:text-sm text-neutral-600">
                 {locale === 'zh' ? '迷你暖贴、舒适衣物、围巾...' : 'Mini heat patches, comfortable clothes, scarf...'}
               </p>
             </div>
@@ -334,9 +334,9 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
           <div className="text-center">
             <Link
               href={`/${locale}/scenario-solutions/emergency-kit`}
-              className="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              className="inline-flex items-center justify-center bg-red-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-red-700 transition-colors text-sm sm:text-base"
             >
-              <Package className="w-5 h-5 mr-2" />
+              <Package className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
               {locale === 'zh' ? '查看完整应急包清单' : 'View Complete Emergency Kit List'}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
@@ -345,26 +345,26 @@ export default async function ScenarioSolutionsPage({ params: { locale } }: Prop
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-neutral-100 p-6 md:p-8 rounded-xl text-center">
-        <h2 className="text-2xl font-semibold text-neutral-800 mb-4">
+      <section className="bg-neutral-100 p-4 sm:p-6 md:p-8 rounded-xl text-center">
+        <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800 mb-4">
           {locale === 'zh' ? '开始您的个性化痛经管理之旅' : 'Start Your Personalized Pain Management Journey'}
         </h2>
-        <p className="text-neutral-700 mb-6 max-w-2xl mx-auto">
+        <p className="text-neutral-700 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
           {locale === 'zh'
             ? '结合我们的症状评估工具和疼痛追踪系统，为您量身定制最适合的场景化解决方案。'
             : 'Combine our symptom assessment tools and pain tracking system to create the most suitable scenario-based solutions for you.'
           }
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             href={`/${locale}/interactive-tools/symptom-assessment`}
-            className="btn-primary"
+            className="inline-flex items-center justify-center bg-primary-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-medium hover:bg-primary-700 transition-colors text-sm sm:text-base"
           >
             {locale === 'zh' ? '开始症状评估' : 'Start Symptom Assessment'}
           </Link>
           <Link
             href={`/${locale}/interactive-tools/pain-tracker`}
-            className="btn-secondary"
+            className="inline-flex items-center justify-center border-2 border-primary-600 text-primary-600 px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-medium hover:bg-primary-50 transition-colors text-sm sm:text-base"
           >
             {locale === 'zh' ? '开始疼痛追踪' : 'Start Pain Tracking'}
           </Link>
