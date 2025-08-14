@@ -1,32 +1,17 @@
-import createMiddleware from 'next-intl/middleware';
-import { locales } from './i18n';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales,
-
-  // Used when no locale matches
-  defaultLocale: 'zh',
-
-  // Always show the locale in the URL
-  localePrefix: 'always',
-
-  // Redirect to default locale when accessing root
-  localeDetection: true
-});
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
+  
+  // 基础安全头部
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  return response;
+}
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: [
-    // Enable a redirect to a matching locale at the root
-    '/',
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
-    '/(zh|en)/:path*',
-
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    '/((?!_next|_vercel|.*\\..*).*)'
-  ]
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 };
