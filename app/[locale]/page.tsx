@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import Hero from '@/components/layout/Hero';
-import HealthStatistics from '@/components/HealthStatistics';
 import UserSuccessStories from '@/components/UserSuccessStories';
 import NavigationTabs from '@/components/NavigationTabs';
 
@@ -260,10 +259,22 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             <NavigationTabs locale={locale} />
           </div>
 
-          {/* 统计模块 */}
-          <div id="articles-section">
-            <HealthStatistics />
-          </div>
+          {/* 统计模块：替换为 SVG 信息图 */}
+          <section id="articles-section" className="py-16">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-white/70 backdrop-blur rounded-2xl shadow-sm p-4 sm:p-6">
+                <img
+                  src="/images/infographics/stats-infographic.svg"
+                  alt={locale === 'zh' ? '月经健康统计数据信息图' : 'Period Health Statistics Infographic'}
+                  className="w-full h-auto"
+                  loading="lazy"
+                />
+                <p className="mt-2 text-center text-sm text-neutral-500">
+                  {locale === 'zh' ? '数据来源：全球女性健康调查（示例）' : 'Data Source: Global Women\'s Health Survey (example)'}
+                </p>
+              </div>
+            </div>
+          </section>
 
           {/* 信任指标 */}
           <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
