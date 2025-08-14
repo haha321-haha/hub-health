@@ -119,11 +119,15 @@ export default function Hero() {
             {/* Statistics */}
             <div className="flex items-center justify-center lg:justify-start space-x-8 mt-8">
               <div className="text-center">
-                <div className="text-2xl font-bold">5个</div>
+                <div className="text-2xl font-bold">
+                  {locale === 'zh' ? '5个' : '5'}
+                </div>
                 <div className="text-sm opacity-80">{t('stats.tools')}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">66篇</div>
+                <div className="text-2xl font-bold">
+                  {locale === 'zh' ? '66篇' : '66'}
+                </div>
                 <div className="text-sm opacity-80">{t('stats.content')}</div>
               </div>
               <div className="text-center">
