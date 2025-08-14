@@ -1,165 +1,46 @@
-import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-
-// 移除强制动态渲染配置，允许静态路由生成
-// export const dynamic = 'force-dynamic';
-// export const revalidate = 0;
-// export const fetchCache = 'force-no-store';
-
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { AppProvider } from '../../components/AppProvider';
-import GA4Provider from '../../components/analytics/GA4Provider';
-
 import '../globals.css';
+import NextDynamic from 'next/dynamic';
+import {NextIntlClientProvider} from 'next-intl';
+import {unstable_setRequestLocale as setRequestLocale} from 'next-intl/server';
 
-// 导入支持的语言列表
-import { locales, Locale } from '@/i18n';
-
-// Font configuration
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
+// 动态导入组件以避免hydration问题
+const Header = NextDynamic(() => import('@/components/Header'), { 
+  ssr: false,
+  loading: () => <div className="h-16 bg-white border-b"></div>
+});
+const Footer = NextDynamic(() => import('@/components/Footer'), { 
+  ssr: false,
+  loading: () => <div className="h-32 bg-gray-50"></div>
 });
 
-// Generate viewport
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: '#ffffff',
-};
-
-// Generate metadata
-export async function generateMetadata({
-  params: { locale }
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
-  return {
-    title: {
-      template: '%s | Period Hub',
-      default: locale === 'zh' ? 'Period Hub - 专业的女性月经健康管理平台' : 'Period Hub - Professional Women\'s Menstrual Health Platform',
-    },
-    description: locale === 'zh'
-      ? '专业的女性月经健康管理平台，提供科学的健康评估工具、专业的健康教育内容、个性化的健康建议和多语言支持。'
-      : 'Professional women\'s menstrual health management platform providing scientific health assessment tools, professional health education content, personalized health advice and multilingual support.',
-    keywords: [
-      'period pain relief',
-      'menstrual cramps',
-      'natural remedies',
-      'period management',
-      'women\'s health',
-      'dysmenorrhea treatment',
-      'periodhub.health',
-      'menstrual health',
-      'articles',
-      'therapies',
-      '月经健康',
-      '经期管理',
-      '女性健康',
-      '痛经',
-      '月经周期'
-    ],
-    authors: [{ name: 'Period Hub Team' }],
-    creator: 'Period Hub',
-    publisher: 'Period Hub',
-    formatDetection: {
-      email: false,
-      address: false,
-      telephone: false,
-    },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health'),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        'en-US': '/en',
-        'zh-CN': '/zh',
-      },
-    },
-    openGraph: {
-      type: 'website',
-      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
-      url: `/${locale}`,
-      title: locale === 'zh' ? 'Period Hub - 专业的女性月经健康管理平台' : 'Period Hub - Professional Women\'s Menstrual Health Platform',
-      description: locale === 'zh'
-        ? '专业的女性月经健康管理平台，提供科学的健康评估工具、专业的健康教育内容、个性化的健康建议和多语言支持。'
-        : 'Professional women\'s menstrual health management platform providing scientific health assessment tools, professional health education content, personalized health advice and multilingual support.',
-      siteName: 'Period Hub',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: locale === 'zh' ? 'Period Hub - 专业的女性月经健康管理平台' : 'Period Hub - Professional Women\'s Menstrual Health Platform',
-      description: locale === 'zh'
-        ? '专业的女性月经健康管理平台，提供科学的健康评估工具、专业的健康教育内容、个性化的健康建议和多语言支持。'
-        : 'Professional women\'s menstrual health management platform providing scientific health assessment tools, professional health education content, personalized health advice and multilingual support.',
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    other: {
-      // Google Search Console 验证
-      'google-site-verification': 'your-verification-code-here',
-    },
-  };
-}
-
-// 恢复静态参数生成，允许路由预渲染
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params: { locale }
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // 验证请求的语言是否支持
-  if (!locales.includes(locale as any)) {
-    notFound();
+  // 确保在服务端设置当前请求的语言环境
+  setRequestLocale(locale);
+
+  let messages;
+  try {
+    // 加载对应语言的消息字典
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    console.error(`Failed to load messages for locale ${locale}:`, error);
+    // 回退到默认语言
+    messages = (await import(`../../messages/zh.json`)).default;
   }
 
-  // 启用静态渲染
-  setRequestLocale(locale as Locale);
-
-  // 获取该语言的翻译消息
-  const messages = await getMessages({ locale });
-
   return (
-    <div className={`scroll-smooth ${inter.variable} antialiased bg-neutral-50 text-neutral-900 flex flex-col min-h-screen`} suppressHydrationWarning={true}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <GA4Provider>
-          <AppProvider>
-            <Header />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </AppProvider>
-        </GA4Provider>
-      </NextIntlClientProvider>
-
-      {/* Medical Disclaimer - For compliance and user safety */}
-      <div className="sr-only">
-        {locale === 'zh'
-          ? '本网站提供的月经健康信息仅供教育目的。内容不能替代专业医疗建议、诊断或治疗。如有任何疑问，请咨询您的医生或其他合格的健康提供者。'
-          : 'This website provides information about menstrual health for educational purposes only. The content is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have.'
-        }
-      </div>
-    </div>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Header />
+      {children}
+      <Footer />
+    </NextIntlClientProvider>
   );
 }

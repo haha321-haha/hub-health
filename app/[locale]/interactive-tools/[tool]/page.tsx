@@ -3,6 +3,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 // Dynamic imports for interactive tools
 const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
@@ -558,25 +559,31 @@ export default async function ToolPage({
       {/* Tool Content */}
       <main className="container-custom">
         <div className="max-w-6xl mx-auto">
-          {/* Render interactive tool if available */}
-          {tool === 'pain-tracker' ? (
-            <PainTrackerTool locale={locale} />
-          ) : tool === 'symptom-assessment' ? (
-            <SymptomAssessmentTool locale={locale} />
-          ) : tool === 'constitution-test' ? (
-            <ConstitutionTestTool locale={locale} />
-          ) : tool === 'period-pain-assessment' ? (
-            <PeriodPainAssessmentTool locale={locale} />
-          ) : tool === 'cycle-tracker' ? (
-            <CycleTrackerTool locale={locale} />
-          ) : tool === 'symptom-tracker' ? (
-            <SymptomTrackerTool locale={locale} />
-          ) : (
-            <div
-              className="prose prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700"
-              dangerouslySetInnerHTML={{ __html: toolData.content }}
-            />
-          )}
+          <Suspense fallback={
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+            </div>
+          }>
+            {/* Render interactive tool if available */}
+            {tool === 'pain-tracker' ? (
+              <PainTrackerTool locale={locale} />
+            ) : tool === 'symptom-assessment' ? (
+              <SymptomAssessmentTool locale={locale} />
+            ) : tool === 'constitution-test' ? (
+              <ConstitutionTestTool locale={locale} />
+            ) : tool === 'period-pain-assessment' ? (
+              <PeriodPainAssessmentTool locale={locale} />
+            ) : tool === 'cycle-tracker' ? (
+              <CycleTrackerTool locale={locale} />
+            ) : tool === 'symptom-tracker' ? (
+              <SymptomTrackerTool locale={locale} />
+            ) : (
+              <div
+                className="prose prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700"
+                dangerouslySetInnerHTML={{ __html: toolData.content }}
+              />
+            )}
+          </Suspense>
         </div>
       </main>
 

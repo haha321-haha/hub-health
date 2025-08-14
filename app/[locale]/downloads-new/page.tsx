@@ -39,25 +39,11 @@ export default async function DownloadsNewPage({
       {/* SEO结构化数据 */}
       <StructuredData
         type="healthTopicPage"
-        data={{
-          title: locale === 'zh' ? '文章PDF下载中心 - Period Hub 经期健康专业资源' : 'Article PDF Download Center - Period Hub Menstrual Health Resources',
-          description: locale === 'zh' 
-            ? 'Period Hub文章PDF下载中心，38个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载'
-            : 'Period Hub article PDF download center, 38 curated menstrual health resources, intelligently categorized by urgency, bilingual support',
-          url: pageUrl,
-          locale: locale === 'zh' ? 'zh-CN' : 'en-US',
-          keywords: [
-            '经期健康',
-            'PDF下载',
-            '痛经缓解',
-            '文章资源',
-            'Period Hub',
-            'menstrual health',
-            'PDF download',
-            'period pain relief',
-            'health resources'
-          ]
-        }}
+        title={locale === 'zh' ? '文章PDF下载中心 - Period Hub 经期健康专业资源' : 'Article PDF Download Center - Period Hub Menstrual Health Resources'}
+        description={locale === 'zh' 
+          ? 'Period Hub文章PDF下载中心，38个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载'
+          : 'Period Hub article PDF download center, 38 curated menstrual health resources, intelligently categorized by urgency, bilingual support'}
+        url={pageUrl}
       />
       {/* 新版本标识横幅 */}
       <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-3 text-center text-sm font-medium">

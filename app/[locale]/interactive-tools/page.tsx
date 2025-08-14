@@ -3,6 +3,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import OptimizedImage from '@/components/ui/OptimizedImage';
 import BreathingExercise from '@/components/BreathingExercise';
+// import Breadcrumb from '@/components/Breadcrumb';
 import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User } from 'lucide-react'; // Icons for cards
 import { Locale, locales } from '@/i18n';
 import StructuredData from '@/components/StructuredData';
@@ -117,27 +118,21 @@ export default async function InteractiveToolsPage({
       {/* SEO结构化数据 */}
       <StructuredData
         type="healthTopicPage"
-        data={{
-          title: locale === 'zh' ? t('title') : 'Interactive Health Tools - Period Hub',
-          description: locale === 'zh' ? t('description') : 'Interactive health assessment tools for menstrual health management',
-          url: pageUrl,
-          locale: locale === 'zh' ? 'zh-CN' : 'en-US',
-          keywords: [
-            '症状评估',
-            '疼痛追踪',
-            '周期记录',
-            '体质测试',
-            '健康管理',
-            'symptom assessment',
-            'pain tracker',
-            'cycle tracking',
-            'health tools',
-            'menstrual health'
-          ]
-        }}
+        title={locale === 'zh' ? t('title') : 'Interactive Health Tools - Period Hub'}
+        description={locale === 'zh' ? t('description') : 'Interactive health assessment tools for menstrual health management'}
+        url={pageUrl}
       />
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-8 sm:space-y-12 mobile-safe-area">
+          {/* Breadcrumb Navigation - Temporarily disabled */}
+          {/* <Breadcrumb 
+            items={[
+              { 
+                label: locale === 'zh' ? '互动工具' : 'Interactive Tools'
+              }
+            ]} 
+          /> */}
+          
           {/* Page Header - 移动端优化 */}
           <header className="text-center px-4 sm:px-0">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-700 mb-3 sm:mb-4 leading-tight">
@@ -190,9 +185,9 @@ export default async function InteractiveToolsPage({
                     {tool.description}
                   </p>
                   {tool.href === "#" ? (
-                     <span className="btn-disabled w-full mobile-touch-target text-sm sm:text-base px-4 py-3">{tool.cta}</span>
+                    <span className="btn-disabled w-full mobile-touch-target text-sm sm:text-base px-4 py-3">{tool.cta}</span>
                   ) : (
-                    <Link href={tool.href} className={`w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center ${tool.title.includes("Symptom") || tool.title.includes("症状") ? 'btn-primary' : 'btn-secondary'}`}>
+                    <Link href={tool.href} className="w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center btn-primary">
                       {tool.cta}
                     </Link>
                   )}
