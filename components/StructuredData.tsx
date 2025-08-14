@@ -1,8 +1,4 @@
-
-import { Metadata } from 'next';
-
-interface StructuredDataProps {
-  type: 'Article' | 'WebPage' | 'Organization' | 'Person' | 'Product' | 'medicalWebPage' | 'healthTopicPage';
+interface StructuredDataData {
   title: string;
   description: string;
   url: string;
@@ -10,14 +6,37 @@ interface StructuredDataProps {
   author?: string;
   datePublished?: string;
   dateModified?: string;
+  // 允许扩展字段（如 locale、keywords 等），避免构建时的“多余属性”报错
+  [key: string]: any;
 }
 
+type StructuredDataType =
+  | 'Article'
+  | 'WebPage'
+  | 'Organization'
+  | 'Person'
+  | 'Product'
+  | 'medicalWebPage'
+  | 'healthTopicPage';
+
+// 兼容两种调用方式：
+// 1) <StructuredData type="..." title="..." description="..." url="..." />
+// 2) <StructuredData type="..." data={{ title, description, url, ... }} />
+type StructuredDataProps =
+  | ({ type: StructuredDataType } & StructuredDataData)
+  | ({ type: StructuredDataType; data: StructuredDataData });
+
 export default function StructuredData(props: StructuredDataProps) {
-  const data = generateStructuredData(props);
+  const normalized: { type: StructuredDataType } & StructuredDataData =
+    'data' in props ? { type: props.type, ...props.data } : props;
+
+  const data = generateStructuredData(normalized);
   return <StructuredDataScript data={data} />;
 }
 
-export function generateStructuredData(props: StructuredDataProps) {
+export function generateStructuredData(
+  props: { type: StructuredDataType } & StructuredDataData
+) {
   const baseData = {
     '@context': 'https://schema.org',
     '@type': props.type,
