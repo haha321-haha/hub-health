@@ -11,6 +11,7 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1年缓存，提升性能
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    loader: 'default',
     remotePatterns: [
       {
         protocol: 'https',
@@ -28,21 +29,18 @@ const nextConfig = {
   
   // 实验性功能 - 提升性能
   experimental: {
-    optimizeCss: true, // CSS 优化
-    optimizePackageImports: ['lucide-react', 'date-fns'], // 包导入优化
-    serverComponentsExternalPackages: ['sharp'], // 优化图片处理
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    optimizePackageImports: ['lucide-react'],
+    optimizeCss: true,
+    scrollRestoration: true,
   },
 
   // 构建优化
-  swcMinify: true, // 使用 SWC 压缩，比 Terser 更快
+  transpilePackages: ['lucide-react'],
+  
+  // 编译器优化
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   
   // 构建配置
   typescript: {
@@ -52,11 +50,28 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  
+  // 修复webpack模块问题
+  webpack: (config, { isServer }) => {
+    // 修复模块解析
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+    
+    return config;
+  },
 
   // 环境变量
   env: {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health',
   },
+
+  // SEO优化
+  trailingSlash: false,
+  generateEtags: true,
 
   // 头部优化 - 提升安全性和性能
   async headers() {
