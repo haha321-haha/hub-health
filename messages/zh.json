@@ -66,17 +66,37 @@
     }
   },
   "hero": {
-    "title": "专业的经期健康管理平台",
-    "subtitle": "科学指导，贴心陪伴，让每个女性都能健康自信地度过生理期",
-    "cta": "免费2分钟健康评估",
-    "learnMore": "浏览文章",
+    "title": "专业的经期健康",
+    "subtitle": "循证指导与隐私保护，陪伴每位女性科学管理生理期",
+    "description": "专业的经期健康管理平台，循证指导与隐私保护，陪伴每位女性科学管理生理期",
+    "titleHighlight": "管理平台",
+    "welcomeBadge": "女性健康专家",
     "features": {
-      "articles": "{count}篇专业文章",
-      "tools": "{toolsCount}个互动工具",
-      "support": "{supportHours}/7在线支持",
-      "articlesDesc": "专业医学指导",
-      "toolsDesc": "智能评估工具",
-      "supportDesc": "专业健康支持"
+      "personalizedRecord": "个性化记录",
+      "personalizedRecordDesc": "基于个人数据的智能分析",
+      "evidenceBasedGuide": "循证指南",
+      "evidenceBasedGuideDesc": "医学研究支持的专业内容",
+      "privacyFirst": "隐私优先",
+      "privacyFirstDesc": "本地存储，数据安全",
+      "precisionPrediction": "精准预测",
+      "precisionPredictionDesc": "基于数据的周期预测"
+    },
+    "cta": {
+      "primary": "开始探索",
+      "secondary": "了解更多"
+    },
+    "stats": {
+      "tools": "实用工具",
+      "content": "专业内容",
+      "support": "24/7 支持"
+    },
+    "toolCards": {
+      "painTracker": "疼痛记录器",
+      "painTrackerDesc": "症状追踪与趋势分析，帮助识别疼痛模式",
+      "cycleTracker": "周期预测",
+      "cycleTrackerDesc": "基于历史数据的智能预测，提前做好准备",
+      "constitutionTest": "体质评估",
+      "constitutionTestDesc": "中医体质辨识与调理建议，个性化健康方案"
     }
   },
   "navigation": {
@@ -166,14 +186,20 @@
       },
       "nutritionHealth": {
         "title": "营养与健康",
-        "description": "通过科学营养调理改善经期健康状况",
+        "description": "科学营养指导和健康生活方式建议",
         "articles": {
-          "antiInflammatory": "抗炎饮食与经期疼痛",
-          "antiInflammatoryDesc": "了解如何通过抗炎饮食减少经期疼痛和炎症反应",
+          "stressManagement": "经期压力管理完全指南：从心理到生理的全面缓解",
+          "stressManagementDesc": "基于ACOG、APA及NIH最新循证医学研究的经期压力管理指南，为北美职场女性提供科学的压力缓解策略，涵盖即时减压技术、长期管理计划和职场应对方案",
+          "antiInflammatory": "抗炎饮食缓解经期疼痛指南",
+          "antiInflammatoryDesc": "科学的抗炎饮食策略，通过营养调节减少经期炎症和疼痛",
           "magnesiumGuide": "镁与肠道健康综合指南",
-          "magnesiumGuideDesc": "深入了解镁元素对经期健康的重要作用及科学补充方法",
+          "magnesiumGuideDesc": "深入了解镁元素对经期健康的重要作用及肠道健康管理",
           "periodRecipes": "经期友好食谱",
-          "periodRecipesDesc": "专为经期设计的营养美味食谱，帮助缓解不适症状"
+          "periodRecipesDesc": "专为经期设计的营养食谱，缓解不适症状",
+          "sleepQuality": "经期睡眠质量全面改善指南：循证医学方法",
+          "sleepQualityDesc": "基于美国睡眠医学会(AASM)、美国妇产科学院(ACOG)及NIH最新研究成果的经期睡眠改善指南，提供21天系统性睡眠质量提升计划",
+          "preventiveCare": "经期预防性护理完全方案：循证医学指导",
+          "preventiveCareDesc": "基于ACOG、NIH及FDA最新循证医学研究，为北美女性提供科学的预防性护理策略，涵盖经前准备、经期管理、经后恢复的全周期护理方案"
         }
       },
       "naturalTherapies": {
@@ -226,24 +252,6 @@
           "lifecycleAnalysisDesc": "基于ACOG、The Menopause Society及NIH最新临床指南，为北美女性提供全生命周期的痛经科学管理方案，涵盖各年龄段特点分析与管理策略"
         }
       },
-      "nutritionHealth": {
-        "title": "营养与健康",
-        "description": "科学营养指导和健康生活方式建议",
-        "articles": {
-          "stressManagement": "经期压力管理完全指南：从心理到生理的全面缓解",
-          "stressManagementDesc": "基于ACOG、APA及NIH最新循证医学研究的经期压力管理指南，为北美职场女性提供科学的压力缓解策略，涵盖即时减压技术、长期管理计划和职场应对方案",
-          "antiInflammatory": "抗炎饮食缓解经期疼痛指南",
-          "antiInflammatoryDesc": "科学的抗炎饮食策略，通过营养调节减少经期炎症和疼痛",
-          "magnesiumGuide": "镁与肠道健康综合指南",
-          "magnesiumGuideDesc": "深入了解镁元素对经期健康的重要作用及肠道健康管理",
-          "periodRecipes": "经期友好食谱",
-          "periodRecipesDesc": "专为经期设计的营养食谱，缓解不适症状",
-          "sleepQuality": "经期睡眠质量全面改善指南：循证医学方法",
-          "sleepQualityDesc": "基于美国睡眠医学会(AASM)、美国妇产科学院(ACOG)及NIH最新研究成果的经期睡眠改善指南，提供21天系统性睡眠质量提升计划",
-          "preventiveCare": "经期预防性护理完全方案：循证医学指导",
-          "preventiveCareDesc": "基于ACOG、NIH及FDA最新循证医学研究，为北美女性提供科学的预防性护理策略，涵盖经前准备、经期管理、经后恢复的全周期护理方案"
-        }
-      },
       "specializedGuides": {
         "title": "专业指南",
         "description": "针对特定情况的专业指导和深度解析",
@@ -283,7 +291,7 @@
       "placeholderShort": "搜索资源...",
       "keywords": {
         "pain": "疼痛",
-        "relief": "缓解", 
+        "relief": "缓解",
         "nutrition": "营养",
         "exercise": "运动",
         "medical": "医学",
@@ -1370,23 +1378,9 @@
     "description": "您的完整痛经健康资源，从基础知识到高级管理策略，帮助您全面了解和管理经期健康。"
   },
   "teenHealth": {
-    "title": "青少年经期健康专区",
-    "description": "专为青少年设计的经期健康指南，涵盖生理发育、情感支持和校园生活管理。",
-    "campusGuide": {
-      "title": "校园生活指南",
-      "description": "在学校环境中管理经期的实用建议和策略。"
-    },
-    "developmentPain": {
-      "title": "发育期疼痛管理",
-      "description": "了解青春期经期疼痛的特点和管理方法。"
-    },
-    "emotionalSupport": {
-      "title": "情感支持",
-      "description": "应对经期情绪变化的心理健康指导。"
-    },
-    "communicationGuide": {
-      "title": "沟通指南",
-      "description": "如何与家长、老师和朋友谈论经期话题。"
+    "meta": {
+      "title": "青少年经期健康指南",
+      "description": "专为青少年设计的经期健康教育资源，提供科学、实用的经期管理知识"
     }
   },
   "toolPage": {
@@ -1679,6 +1673,35 @@
       }
     }
   },
+  "home": {
+    "features": {
+      "title": "专业功能特色",
+      "subtitle": "为您提供全方位的经期健康管理服务",
+      "tracking": {
+        "title": "智能追踪系统",
+        "description": "精准预测经期周期，科学记录症状变化，提供个性化健康洞察"
+      },
+      "assessment": {
+        "title": "专业健康评估",
+        "description": "基于医学研究的症状评估工具，为您量身定制健康管理方案"
+      },
+      "resources": {
+        "title": "丰富专业资源",
+        "description": "42篇专业文章、24个实用工具、PDF指南，全面支持您的健康需求"
+      }
+    },
+    "quickLinks": {
+      "title": "快速导航",
+      "healthGuide": "健康指南",
+      "healthGuideDesc": "全面的痛经知识和科学管理方法",
+      "assessment": "症状评估",
+      "assessmentDesc": "专业工具帮助了解您的痛经类型",
+      "resources": "PDF资源",
+      "resourcesDesc": "可下载的专业健康指导和工具",
+      "solutions": "场景方案",
+      "solutionsDesc": "针对不同生活环境的应对方案"
+    }
+  },
   "homePageContent": {
     "searchPlaceholder": "🔍 快速搜索痛经解决方案...",
     "searchTips": "💡 试试搜索\"5分钟缓解\"、\"热敷\"、\"前列腺素\"",
@@ -1874,16 +1897,47 @@
       }
     }
   },
-  "teenHealth": {
-    "meta": {
-      "title": "青少年经期健康指南",
-      "description": "专为青少年设计的经期健康教育资源，提供科学、实用的经期管理知识"
-    }
-  },
   "embeddedPainAssessment": {
     "title": "疼痛评估工具",
     "description": "快速评估您的疼痛程度",
     "loading": "加载中...",
     "error": "加载失败，请刷新页面重试"
+  },
+  "home": {
+    "hero": {
+      "title": "经期健康管理专家",
+      "subtitle": "科学的经期追踪、健康建议和个性化护理方案",
+      "cta": {
+        "primary": "开始使用",
+        "secondary": "了解更多"
+      }
+    },
+    "features": {
+      "title": "专业功能特色",
+      "subtitle": "为您提供全方位的经期健康管理服务",
+      "tracking": {
+        "title": "智能追踪系统",
+        "description": "精准预测经期周期，科学记录症状变化，提供个性化健康洞察"
+      },
+      "assessment": {
+        "title": "专业健康评估",
+        "description": "基于医学研究的症状评估工具，为您量身定制健康管理方案"
+      },
+      "resources": {
+        "title": "丰富专业资源",
+        "description": "42篇专业文章、24个实用工具、PDF指南，全面支持您的健康需求"
+      }
+    },
+    "quickLinks": {
+      "title": "快速导航",
+      "healthGuide": "健康指南",
+      "healthGuideDesc": "全面的痛经知识和科学管理方法",
+      "assessment": "症状评估",
+      "assessmentDesc": "专业工具帮助了解您的痛经类型",
+      "resources": "PDF资源",
+      "resourcesDesc": "可下载的专业健康指导和工具",
+      "solutions": "场景方案",
+      "solutionsDesc": "针对不同生活环境的应对方案"
+    }
   }
 }

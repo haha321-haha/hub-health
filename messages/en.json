@@ -66,17 +66,36 @@
     }
   },
   "hero": {
-    "title": "Professional Menstrual Health Management Platform",
-    "subtitle": "Scientific guidance and caring support to help every woman navigate their menstrual cycle with confidence and health",
-    "cta": "Free 2-Minute Health Assessment",
-    "learnMore": "Browse Articles",
+    "welcomeBadge": "Women's Health Expert",
+    "title": "Professional Menstrual",
+    "titleHighlight": "Health Management Platform",
+    "subtitle": "Evidence-based guidance and privacy protection, supporting every woman in scientific menstrual management",
     "features": {
-      "articles": "{count} Professional Articles",
-      "tools": "{toolsCount} Interactive Tools",
-      "support": "{supportHours}/7 Online Support",
-      "articlesDesc": "Professional Medical Guidance",
-      "toolsDesc": "Smart Assessment Tools",
-      "supportDesc": "Professional Health Support"
+      "personalizedRecord": "Personalized Records",
+      "personalizedRecordDesc": "Intelligent analysis based on personal data",
+      "evidenceBasedGuide": "Evidence-Based Guide",
+      "evidenceBasedGuideDesc": "Professional content supported by medical research",
+      "privacyFirst": "Privacy First",
+      "privacyFirstDesc": "Local storage, secure data",
+      "precisionPrediction": "Precision Prediction",
+      "precisionPredictionDesc": "Data-driven cycle prediction"
+    },
+    "cta": {
+      "primary": "Start Exploring",
+      "secondary": "Learn More"
+    },
+    "stats": {
+      "tools": "Practical Tools",
+      "content": "Professional Content",
+      "support": "24/7 Support"
+    },
+    "toolCards": {
+      "painTracker": "Pain Recorder",
+      "painTrackerDesc": "Symptom tracking and trend analysis to help identify pain patterns",
+      "cycleTracker": "Cycle Prediction",
+      "cycleTrackerDesc": "Intelligent prediction based on historical data, prepare in advance",
+      "constitutionTest": "Constitution Assessment",
+      "constitutionTestDesc": "TCM constitution identification and conditioning advice, personalized health plans"
     }
   },
   "navigation": {
@@ -1886,6 +1905,35 @@
     "meta": {
       "title": "Teen Health Guide",
       "description": "Educational resources designed for teenagers about menstrual health, providing scientific and practical period management knowledge"
+    }
+  },
+  "home": {
+    "features": {
+      "title": "Professional Features",
+      "subtitle": "Comprehensive menstrual health management services for you",
+      "tracking": {
+        "title": "Smart Tracking System",
+        "description": "Accurate cycle prediction, scientific symptom recording, personalized health insights"
+      },
+      "assessment": {
+        "title": "Professional Health Assessment",
+        "description": "Evidence-based symptom assessment tools, customized health management plans for you"
+      },
+      "resources": {
+        "title": "Rich Professional Resources",
+        "description": "42 professional articles, 24 practical tools, PDF guides, comprehensive support for your health needs"
+      }
+    },
+    "quickLinks": {
+      "title": "Quick Navigation",
+      "healthGuide": "Health Guide",
+      "healthGuideDesc": "Comprehensive period pain knowledge and scientific management methods",
+      "assessment": "Symptom Assessment",
+      "assessmentDesc": "Professional tools to help understand your period pain type",
+      "resources": "PDF Resources",
+      "resourcesDesc": "Downloadable professional health guidance and tools",
+      "solutions": "Scenario Solutions",
+      "solutionsDesc": "Targeted solutions for different life environments"
     }
   },
   "embeddedPainAssessment": {

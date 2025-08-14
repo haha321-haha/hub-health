@@ -148,19 +148,24 @@ export function getCategoryBgColor(category: string): string {
 export function formatDate(dateString: string, locale: Locale): string {
   const date = new Date(dateString);
   
+  // 使用UTC时间避免时区差异导致的hydration mismatch
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth();
+  const day = date.getUTCDate();
+  
   if (locale === 'zh') {
-    return date.toLocaleDateString('zh-CN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    const months = [
+      '1月', '2月', '3月', '4月', '5月', '6月',
+      '7月', '8月', '9月', '10月', '11月', '12月'
+    ];
+    return `${year}年${months[month]}${day}日`;
   }
   
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  return `${months[month]} ${day}, ${year}`;
 }
 
 /**
@@ -170,8 +175,8 @@ export function createDownloadEvent(resourceId: string, locale: Locale) {
   return {
     resourceId,
     locale,
-    timestamp: new Date(),
-    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined,
+    timestamp: new Date().toISOString(), // 使用ISO格式保持一致
+    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'SSR',
   };
 }
 
