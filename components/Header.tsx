@@ -50,9 +50,9 @@ export default function Header() {
     }
     // 简化：downloads页面匹配articles或downloads路径
     if (href.includes('/downloads')) {
-      return pathname.includes('/articles') || pathname.includes('/downloads');
+      return pathname?.includes('/articles') || pathname?.includes('/downloads');
     }
-    return pathname.startsWith(href);
+    return pathname?.startsWith(href) || false;
   };
 
   return (
@@ -153,7 +153,7 @@ function LanguageSwitcher() {
 
   const switchLocale = (newLocale: string) => {
     // Replace the current locale segment in the pathname with the new locale
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    const newPath = pathname?.replace(`/${locale}`, `/${newLocale}`) || `/${newLocale}`;
     window.location.href = newPath; // Use window.location for a full page refresh
     setIsOpen(false);
   };
