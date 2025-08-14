@@ -11,13 +11,13 @@ export default function PerformanceMonitor() {
         
         const metrics = {
           // 页面加载时间
-          pageLoadTime: navigation.loadEventEnd - navigation.navigationStart,
+          pageLoadTime: navigation.loadEventEnd - navigation.fetchStart,
           // DNS查询时间
           dnsTime: navigation.domainLookupEnd - navigation.domainLookupStart,
           // TCP连接时间
           tcpTime: navigation.connectEnd - navigation.connectStart,
           // 首字节时间
-          ttfb: navigation.responseStart - navigation.navigationStart,
+          ttfb: navigation.responseStart - navigation.fetchStart,
           // DOM解析时间
           domParseTime: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
           // 资源加载时间
@@ -108,7 +108,7 @@ export function usePerformanceOptimization() {
       // 延迟加载第三方脚本
       setTimeout(() => {
         // Google Analytics
-        if (process.env.NODE_ENV === 'production' && !window.gtag) {
+        if (process.env.NODE_ENV === 'production' && !(window as any).gtag) {
           const script = document.createElement('script');
           script.async = true;
           script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA_ID';

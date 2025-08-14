@@ -733,10 +733,13 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
           videoPlayer.src = scene.videoUrl;
           videoPlayer.load();
 
-          // Try to play automatically
-          videoPlayer.play().catch(error => {
-            console.warn("Autoplay prevented:", error);
-          });
+          // 仅在用户交互后尝试播放，避免 AudioContext/Autoplay 警告
+          const tryPlay = () => {
+            videoPlayer.play().catch(() => {});
+            videoPlayer.removeEventListener('pointerdown', tryPlay);
+            document.removeEventListener('pointerdown', tryPlay);
+          };
+          document.addEventListener('pointerdown', tryPlay, { once: true });
         }
 
         // Update navigation buttons
