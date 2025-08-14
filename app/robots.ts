@@ -1,57 +1,32 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health'
-  
   return {
     rules: [
       {
         userAgent: '*',
-        allow: [
-          '/',
-          '/articles/',
-          '/interactive-tools/',
-          '/health-guide/',
-          '/scenario-solutions/',
-          '/teen-health/',
-          '/natural-therapies/',
-          '/downloads/',
-        ],
+        allow: '/',
         disallow: [
           '/api/',
-          '/_next/',
           '/admin/',
+          '/_next/',
           '/private/',
-          '/test-*',
-          '/debug-*',
-          '/preview/',
           '*.json',
-          '/*.json',
-          '/zh/interactive-tools/constitution-test',
+          '/search?*'
         ],
       },
       {
-        userAgent: 'GPTBot',
-        disallow: '/',
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/api/', '/admin/'],
       },
       {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
-      },
-      {
-        userAgent: 'CCBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'anthropic-ai',
-        disallow: '/',
-      },
-      {
-        userAgent: 'Claude-Web',
-        disallow: '/',
-      },
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/api/', '/admin/'],
+      }
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
-  }
+    sitemap: 'https://periodhub.health/sitemap.xml',
+    host: 'https://periodhub.health'
+  };
 }

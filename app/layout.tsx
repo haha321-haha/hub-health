@@ -1,7 +1,15 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
-import WebVitalsReporter from '@/components/WebVitalsReporter';
-import PerformanceMonitor from '@/components/PerformanceMonitor';
+import { Noto_Sans_SC } from 'next/font/google';
+import ClientSafe from '@/components/ClientSafe';
+
+const notoSansSC = Noto_Sans_SC({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '900'],
+  display: 'swap',
+});
+// import WebVitalsReporter from '@/components/WebVitalsReporter';
+// import PerformanceMonitor from '@/components/PerformanceMonitor';
 
 // 🚀 Core Web Vitals 优化的根布局
 export const metadata: Metadata = {
@@ -150,7 +158,7 @@ export default function RootLayout({
             html { scroll-behavior: smooth; }
             body { 
               margin: 0; 
-              font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+              font-family: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
               line-height: 1.6;
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
@@ -158,36 +166,20 @@ export default function RootLayout({
             }
             * { box-sizing: border-box; }
             img, video { max-width: 100%; height: auto; }
-            /* 防止闪烁 */
-            .loading { opacity: 0; }
-            .loaded { opacity: 1; transition: opacity 0.3s ease; }
           `
         }} />
       </head>
-      <body className="loading">
-        {children}
+      <body className={notoSansSC.className}>
+        <ClientSafe>
+          {children}
+        </ClientSafe>
         
         {/* 🚀 SEO优化 - Core Web Vitals监控 */}
-        <WebVitalsReporter />
+        {/* <WebVitalsReporter /> */}
         
         {/* 🚀 SEO优化 - 性能监控 */}
-        <PerformanceMonitor />
+        {/* <PerformanceMonitor /> */}
         
-        {/* 🚀 性能优化 - 页面加载完成后移除loading类 */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.addEventListener('load', function() {
-              document.body.classList.remove('loading');
-              document.body.classList.add('loaded');
-            });
-            
-            // 如果页面已经加载完成
-            if (document.readyState === 'complete') {
-              document.body.classList.remove('loading');
-              document.body.classList.add('loaded');
-            }
-          `
-        }} />
       </body>
     </html>
   );
