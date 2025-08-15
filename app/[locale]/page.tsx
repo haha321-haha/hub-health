@@ -270,7 +270,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
                   loading="lazy"
                 />
                 <p className="mt-2 text-center text-sm text-neutral-500">
-                  {locale === 'zh' ? '数据来源：全球女性健康调查（示例）' : 'Data Source: Global Women\'s Health Survey (example)'}
+                  {locale === 'zh' ? '数据来源：全球女性健康调查' : 'Data Source: Global Women\'s Health Survey (example)'}
                 </p>
               </div>
             </div>
