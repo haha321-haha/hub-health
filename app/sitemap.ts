@@ -51,13 +51,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 生成静态页面的 sitemap 条目
   const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: `${baseUrl}${page}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
+    lastModified: new Date('2025-08-15'),
+    changeFrequency: 'weekly' as const,
     priority: page === '' || page === '/zh' ? 1 : 0.8,
   }));
 
-  // PDF 资源文件
+
+
+  // PDF 资源文件 - 只包含有语言后缀的文件（用户实际需要的）
   const pdfFiles = [
+    // 中文版PDF
     'parent-communication-guide-zh.pdf',
     'zhan-zhuang-baduanjin-illustrated-guide-zh.pdf',
     'teacher-collaboration-handbook-zh.pdf',
@@ -70,7 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'magnesium-gut-health-menstrual-pain-guide-zh.pdf',
     'pain-tracking-form-zh.pdf',
     'teacher-health-manual-zh.pdf',
-    // 英文版本
+    // 英文版PDF
     'parent-communication-guide-en.pdf',
     'zhan-zhuang-baduanjin-illustrated-guide-en.pdf',
     'teacher-collaboration-handbook-en.pdf',
@@ -85,27 +88,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'teacher-health-manual-en.pdf',
   ];
 
-  // PDF 文件的 sitemap 条目
   const pdfEntries: MetadataRoute.Sitemap = pdfFiles.map((filename) => ({
     url: `${baseUrl}/pdf-files/${filename}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
+    lastModified: new Date('2025-08-15'),
+    changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
 
-  // 文章页面（这里需要根据实际文章动态生成）
+  // 实际存在的文章页面
   const articleEntries: MetadataRoute.Sitemap = [
-    // 示例文章，实际应该从文章数据源获取
     {
-      url: `${baseUrl}/zh/articles/period-pain-relief`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: `${baseUrl}/zh/articles/pain-management/understanding-dysmenorrhea`,
+      lastModified: new Date('2025-08-15'),
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/en/articles/period-pain-relief`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: `${baseUrl}/en/articles/pain-management/understanding-dysmenorrhea`,
+      lastModified: new Date('2025-08-15'),
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
   ];
