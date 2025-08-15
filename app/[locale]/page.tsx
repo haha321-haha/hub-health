@@ -15,8 +15,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       ? 'PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴'
       : 'PeriodHub - Professional Menstrual Health Management Platform | Scientific Guidance',
     description: isZh
-      ? '专业的女性月经健康管理平台，提供42篇专业文章、5个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。'
-      : 'Professional menstrual health management platform providing 42 expert articles and 5 practical tools to help women scientifically manage menstrual health and quickly relieve period pain.',
+      ? '专业的女性月经健康管理平台，提供42篇专业文章、24个PDF资源，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。'
+      : 'Professional menstrual health management platform providing 42 expert articles and 24 PDF resources to help women scientifically manage menstrual health and quickly relieve period pain.',
     keywords: isZh ? [
       '痛经怎么缓解最快方法', '痛经吃什么药最有效', '月经推迟几天算正常', '月经量少是什么原因',
       '痛经缓解', '月经疼痛', '经期健康', '女性健康', '月经健康管理', '经期疼痛怎么办', '中医调理',
@@ -298,8 +298,8 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
                   <div className="text-gray-600">{locale === 'zh' ? '专业文章' : 'Expert Articles'}</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">5</div>
-                  <div className="text-gray-600">{locale === 'zh' ? '实用工具' : 'Practical Tools'}</div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">24</div>
+                  <div className="text-gray-600">{locale === 'zh' ? 'PDF资源' : 'PDF Resources'}</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-3xl font-bold text-green-600 mb-2">98%</div>
