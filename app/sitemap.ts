@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://periodhub.health';
+  const baseUrl = 'https://www.periodhub.health';
   
   // 静态页面
   const staticPages = [
