@@ -92,6 +92,7 @@ export default function RootLayout({
         
         {/* 🔍 搜索引擎优化 */}
         <meta name="google-site-verification" content="1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk" />
+        <meta name="msvalidate.01" content="12D5EA89A249696AACD3F155B64C5E56" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         
         {/* 🎨 主题和图标 */}
