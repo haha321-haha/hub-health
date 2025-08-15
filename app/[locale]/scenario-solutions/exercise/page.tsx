@@ -150,7 +150,7 @@ export default async function ExerciseScenarioPage({ params: { locale } }: Props
   ];
 
   return (
-    <div className="space-y-12" data-page="scenario-exercise">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-exercise">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm text-neutral-600">
         <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600 transition-colors">
