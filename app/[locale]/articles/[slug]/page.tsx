@@ -203,17 +203,13 @@ export default async function ArticlePage({
       {/* SEO结构化数据 */}
       <StructuredData
         type="medicalWebPage"
-        data={{
-          title,
-          description: summary || '',
-          url: articleUrl,
-          image: article.featured_image,
-          author: article.author,
-          datePublished: article.date,
-          dateModified: article.date,
-          locale: locale,
-          keywords: (locale === 'zh' ? article.tags_zh : article.tags),
-        }}
+        title={title}
+        description={summary || ''}
+        url={articleUrl}
+        image={article.featured_image}
+        author={article.author}
+        datePublished={article.date}
+        dateModified={article.date}
       />
 
       {/* 阅读进度条和返回顶部 */}

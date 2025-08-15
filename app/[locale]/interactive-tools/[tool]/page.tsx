@@ -2,51 +2,15 @@ import { notFound } from 'next/navigation';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// Dynamic imports for interactive tools
-const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
-  </div>
-});
-
-const SymptomAssessmentTool = dynamic(() => import('../components/SymptomAssessmentTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
-  </div>
-});
-
-const ConstitutionTestTool = dynamic(() => import('../components/ConstitutionTestTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
-  </div>
-});
-
-const PeriodPainAssessmentTool = dynamic(() => import('../components/PeriodPainAssessmentTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
-  </div>
-});
-
-const CycleTrackerTool = dynamic(() => import('../components/CycleTrackerTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
-  </div>
-});
-
-const SymptomTrackerTool = dynamic(() => import('../components/SymptomTrackerTool'), {
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-  </div>
-});
+// Static imports for interactive tools (temporary fix)
+import PainTrackerTool from '../components/PainTrackerTool';
+import SymptomAssessmentTool from '../components/SymptomAssessmentTool';
+import ConstitutionTestTool from '../components/ConstitutionTestTool';
+import PeriodPainAssessmentTool from '../components/PeriodPainAssessmentTool';
+import CycleTrackerTool from '../components/CycleTrackerTool';
+import SymptomTrackerTool from '../components/SymptomTrackerTool';
 
 // Types
 type Locale = 'en' | 'zh';
