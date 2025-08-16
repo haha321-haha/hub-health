@@ -1,7 +1,7 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
 import { Noto_Sans_SC } from 'next/font/google';
-import ClientSafe from '@/components/ClientSafe';
+// import ClientSafe from '@/components/ClientSafe';
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ['latin'],
@@ -171,9 +171,7 @@ export default function RootLayout({
         }} />
       </head>
       <body className={notoSansSC.className}>
-        <ClientSafe>
-          {children}
-        </ClientSafe>
+        {children}
         
         {/* 🚀 SEO优化 - Core Web Vitals监控 */}
         {/* <WebVitalsReporter /> */}
