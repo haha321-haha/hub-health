@@ -61,7 +61,6 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
-    "@next/swc-darwin-arm64": "^14.2.31",
     "@tailwindcss/typography": "^0.5.10",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.19.10",
