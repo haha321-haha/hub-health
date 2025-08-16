@@ -52,9 +52,9 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
   
-  // 修复webpack模块问题
-  webpack: (config, { isServer }) => {
-    // 修复模块解析
+  // 简化webpack配置
+  webpack: (config, { dev, isServer }) => {
+    // 基本模块解析修复
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
@@ -120,10 +120,7 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
-          {
-            key: 'Link',
-            value: '</images/:path*>; rel=preload; as=image; crossorigin=anonymous',
-          },
+
         ],
       },
       {
@@ -142,10 +139,6 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
-          },
-          {
-            key: 'Link',
-            value: '</fonts/:path*>; rel=preload; as=font; crossorigin=anonymous',
           },
         ],
       },
