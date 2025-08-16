@@ -1,390 +1,408 @@
-'use client';
-
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { useState, useEffect } from 'react';
-// import Breadcrumb from '@/components/Breadcrumb';
+import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
+import { Metadata } from 'next';
+
+// SEO Metadata - 实现你建议的长标题策略
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const isZh = locale === 'zh';
+  
+  return {
+    title: isZh 
+      ? '痛经自然疗法大全 | 8种科学验证的缓解方法 [2025] - PeriodHub'
+      : 'Complete Natural Menstrual Pain Relief Guide | 8 Science-Backed Methods [2025] - PeriodHub',
+    description: isZh
+      ? '探索8种科学验证的痛经自然疗法：从热敷到瑜伽，从草药到针灸。基于循证医学的完整指南，适用于青少年到职场女性。无副作用，安全有效。'
+      : 'Explore 8 science-backed natural therapies for menstrual pain: from heat therapy to yoga, herbs to acupuncture. Complete evidence-based guide for teens to working women.',
+    keywords: isZh ? [
+      '痛经自然疗法', '痛经缓解方法', '经期疼痛自然疗法', '痛经调理', '经期不适', '自然止痛',
+      '热敷缓解痛经', '瑜伽缓解痛经', '草药治疗痛经', '针灸治疗痛经', '按摩缓解痛经',
+      '痛经快速缓解5分钟', '青少年痛经怎么办', '职场女性痛经应对', '无药物痛经缓解'
+    ] : [
+      'natural menstrual pain relief', 'period pain natural remedies', 'menstrual cramps natural treatment',
+      'heat therapy period pain', 'yoga for menstrual cramps', 'herbal remedies period pain',
+      'acupuncture menstrual pain', 'massage period cramps', 'drug-free period pain relief'
+    ],
+    openGraph: {
+      title: isZh 
+        ? '痛经自然疗法大全 | 8种科学验证的缓解方法 [2025]'
+        : 'Complete Natural Menstrual Pain Relief Guide | 8 Science-Backed Methods [2025]',
+      description: isZh
+        ? '探索8种科学验证的痛经自然疗法，无副作用，安全有效。'
+        : 'Explore 8 science-backed natural therapies for menstrual pain relief.',
+      url: `https://periodhub.health/${locale}/natural-therapies`,
+      siteName: 'PeriodHub',
+      locale: isZh ? 'zh_CN' : 'en_US',
+      type: 'article',
+    },
+    alternates: {
+      canonical: `https://periodhub.health/${locale}/natural-therapies`,
+      languages: {
+        'zh-CN': 'https://periodhub.health/zh/natural-therapies',
+        'en-US': 'https://periodhub.health/en/natural-therapies',
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  };
+}
+
+// 增强的结构化数据 - 医疗网页Schema
+const getStructuredData = (locale: string) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": `https://periodhub.health/${locale}/natural-therapies#webpage`,
+      "name": locale === 'zh' ? "痛经自然疗法大全" : "Natural Menstrual Pain Relief Guide",
+      "description": locale === 'zh'
+        ? "探索8种科学验证的痛经自然疗法，包括物理疗法、草药疗法、饮食调整等"
+        : "Explore 8 science-backed natural therapies for menstrual pain relief",
+      "url": `https://periodhub.health/${locale}/natural-therapies`,
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "about": {
+        "@type": "MedicalCondition",
+        "name": locale === 'zh' ? "痛经" : "Dysmenorrhea"
+      },
+      "lastReviewed": "2025-08-16",
+      "reviewedBy": {
+        "@type": "Organization",
+        "name": "PeriodHub Medical Team"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `https://periodhub.health/${locale}/natural-therapies#faq`,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": locale === 'zh' ? "哪些自然疗法对痛经最有效？" : "Which natural therapies are most effective for menstrual pain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": locale === 'zh'
+              ? "最有效的自然疗法包括：热敷疗法（40-45°C，15-20分钟）、瑜伽体式（猫牛式、婴儿式）、草药茶（姜茶、洋甘菊茶）、腹部按摩和针灸。建议结合多种方法使用。"
+              : "Most effective natural therapies include: heat therapy (40-45°C, 15-20 minutes), yoga poses (cat-cow, child's pose), herbal teas (ginger, chamomile), abdominal massage, and acupuncture. Combining multiple methods is recommended."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": locale === 'zh' ? "自然疗法多久能见效？" : "How quickly do natural therapies work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": locale === 'zh'
+              ? "不同疗法见效时间不同：热敷和按摩5-15分钟内见效，瑜伽和呼吸法20-30分钟见效，草药茶需要30-60分钟，针灸通常在治疗后立即见效。"
+              : "Different therapies work at different speeds: heat therapy and massage work in 5-15 minutes, yoga and breathing techniques in 20-30 minutes, herbal teas need 30-60 minutes, acupuncture usually works immediately after treatment."
+          }
+        }
+      ]
+    }
+  ]
+});
 
 export default function NaturalTherapiesPage({
   params: { locale }
 }: {
   params: { locale: string }
 }) {
-  const t = useTranslations('naturalTherapiesPage');
-  const [expandedTherapy, setExpandedTherapy] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Define therapy categories with simplified content
-  const therapyCategories = [
-    {
-      id: 'physical',
-      title: locale === 'zh' ? '物理疗法' : 'Physical Therapy',
-      subtitle: locale === 'zh' ? '热敷、按摩、TENS等' : 'Heat therapy, massage, TENS, etc.',
-      icon: '🔥',
-      color: 'red',
-      description: locale === 'zh'
-        ? '物理疗法通过外部物理手段改善血液循环、缓解肌肉紧张，是最直接有效的痛经缓解方法。'
-        : 'Physical therapy improves blood circulation and relieves muscle tension through external physical means, making it the most direct and effective method for menstrual pain relief.',
-      methods: locale === 'zh' ? [
-        { name: '热敷疗法', description: '使用热水袋、暖宫贴等，温度40-45°C，每次15-20分钟' },
-        { name: '按摩疗法', description: '腹部顺时针按摩、腰部按压，促进血液循环' },
-        { name: 'TENS疗法', description: '经皮神经电刺激，阻断疼痛信号传导' },
-        { name: '温水浴', description: '38-40°C温水浸泡15-20分钟，全身放松' }
-      ] : [
-        { name: 'Heat Therapy', description: 'Use hot water bottles, heating pads at 40-45°C for 15-20 minutes' },
-        { name: 'Massage Therapy', description: 'Clockwise abdominal massage, lower back pressure to promote circulation' },
-        { name: 'TENS Therapy', description: 'Transcutaneous electrical nerve stimulation blocks pain signal transmission' },
-        { name: 'Warm Bath', description: 'Soak in 38-40°C warm water for 15-20 minutes for full body relaxation' }
-      ]
-    },
-    {
-      id: 'herbal',
-      title: locale === 'zh' ? '草药疗法' : 'Herbal Therapy',
-      subtitle: locale === 'zh' ? '草药茶、中药、补充剂等' : 'Herbal teas, TCM, supplements, etc.',
-      icon: '🌿',
-      color: 'green',
-      description: locale === 'zh'
-        ? '草药疗法利用植物的天然活性成分调节激素平衡、减少炎症，是温和而有效的调理方式。'
-        : 'Herbal therapy uses natural active compounds from plants to regulate hormonal balance and reduce inflammation, providing gentle yet effective conditioning.',
-      methods: locale === 'zh' ? [
-        { name: '姜茶', description: '生姜具有抗炎作用，每日2-3杯温姜茶' },
-        { name: '当归补血汤', description: '传统中药方剂，调理气血，建议咨询中医师' },
-        { name: '洋甘菊茶', description: '具有镇静和抗痉挛作用，睡前饮用' },
-        { name: '月见草油', description: '富含γ-亚麻酸，调节前列腺素平衡' }
-      ] : [
-        { name: 'Ginger Tea', description: 'Ginger has anti-inflammatory properties, 2-3 cups of warm ginger tea daily' },
-        { name: 'Angelica Blood Tonic', description: 'Traditional Chinese medicine formula for qi and blood regulation, consult TCM practitioner' },
-        { name: 'Chamomile Tea', description: 'Has sedative and antispasmodic effects, drink before bedtime' },
-        { name: 'Evening Primrose Oil', description: 'Rich in γ-linolenic acid, helps balance prostaglandins' }
-      ]
-    },
-    {
-      id: 'dietary',
-      title: locale === 'zh' ? '饮食调整' : 'Dietary Adjustment',
-      subtitle: locale === 'zh' ? '抗炎饮食、营养补充等' : 'Anti-inflammatory diet, nutrition, etc.',
-      icon: '🍎',
-      color: 'blue',
-      description: locale === 'zh'
-        ? '通过科学的饮食调整，补充关键营养素，减少炎症反应，从根本上改善痛经症状。'
-        : 'Through scientific dietary adjustments and key nutrient supplementation, reduce inflammatory responses and fundamentally improve menstrual pain symptoms.',
-      methods: locale === 'zh' ? [
-        { name: '增加Omega-3', description: '深海鱼、亚麻籽、核桃等，每周2-3次' },
-        { name: '补充镁元素', description: '黑巧克力、香蕉、杏仁，每日300-400mg' },
-        { name: '减少糖分摄入', description: '避免精制糖和加工食品，稳定血糖' },
-        { name: '增加纤维', description: '全谷物、蔬菜水果，促进激素代谢' }
-      ] : [
-        { name: 'Increase Omega-3', description: 'Deep sea fish, flaxseeds, walnuts, 2-3 times per week' },
-        { name: 'Magnesium Supplement', description: 'Dark chocolate, bananas, almonds, 300-400mg daily' },
-        { name: 'Reduce Sugar Intake', description: 'Avoid refined sugar and processed foods, stabilize blood sugar' },
-        { name: 'Increase Fiber', description: 'Whole grains, fruits and vegetables, promote hormone metabolism' }
-      ]
-    },
-    {
-      id: 'yoga',
-      title: locale === 'zh' ? '瑜伽运动' : 'Yoga & Exercise',
-      subtitle: locale === 'zh' ? '瑜伽体式、温和运动等' : 'Yoga poses, gentle exercise, etc.',
-      icon: '🧘‍♀️',
-      color: 'purple',
-      description: locale === 'zh'
-        ? '特定的瑜伽体式和温和运动可以缓解盆腔紧张、改善血液循环，同时释放内啡肽缓解疼痛。'
-        : 'Specific yoga poses and gentle exercises can relieve pelvic tension, improve blood circulation, and release endorphins to alleviate pain.',
-      methods: locale === 'zh' ? [
-        { name: '猫牛式', description: '缓解下背部紧张，促进脊柱灵活性' },
-        { name: '婴儿式', description: '放松骨盆区域，缓解腹部压力' },
-        { name: '扭转体式', description: '刺激腹部器官，改善消化和血液循环' },
-        { name: '温和散步', description: '每日20-30分钟，促进内啡肽释放' }
-      ] : [
-        { name: 'Cat-Cow Pose', description: 'Relieves lower back tension, promotes spinal flexibility' },
-        { name: 'Child\'s Pose', description: 'Relaxes pelvic area, relieves abdominal pressure' },
-        { name: 'Twisting Poses', description: 'Stimulates abdominal organs, improves digestion and circulation' },
-        { name: 'Gentle Walking', description: '20-30 minutes daily, promotes endorphin release' }
-      ]
-    },
-    {
-      id: 'aromatherapy',
-      title: locale === 'zh' ? '芳香疗法' : 'Aromatherapy',
-      subtitle: locale === 'zh' ? '精油按摩、香薰等' : 'Essential oil massage, diffusion, etc.',
-      icon: '🌸',
-      color: 'pink',
-      description: locale === 'zh'
-        ? '精油的天然芳香分子可以通过嗅觉系统影响大脑，同时外用按摩可以缓解局部疼痛。'
-        : 'Natural aromatic molecules in essential oils can affect the brain through the olfactory system, while topical massage can relieve local pain.',
-      methods: locale === 'zh' ? [
-        { name: '薰衣草精油', description: '具有镇静和止痛作用，可用于按摩或香薰' },
-        { name: '快乐鼠尾草', description: '调节激素平衡，缓解经前综合征' },
-        { name: '甜橙精油', description: '提升情绪，减少焦虑和抑郁' },
-        { name: '腹部按摩', description: '稀释精油按摩下腹部，顺时针方向' }
-      ] : [
-        { name: 'Lavender Essential Oil', description: 'Has sedative and analgesic effects, use for massage or diffusion' },
-        { name: 'Clary Sage', description: 'Regulates hormonal balance, relieves PMS symptoms' },
-        { name: 'Sweet Orange Oil', description: 'Uplifts mood, reduces anxiety and depression' },
-        { name: 'Abdominal Massage', description: 'Massage lower abdomen with diluted oils in clockwise direction' }
-      ]
-    },
-    {
-      id: 'acupuncture',
-      title: locale === 'zh' ? '针灸艾灸' : 'Acupuncture & Moxibustion',
-      subtitle: locale === 'zh' ? '传统中医疗法' : 'Traditional Chinese medicine',
-      icon: '📍',
-      color: 'yellow',
-      description: locale === 'zh'
-        ? '传统中医针灸通过刺激特定穴位调节气血运行，艾灸则通过温热刺激达到调理效果。'
-        : 'Traditional Chinese acupuncture regulates qi and blood flow by stimulating specific acupoints, while moxibustion achieves conditioning effects through warm stimulation.',
-      methods: locale === 'zh' ? [
-        { name: '三阴交穴', description: '位于小腿内侧，调节妇科疾病的重要穴位' },
-        { name: '关元穴', description: '位于下腹部，温补肾阳，调理月经' },
-        { name: '血海穴', description: '位于大腿内侧，活血化瘀，调经止痛' },
-        { name: '艾灸疗法', description: '在相关穴位进行艾灸，温经散寒' }
-      ] : [
-        { name: 'Sanyinjiao Point', description: 'Located on inner calf, important acupoint for gynecological conditions' },
-        { name: 'Guanyuan Point', description: 'Located on lower abdomen, tonifies kidney yang, regulates menstruation' },
-        { name: 'Xuehai Point', description: 'Located on inner thigh, promotes blood circulation, regulates menstruation' },
-        { name: 'Moxibustion Therapy', description: 'Apply moxibustion to relevant acupoints to warm meridians and dispel cold' }
-      ]
-    },
-    {
-      id: 'psychological',
-      title: locale === 'zh' ? '心理调节' : 'Psychological Techniques',
-      subtitle: locale === 'zh' ? '冥想、呼吸法等' : 'Meditation, breathing techniques, etc.',
-      icon: '🧠',
-      color: 'indigo',
-      description: locale === 'zh'
-        ? '心理调节技巧可以激活副交感神经系统，降低疼痛敏感度，同时减少焦虑和压力。'
-        : 'Psychological techniques can activate the parasympathetic nervous system, reduce pain sensitivity, and decrease anxiety and stress.',
-      methods: locale === 'zh' ? [
-        { name: '深呼吸练习', description: '腹式呼吸，吸气4秒-屏息4秒-呼气6秒' },
-        { name: '正念冥想', description: '专注当下感受，接纳疼痛而不抗拒' },
-        { name: '渐进性肌肉放松', description: '从头到脚依次紧张和放松各部位肌肉' },
-        { name: '引导想象', description: '想象温暖的光芒照射疼痛部位' }
-      ] : [
-        { name: 'Deep Breathing Exercise', description: 'Abdominal breathing: inhale 4 seconds - hold 4 seconds - exhale 6 seconds' },
-        { name: 'Mindfulness Meditation', description: 'Focus on present sensations, accept pain without resistance' },
-        { name: 'Progressive Muscle Relaxation', description: 'Systematically tense and relax muscle groups from head to toe' },
-        { name: 'Guided Imagery', description: 'Visualize warm light radiating to the painful area' }
-      ]
-    },
-    {
-      id: 'comprehensive',
-      title: locale === 'zh' ? '综合方案' : 'Comprehensive Plans',
-      subtitle: locale === 'zh' ? '个性化组合疗法' : 'Personalized combination therapy',
-      icon: '🎯',
-      color: 'teal',
-      description: locale === 'zh'
-        ? '结合多种自然疗法，制定个性化的综合治疗方案，效果更加显著和持久。'
-        : 'Combine multiple natural therapies to create personalized comprehensive treatment plans for more significant and lasting effects.',
-      methods: locale === 'zh' ? [
-        { name: '轻度痛经方案', description: '热敷+瑜伽+草药茶+饮食调整' },
-        { name: '中度痛经方案', description: '按摩+针灸+营养补充+心理调节' },
-        { name: '重度痛经方案', description: '多种物理疗法+中药调理+专业指导' },
-        { name: '预防性方案', description: '日常调理+定期评估+生活方式优化' }
-      ] : [
-        { name: 'Mild Pain Plan', description: 'Heat therapy + Yoga + Herbal tea + Dietary adjustment' },
-        { name: 'Moderate Pain Plan', description: 'Massage + Acupuncture + Nutrition + Psychological techniques' },
-        { name: 'Severe Pain Plan', description: 'Multiple physical therapies + TCM + Professional guidance' },
-        { name: 'Prevention Plan', description: 'Daily conditioning + Regular assessment + Lifestyle optimization' }
-      ]
-    }
-  ];
-
-  const getCardClasses = (color: string) => {
-    const colorMap: { [key: string]: string } = {
-      red: 'bg-gradient-to-br from-red-50 to-red-50 hover:from-red-100 hover:to-red-100',
-      green: 'bg-gradient-to-br from-green-50 to-green-50 hover:from-green-100 hover:to-green-100',
-      blue: 'bg-gradient-to-br from-blue-50 to-blue-50 hover:from-blue-100 hover:to-blue-100',
-      purple: 'bg-gradient-to-br from-purple-50 to-purple-50 hover:from-purple-100 hover:to-purple-100',
-      pink: 'bg-gradient-to-br from-pink-50 to-pink-50 hover:from-pink-100 hover:to-pink-100',
-      yellow: 'bg-gradient-to-br from-yellow-50 to-yellow-50 hover:from-yellow-100 hover:to-yellow-100',
-      indigo: 'bg-gradient-to-br from-indigo-50 to-indigo-50 hover:from-indigo-100 hover:to-indigo-100',
-      teal: 'bg-gradient-to-br from-teal-50 to-teal-50 hover:from-teal-100 hover:to-teal-100'
-    };
-    return colorMap[color] || colorMap.green;
-  };
-
-  const getTextClasses = (color: string) => {
-    const colorMap: { [key: string]: string } = {
-      red: 'text-red-800',
-      green: 'text-green-800',
-      blue: 'text-blue-800',
-      purple: 'text-purple-800',
-      pink: 'text-pink-800',
-      yellow: 'text-yellow-800',
-      indigo: 'text-indigo-800',
-      teal: 'text-teal-800'
-    };
-    return colorMap[color] || colorMap.green;
-  };
-
-  if (!isClient) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-        <div className="container-custom mx-auto px-4 py-8">
-          <div className="animate-pulse">
-            <div className="h-32 bg-gray-200 rounded-2xl mb-8"></div>
-            <div className="space-y-4">
-              <div className="h-8 bg-gray-200 rounded"></div>
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // 面包屑导航数据
-  const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": locale === 'zh' ? "首页" : "Home",
-        "item": `https://periodhub.health/${locale}`
-      },
-      {
-        "@type": "ListItem", 
-        "position": 2,
-        "name": locale === 'zh' ? "自然疗法" : "Natural Therapies",
-        "item": `https://periodhub.health/${locale}/natural-therapies`
-      }
-    ]
-  };
-
+  setRequestLocale(locale);
   return (
     <>
-      {/* 面包屑结构化数据 */}
+      {/* 增强的结构化数据 */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbData)
+          __html: JSON.stringify(getStructuredData(locale))
         }}
       />
       
+      {/* Natural Therapies Content */}
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-        <div className="container-custom mx-auto px-4 py-8">
-          {/* 面包屑导航 - Temporarily disabled */}
-          {/* <Breadcrumb 
-            items={[
-              { 
-                label: locale === 'zh' ? '自然疗法' : 'Natural Therapies'
-              }
-            ]} 
-          /> */}
-          
+        <div className="container mx-auto px-4 py-8">
           <div className="space-y-12">
-          {/* Hero Section */}
-          <section className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16 rounded-2xl">
-            <div className="container-custom mx-auto px-4">
-              <div className="max-w-4xl mx-auto text-center">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                  {locale === 'zh' ? '自然疗法' : 'Natural Therapies'}
-                </h1>
-                <p className="text-xl md:text-2xl opacity-90 mb-8">
-                  {locale === 'zh'
-                    ? '通过科学的自然疗法，安全有效地缓解痛经'
-                    : 'Safe and effective menstrual pain relief through scientific natural therapies'
-                  }
-                </p>
+            {/* Hero Section */}
+            <section className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16 rounded-2xl">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto text-center">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                    {locale === 'zh' ? '自然疗法' : 'Natural Therapies'}
+                  </h1>
+                  <p className="text-xl md:text-2xl opacity-90 mb-8">
+                    {locale === 'zh'
+                      ? '通过科学的自然疗法，安全有效地缓解痛经'
+                      : 'Safe and effective menstrual pain relief through scientific natural therapies'
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Content */}
+            <div className="bg-white rounded-lg shadow-sm p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                {locale === 'zh' ? '自然疗法概述' : 'Natural Therapy Overview'}
+              </h2>
+              <p className="text-gray-600 mb-6">
+                {locale === 'zh'
+                  ? '自然疗法是通过非药物手段缓解痛经症状的方法，包括物理疗法、草药疗法、饮食调整和运动等。'
+                  : 'Natural therapies are non-pharmacological methods to relieve menstrual pain symptoms, including physical therapy, herbal remedies, dietary adjustments, and exercise.'
+                }
+              </p>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {/* 1. Physical Therapy */}
+                <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🔥</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-red-800">
+                        {locale === 'zh' ? '物理疗法' : 'Physical Therapy'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '热敷、按摩、TENS等' : 'Heat therapy, massage, TENS, etc.'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '物理疗法通过外部物理手段改善血液循环、缓解肌肉紧张，是最直接有效的痛经缓解方法。'
+                      : 'Physical therapy improves blood circulation and relieves muscle tension through external physical means.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '热敷垫 (40-45°C, 15-20分钟)' : 'Heat pad (40-45°C, 15-20 minutes)'}</li>
+                    <li>• {locale === 'zh' ? '腹部按摩 (顺时针轻柔)' : 'Abdominal massage (clockwise, gentle)'}</li>
+                    <li>• {locale === 'zh' ? 'TENS电疗 (经皮神经电刺激)' : 'TENS therapy (transcutaneous electrical nerve stimulation)'}</li>
+                  </ul>
+                </div>
+
+                {/* 2. Herbal Therapy */}
+                <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🌿</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-green-800">
+                        {locale === 'zh' ? '草药疗法' : 'Herbal Therapy'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '姜茶、当归、洋甘菊' : 'Ginger tea, Angelica, Chamomile'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '草药疗法利用植物的天然活性成分调节激素平衡、减少炎症，是温和而有效的调理方式。'
+                      : 'Herbal therapy uses natural active compounds from plants to regulate hormonal balance and reduce inflammation.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '生姜茶 (抗炎、暖宫)' : 'Ginger tea (anti-inflammatory, warming)'}</li>
+                    <li>• {locale === 'zh' ? '当归 (补血调经)' : 'Angelica (blood nourishing, menstrual regulation)'}</li>
+                    <li>• {locale === 'zh' ? '洋甘菊茶 (镇静、解痉)' : 'Chamomile tea (calming, antispasmodic)'}</li>
+                  </ul>
+                </div>
+
+                {/* 3. Dietary Adjustment */}
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🍎</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-blue-800">
+                        {locale === 'zh' ? '饮食调整' : 'Dietary Adjustment'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '抗炎饮食、Omega-3' : 'Anti-inflammatory diet, Omega-3'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '通过科学的饮食调整，补充关键营养素，减少炎症反应，从根本上改善痛经症状。'
+                      : 'Through scientific dietary adjustments and key nutrient supplementation, reduce inflammatory responses.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? 'Omega-3脂肪酸 (深海鱼、亚麻籽)' : 'Omega-3 fatty acids (fish, flaxseed)'}</li>
+                    <li>• {locale === 'zh' ? '镁元素 (坚果、绿叶蔬菜)' : 'Magnesium (nuts, leafy greens)'}</li>
+                    <li>• {locale === 'zh' ? '减少咖啡因和糖分摄入' : 'Reduce caffeine and sugar intake'}</li>
+                  </ul>
+                </div>
+
+                {/* 4. Yoga & Exercise */}
+                <div className="bg-purple-50 border border-purple-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🧘‍♀️</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-purple-800">
+                        {locale === 'zh' ? '瑜伽运动' : 'Yoga & Exercise'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '体式、温和运动' : 'Poses, gentle exercise'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '特定的瑜伽体式和温和运动可以缓解盆腔紧张、改善血液循环，同时释放内啡肽缓解疼痛。'
+                      : 'Specific yoga poses and gentle exercises can relieve pelvic tension and improve blood circulation.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '猫牛式 (缓解下背部紧张)' : 'Cat-cow pose (relieves lower back tension)'}</li>
+                    <li>• {locale === 'zh' ? '婴儿式 (放松盆腔)' : 'Child\'s pose (relaxes pelvis)'}</li>
+                    <li>• {locale === 'zh' ? '温和散步 (促进血液循环)' : 'Gentle walking (promotes circulation)'}</li>
+                  </ul>
+                </div>
+
+                {/* 5. Aromatherapy */}
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🌸</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-yellow-800">
+                        {locale === 'zh' ? '芳香疗法' : 'Aromatherapy'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '精油、香薰' : 'Essential oils, aromatherapy'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '通过天然植物精油的芳香分子，调节神经系统，缓解疼痛和情绪紧张。'
+                      : 'Uses aromatic molecules from natural plant essential oils to regulate the nervous system and relieve pain and emotional tension.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '薰衣草精油 (镇静、止痛)' : 'Lavender oil (calming, pain relief)'}</li>
+                    <li>• {locale === 'zh' ? '快乐鼠尾草 (调节激素)' : 'Clary sage (hormone regulation)'}</li>
+                    <li>• {locale === 'zh' ? '罗马洋甘菊 (抗炎、舒缓)' : 'Roman chamomile (anti-inflammatory, soothing)'}</li>
+                  </ul>
+                </div>
+
+                {/* 6. Acupuncture & Moxibustion */}
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🪡</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-orange-800">
+                        {locale === 'zh' ? '针灸艾灸' : 'Acupuncture & Moxibustion'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '传统中医疗法' : 'Traditional Chinese Medicine'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '传统中医针灸通过刺激特定穴位，调节气血运行，平衡阴阳，从根本上治疗痛经。'
+                      : 'Traditional Chinese acupuncture stimulates specific acupoints to regulate qi and blood flow, balance yin and yang.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '三阴交穴 (调经止痛)' : 'Sanyinjiao point (menstrual regulation, pain relief)'}</li>
+                    <li>• {locale === 'zh' ? '关元穴 (温阳补气)' : 'Guanyuan point (warming yang, qi supplementation)'}</li>
+                    <li>• {locale === 'zh' ? '艾灸神阙穴 (温经散寒)' : 'Moxibustion at Shenque (warming meridians)'}</li>
+                  </ul>
+                </div>
+
+                {/* 7. Psychological Techniques */}
+                <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">🧠</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-indigo-800">
+                        {locale === 'zh' ? '心理调节' : 'Psychological Techniques'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '冥想、呼吸法' : 'Meditation, breathing techniques'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '通过心理调节技术，降低疼痛敏感性，减少焦虑和压力，提高疼痛耐受性。'
+                      : 'Uses psychological techniques to reduce pain sensitivity, decrease anxiety and stress, improve pain tolerance.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '深呼吸冥想 (4-7-8呼吸法)' : 'Deep breathing meditation (4-7-8 technique)'}</li>
+                    <li>• {locale === 'zh' ? '正念冥想 (专注当下)' : 'Mindfulness meditation (present moment awareness)'}</li>
+                    <li>• {locale === 'zh' ? '渐进性肌肉放松' : 'Progressive muscle relaxation'}</li>
+                  </ul>
+                </div>
+
+                {/* 8. Comprehensive Plans */}
+                <div className="bg-pink-50 border border-pink-200 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-3xl mr-3">📋</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-pink-800">
+                        {locale === 'zh' ? '综合方案' : 'Comprehensive Plans'}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {locale === 'zh' ? '个性化组合' : 'Personalized combinations'}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 text-sm mb-3">
+                    {locale === 'zh'
+                      ? '根据个人体质和症状特点，制定个性化的综合治疗方案，多种疗法协同作用，效果更佳。'
+                      : 'Develop personalized comprehensive treatment plans based on individual constitution and symptoms for synergistic effects.'
+                    }
+                  </p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    <li>• {locale === 'zh' ? '轻度痛经：热敷+瑜伽+草药茶' : 'Mild pain: Heat therapy + Yoga + Herbal tea'}</li>
+                    <li>• {locale === 'zh' ? '中度痛经：按摩+针灸+饮食调整' : 'Moderate pain: Massage + Acupuncture + Diet'}</li>
+                    <li>• {locale === 'zh' ? '重度痛经：多疗法组合+专业指导' : 'Severe pain: Multi-therapy + Professional guidance'}</li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </section>
 
-          {/* Simplified Content */}
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              {locale === 'zh' ? '自然疗法概述' : 'Natural Therapy Overview'}
-            </h2>
-            <p className="text-gray-600 mb-4">
-              {locale === 'zh'
-                ? '自然疗法是通过非药物手段缓解痛经症状的方法，包括物理疗法、草药疗法、饮食调整和运动等。'
-                : 'Natural therapies are non-pharmacological methods to relieve menstrual pain symptoms, including physical therapy, herbal remedies, dietary adjustments, and exercise.'
-              }
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              {therapyCategories.map((category) => (
-                <div 
-                  key={category.id} 
-                  className={`${getCardClasses(category.color)} border border-gray-200 rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-lg`}
-                  onClick={() => setExpandedTherapy(expandedTherapy === category.id ? null : category.id)}
+            {/* Quick Links */}
+            <div className="bg-white rounded-lg shadow-sm p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                {locale === 'zh' ? '相关资源' : 'Related Resources'}
+              </h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Link
+                  href={`/${locale}/interactive-tools/period-pain-assessment`}
+                  className="block p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <div className="flex items-center mb-3">
-                    <span className="text-3xl mr-3">{category.icon}</span>
-                    <div className="flex-1">
-                      <h3 className={`text-lg font-bold ${getTextClasses(category.color)}`}>
-                        {category.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">{category.subtitle}</p>
-                    </div>
-                    <svg 
-                      className={`w-5 h-5 transform transition-transform duration-200 ${expandedTherapy === category.id ? 'rotate-180' : ''}`}
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                  
-                  <p className="text-gray-700 text-sm mb-4">{category.description}</p>
-                  
-                  {expandedTherapy === category.id && (
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="font-semibold text-gray-900 mb-3">
-                        {locale === 'zh' ? '具体方法：' : 'Specific Methods:'}
-                      </h4>
-                      <div className="space-y-3">
-                        {category.methods.map((method, index) => (
-                          <div key={index} className="bg-gray-50 rounded-lg p-3">
-                            <h5 className="font-medium text-gray-900">{method.name}</h5>
-                            <p className="text-sm text-gray-600 mt-1">{method.description}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              {locale === 'zh' ? '相关资源' : 'Related Resources'}
-            </h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link
-                href={`/${locale}/interactive-tools/period-pain-assessment`}
-                className="block p-4 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
-              >
-                <h3 className="font-semibold text-blue-800">
-                  {locale === 'zh' ? '痛经评估工具' : 'Pain Assessment Tool'}
-                </h3>
-                <p className="text-sm text-blue-600">
-                  {locale === 'zh' ? '评估痛经程度' : 'Assess pain level'}
-                </p>
-              </Link>
-              <Link
-                href={`/${locale}/scenario-solutions`}
-                className="block p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
-              >
-                <h3 className="font-semibold text-green-800">
-                  {locale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
-                </h3>
-                <p className="text-sm text-green-600">
-                  {locale === 'zh' ? '针对性解决方案' : 'Targeted solutions'}
-                </p>
-              </Link>
+                  <h3 className="font-semibold text-blue-800">
+                    {locale === 'zh' ? '痛经评估工具' : 'Pain Assessment Tool'}
+                  </h3>
+                  <p className="text-sm text-blue-600">
+                    {locale === 'zh' ? '评估痛经程度' : 'Assess pain level'}
+                  </p>
+                </Link>
+                <Link
+                  href={`/${locale}/scenario-solutions`}
+                  className="block p-4 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
+                >
+                  <h3 className="font-semibold text-green-800">
+                    {locale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
+                  </h3>
+                  <p className="text-sm text-green-600">
+                    {locale === 'zh' ? '针对性解决方案' : 'Targeted solutions'}
+                  </p>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

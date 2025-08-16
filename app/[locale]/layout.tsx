@@ -1,20 +1,31 @@
 import '../globals.css';
-import NextDynamic from 'next/dynamic';
 import {NextIntlClientProvider} from 'next-intl';
 import {unstable_setRequestLocale as setRequestLocale} from 'next-intl/server';
-
-// 动态导入组件以避免hydration问题
-const Header = NextDynamic(() => import('@/components/Header'), { 
-  ssr: false,
-  loading: () => <div className="h-16 bg-white border-b"></div>
-});
-const Footer = NextDynamic(() => import('@/components/Footer'), { 
-  ssr: false,
-  loading: () => <div className="h-32 bg-gray-50"></div>
-});
+import {Suspense} from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import enMessages from '../../messages/en.json';
+import zhMessages from '../../messages/zh.json';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
+
+// 加载状态组件
+function LoadingState() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="animate-pulse">
+          <div className="h-32 bg-gray-200 rounded-lg mb-8"></div>
+          <div className="space-y-4">
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default async function LocaleLayout({
   children,
@@ -26,21 +37,18 @@ export default async function LocaleLayout({
   // 确保在服务端设置当前请求的语言环境
   setRequestLocale(locale);
 
-  let messages;
-  try {
-    // 加载对应语言的消息字典
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    console.error(`Failed to load messages for locale ${locale}:`, error);
-    // 回退到默认语言
-    messages = (await import(`../../messages/zh.json`)).default;
-  }
+  // 静态选择消息文件，避免动态导入问题
+  const messages = (locale === 'en' ? enMessages : zhMessages) as any;
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <Header />
-      {children}
-      <Footer />
+      <Suspense fallback={<LoadingState />}>
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </Suspense>
     </NextIntlClientProvider>
   );
 }
