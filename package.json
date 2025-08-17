@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run hydration-check && next build",
-    "build:unsafe": "next build",
+    "check-client-usage": "node scripts/check-client-components.js",    "prebuild": "npm run check-client-usage",    "build:unsafe": "next build",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
