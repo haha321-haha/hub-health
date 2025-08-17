@@ -36,7 +36,7 @@ export interface SEOReport {
 
 export class SEOReportGenerator {
   private keywordTracker = new KeywordTracker();
-  private analyzer = new PeriodHubSEOAnalyzer();
+  private analyzer = PeriodHubSEOAnalyzer;
 
   async generateReport(): Promise<SEOReport> {
     const [
@@ -45,7 +45,7 @@ export class SEOReportGenerator {
       competitorData
     ] = await Promise.all([
       this.keywordTracker.getKeywordPerformanceReport(),
-      webVitalsTracker.exportReport(),
+      webVitalsTracker.generateReport(),
       this.analyzer.analyzeCompetitors()
     ]);
 
