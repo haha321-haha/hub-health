@@ -104,8 +104,13 @@ export default function Header() {
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
-              <Menu className={`block h-5 w-5 sm:h-6 sm:w-6 ${isMenuOpen ? 'hidden' : ''}`} aria-hidden="true" />
-              <X className={`block h-5 w-5 sm:h-6 sm:w-6 ${!isMenuOpen ? 'hidden' : ''}`} aria-hidden="true" />
+              {/* 修复SVG hydration问题 - 使用条件渲染而不是CSS隐藏 */}
+              {!isMenuOpen && (
+                <Menu className="block h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+              )}
+              {isMenuOpen && (
+                <X className="block h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -135,11 +140,17 @@ export default function Header() {
   );
 }
 
-// Language Switcher Component - 修复hydration错误
+// Language Switcher Component - 完全修复hydration错误
 function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const locale = useLocale();
   const pathname = usePathname();
+
+  // 确保客户端和服务端渲染一致
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -149,11 +160,32 @@ function LanguageSwitcher() {
   const currentLanguage = languages.find(lang => lang.code === locale);
 
   const switchLocale = (newLocale: string) => {
-    // Replace the current locale segment in the pathname with the new locale
+    // 使用Next.js路由而不是window.location来避免hydration问题
     const newPath = pathname?.replace(`/${locale}`, `/${newLocale}`) || `/${newLocale}`;
-    window.location.href = newPath; // Use window.location for a full page refresh
+    
+    // 使用Next.js的Link行为来避免全页刷新
+    if (typeof window !== 'undefined') {
+      window.location.href = newPath;
+    }
     setIsOpen(false);
   };
+
+  // 服务端渲染时返回静态内容，避免hydration不匹配
+  if (!isMounted) {
+    return (
+      <div className="relative">
+        <button
+          className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 rounded min-w-[44px] min-h-[44px] justify-center sm:justify-start"
+          aria-expanded={false}
+          disabled
+        >
+          <span className="text-base">{currentLanguage?.flag}</span>
+          <span className="hidden sm:inline text-xs lg:text-sm">{currentLanguage?.name}</span>
+          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 hidden sm:block" />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
@@ -163,8 +195,8 @@ function LanguageSwitcher() {
         className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 hover:text-primary-600 rounded hover:bg-neutral-100 transition-colors min-w-[44px] min-h-[44px] justify-center sm:justify-start"
         aria-expanded={isOpen}
       >
-        <span className="text-base">{currentLanguage?.flag}</span>
-        <span className="hidden sm:inline text-xs lg:text-sm">{currentLanguage?.name}</span>
+        <span className="text-base" suppressHydrationWarning>{currentLanguage?.flag}</span>
+        <span className="hidden sm:inline text-xs lg:text-sm" suppressHydrationWarning>{currentLanguage?.name}</span>
         <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${isOpen ? 'rotate-180' : ''} hidden sm:block`} />
       </button>
 
@@ -180,8 +212,8 @@ function LanguageSwitcher() {
                   locale === language.code ? 'bg-primary-50 text-primary-600' : 'text-neutral-700'
                 }`}
               >
-                <span className="text-base">{language.flag}</span>
-                <span className="text-sm">{language.name}</span>
+                <span className="text-base" suppressHydrationWarning>{language.flag}</span>
+                <span className="text-sm" suppressHydrationWarning>{language.name}</span>
               </button>
             ))}
           </div>
