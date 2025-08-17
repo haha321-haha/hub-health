@@ -135,10 +135,9 @@ export default function Header() {
   );
 }
 
-// Language Switcher Component
+// Language Switcher Component - 修复hydration错误
 function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const locale = useLocale();
   const pathname = usePathname();
 
@@ -146,11 +145,6 @@ function LanguageSwitcher() {
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'zh', name: '中文', flag: '🇨🇳' },
   ];
-
-  // 防止hydration不匹配
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const currentLanguage = languages.find(lang => lang.code === locale);
 
@@ -160,14 +154,6 @@ function LanguageSwitcher() {
     window.location.href = newPath; // Use window.location for a full page refresh
     setIsOpen(false);
   };
-
-  if (!isMounted) {
-    return (
-      <button className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 rounded min-w-[44px] min-h-[44px] justify-center">
-        <span className="text-base">🌐</span>
-      </button>
-    );
-  }
 
   return (
     <div className="relative">
