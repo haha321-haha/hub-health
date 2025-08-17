@@ -8,7 +8,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Locale } from '@/types/pdf';
-import { getAllPDFResources, getAllCategories } from '@/config/pdfResources';
+import { getAllPDFResources, getAllCategories, getCategoryInfo } from '@/config/pdfResources';
 import { localizeResource, groupResourcesByCategory } from '@/utils/pdfHelpers';
 import PDFCard from './PDFCard';
 
@@ -35,25 +35,26 @@ export default function DownloadsPDFGrid({ locale, className = '' }: DownloadsPD
 
   return (
     <div className={`space-y-12 ${className}`}>
-      {categories.map(category => {
-        const categoryResources = groupedResources[category.id] || [];
+      {categories.map(categoryId => {
+        const categoryInfo = getCategoryInfo(categoryId);
+        const categoryResources = groupedResources[categoryId] || [];
         
         if (categoryResources.length === 0) {
           return null;
         }
 
         return (
-          <div key={category.id} className="space-y-6">
+          <div key={categoryId} className="space-y-6">
             {/* 分类标题 */}
             <div className="text-center">
               <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg border border-white/20">
-                <span className="text-2xl">{category.icon}</span>
+                <span className="text-2xl">{categoryInfo.icon}</span>
                 <div>
                   <h2 className="text-xl font-bold text-gray-800">
-                    {tPage(category.titleKey)}
+                    {tPage(categoryInfo.titleKey)}
                   </h2>
                   <p className="text-sm text-gray-600 mt-1">
-                    {tPage(category.descriptionKey)}
+                    {tPage(categoryInfo.descriptionKey)}
                   </p>
                 </div>
               </div>
