@@ -1,11 +1,9 @@
 import '../globals.css';
 import {NextIntlClientProvider} from 'next-intl';
-import {unstable_setRequestLocale as setRequestLocale} from 'next-intl/server';
+import {setRequestLocale, getMessages} from 'next-intl/server';
 import {Suspense} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import enMessages from '../../messages/en.json';
-import zhMessages from '../../messages/zh.json';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
@@ -37,8 +35,8 @@ export default async function LocaleLayout({
   // 确保在服务端设置当前请求的语言环境
   setRequestLocale(locale);
 
-  // 静态选择消息文件，避免动态导入问题
-  const messages = (locale === 'en' ? enMessages : zhMessages) as any;
+  // 由 next-intl 官方链路提供消息，避免手动动态导入导致的 SSR/CSR 差异
+  const messages = await getMessages();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>

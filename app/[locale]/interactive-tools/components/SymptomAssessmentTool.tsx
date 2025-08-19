@@ -255,34 +255,34 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
             </h2>
           </div>
 
-          {/* Score and Severity */}
+          {/* Score and Severity - 卡片化，与体质测试结果风格一致 */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-lg text-center">
-              <h3 className="text-sm font-medium text-gray-600 mb-2">
+            <div className="card text-center">
+              <h3 className="text-sm font-medium text-neutral-600 mb-2">
                 {t('result.yourScore', {}, locale === 'en' ? 'Your Score' : '您的得分')}
               </h3>
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-3xl font-extrabold text-primary-700">
                 {result.score}/{result.maxScore}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs text-neutral-500 mt-1">
                 {Math.round(result.percentage)}%
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-green-100 to-teal-100 p-6 rounded-lg text-center">
-              <h3 className="text-sm font-medium text-gray-600 mb-2">
+            <div className="card text-center">
+              <h3 className="text-sm font-medium text-neutral-600 mb-2">
                 {t('result.severity')}
               </h3>
-              <p className="text-xl font-bold text-gray-900">
+              <p className="text-xl font-bold text-neutral-900">
                 {t(`severity.${result.severity}`)}
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-6 rounded-lg text-center">
-              <h3 className="text-sm font-medium text-gray-600 mb-2">
+            <div className="card text-center">
+              <h3 className="text-sm font-medium text-neutral-600 mb-2">
                 {t('result.riskLevel')}
               </h3>
-              <p className="text-xl font-bold text-gray-900">
+              <p className="text-xl font-bold text-neutral-900">
                 {t(`severity.${result.type}`)}
               </p>
             </div>
@@ -290,43 +290,43 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
 
           {/* Summary */}
           <div className="mb-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-neutral-900 mb-4">
               {t('result.summary')}
             </h3>
-            <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-700">{result.message}</p>
+            <div className="card">
+              <p className="text-neutral-700 leading-relaxed">{result.message}</p>
             </div>
           </div>
 
           {/* Recommendations */}
           <div className="mb-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-neutral-900 mb-4">
               {t('result.recommendations')}
             </h3>
             <div className="space-y-4">
               {result.recommendations.map((recommendation) => (
-                <div key={recommendation.id} className="border border-gray-200 rounded-lg p-6">
+                <div key={recommendation.id} className="card">
                   <div className="flex items-start justify-between mb-3">
-                    <h4 className="text-lg font-semibold text-gray-900">
+                    <h4 className="text-lg font-semibold text-neutral-900">
                       {recommendation.title}
                     </h4>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      recommendation.priority === 'high' ? 'bg-red-100 text-red-800' :
-                      recommendation.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-green-100 text-green-800'
+                      recommendation.priority === 'high' ? 'bg-red-100 text-red-700' :
+                      recommendation.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-green-100 text-green-700'
                     }`}>
                       {t(`priority.${recommendation.priority}`)}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-3">{recommendation.description}</p>
-                  <p className="text-sm text-gray-500 mb-3">
+                  <p className="text-neutral-700 mb-3 leading-relaxed">{recommendation.description}</p>
+                  <p className="text-sm text-neutral-500 mb-3">
                     <strong>{t('result.timeframe')}</strong> {recommendation.timeframe}
                   </p>
 
                   {recommendation.actionSteps && (
                     <div>
-                      <h5 className="font-medium text-gray-900 mb-2">{t('result.actionSteps')}</h5>
-                      <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                      <h5 className="font-medium text-neutral-900 mb-2">{t('result.actionSteps')}</h5>
+                      <ul className="list-disc list-inside text-sm text-neutral-700 space-y-1">
                         {(() => {
                           // Handle both array and string types for actionSteps
                           const steps = Array.isArray(recommendation.actionSteps)
@@ -351,7 +351,7 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={resetAssessment}
-              className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition-colors"
             >
               {t('result.retakeAssessment')}
             </button>

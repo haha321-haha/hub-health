@@ -160,6 +160,20 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     return currentQuestion ? selectedAnswers[currentQuestion.id] : undefined;
   };
 
+  // 渐变滑块样式工具
+  const getRangeStyle = (value: number, min: number, max: number) => {
+    const safeMin = Number(min ?? 0);
+    const safeMax = Number(max ?? 10);
+    const val = Number(value ?? safeMin);
+    const percent = safeMax > safeMin ? ((val - safeMin) / (safeMax - safeMin)) * 100 : 0;
+    return {
+      backgroundImage:
+        'linear-gradient(90deg, #22c55e, #f59e0b, #ef4444), linear-gradient(90deg, #e5e7eb 0 0)',
+      backgroundSize: `${percent}% 100%, 100% 100%`,
+      backgroundRepeat: 'no-repeat'
+    } as React.CSSProperties;
+  };
+
   const canProceed = () => {
     if (!currentQuestion) return false;
 
@@ -793,7 +807,12 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
                     max={currentQuestion.validation?.max || 10}
                     value={selectedAnswers[currentQuestion.id] || 0}
                     onChange={(e) => handleAnswerSelect(currentQuestion.id, e.target.value)}
-                    className="w-full pain-scale cursor-pointer"
+                    className="w-full pain-scale cursor-pointer outline-none rounded-lg"
+                    style={getRangeStyle(
+                      Number(selectedAnswers[currentQuestion.id] || 0),
+                      Number(currentQuestion.validation?.min || 0),
+                      Number(currentQuestion.validation?.max || 10)
+                    )}
                   />
                   <div className="flex justify-between text-sm text-neutral-600 mt-2">
                     <span className="text-xs sm:text-sm">{t('painScale.levels.none')}</span>
