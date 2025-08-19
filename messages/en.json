@@ -185,14 +185,20 @@
       },
       "nutritionHealth": {
         "title": "Nutrition & Health",
-        "description": "Improve menstrual health through scientific nutritional care",
+        "description": "Scientific nutrition guidance and healthy lifestyle recommendations",
         "articles": {
-          "antiInflammatory": "Anti-inflammatory Diet for Period Pain",
-          "antiInflammatoryDesc": "Learn how anti-inflammatory diet can reduce menstrual pain and inflammatory responses",
-          "magnesiumGuide": "Comprehensive Magnesium & Gut Health Guide",
-          "magnesiumGuideDesc": "In-depth understanding of magnesium's important role in menstrual health and scientific supplementation",
+          "stressManagement": "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological",
+          "stressManagementDesc": "Evidence-based menstrual stress management guide based on the latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions",
+          "antiInflammatory": "Anti-Inflammatory Diet Guide for Menstrual Pain Relief",
+          "antiInflammatoryDesc": "Scientific anti-inflammatory dietary strategies to reduce menstrual inflammation and pain through nutritional regulation",
+          "magnesiumGuide": "Comprehensive Guide to Magnesium and Gut Health",
+          "magnesiumGuideDesc": "In-depth understanding of magnesium's important role in menstrual health and gut health management",
           "periodRecipes": "Period-Friendly Recipes",
-          "periodRecipesDesc": "Nutritious and delicious recipes designed specifically for menstrual periods to help alleviate discomfort"
+          "periodRecipesDesc": "Nutritional recipes specifically designed for menstruation to alleviate discomfort symptoms",
+          "sleepQuality": "Comprehensive Menstrual Sleep Quality Improvement Guide: Evidence-Based Medical Methods",
+          "sleepQualityDesc": "Evidence-based menstrual sleep improvement guide based on the latest research from AASM, ACOG, and NIH, providing a systematic 21-day sleep quality enhancement plan",
+          "preventiveCare": "Complete Menstrual Preventive Care Plan: Evidence-Based Medical Guidance",
+          "preventiveCareDesc": "Evidence-based preventive care strategies for North American women based on the latest research from ACOG, NIH, and FDA, covering comprehensive full-cycle care plans"
         }
       },
       "naturalTherapies": {
@@ -245,24 +251,6 @@
           "lifecycleAnalysisDesc": "Based on the latest clinical guidelines from ACOG, The Menopause Society, and NIH, providing North American women with scientific menstrual pain management plans throughout their lifecycle"
         }
       },
-      "nutritionHealth": {
-        "title": "Nutrition & Health",
-        "description": "Scientific nutrition guidance and healthy lifestyle recommendations",
-        "articles": {
-          "stressManagement": "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological",
-          "stressManagementDesc": "Evidence-based menstrual stress management guide based on the latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions",
-          "antiInflammatory": "Anti-Inflammatory Diet Guide for Menstrual Pain Relief",
-          "antiInflammatoryDesc": "Scientific anti-inflammatory dietary strategies to reduce menstrual inflammation and pain through nutritional regulation",
-          "magnesiumGuide": "Comprehensive Guide to Magnesium and Gut Health",
-          "magnesiumGuideDesc": "In-depth understanding of magnesium's important role in menstrual health and gut health management",
-          "periodRecipes": "Period-Friendly Recipes",
-          "periodRecipesDesc": "Nutritional recipes specifically designed for menstruation to alleviate discomfort symptoms",
-          "sleepQuality": "Comprehensive Menstrual Sleep Quality Improvement Guide: Evidence-Based Medical Methods",
-          "sleepQualityDesc": "Evidence-based menstrual sleep improvement guide based on the latest research from AASM, ACOG, and NIH, providing a systematic 21-day sleep quality enhancement plan",
-          "preventiveCare": "Complete Menstrual Preventive Care Plan: Evidence-Based Medical Guidance",
-          "preventiveCareDesc": "Evidence-based preventive care strategies for North American women based on the latest research from ACOG, NIH, and FDA, covering comprehensive full-cycle care plans"
-        }
-      },
       "specializedGuides": {
         "title": "Specialized Guides",
         "description": "Professional guidance and in-depth analysis for specific situations",
@@ -302,7 +290,7 @@
       "placeholderShort": "Search resources...",
       "keywords": {
         "pain": "pain",
-        "relief": "relief", 
+        "relief": "relief",
         "nutrition": "nutrition",
         "exercise": "exercise",
         "medical": "medical",
@@ -1047,7 +1035,8 @@
           ]
         }
       }
-    }
+    },
+    "title": "Interactive Tools"
   },
   "scenarioSolutionsPage": {
     "title": "Scenario-Based Solutions",
@@ -1432,23 +1421,9 @@
     "description": "Your complete menstrual health resource, from basics to advanced management strategies, helping you understand and manage your menstrual health comprehensively."
   },
   "teenHealth": {
-    "title": "Teen Menstrual Health Zone",
-    "description": "Specialized menstrual health guidance designed for teenagers, covering physical development, emotional support, and campus life management.",
-    "campusGuide": {
-      "title": "Campus Life Guide",
-      "description": "Practical advice and strategies for managing periods in school environments."
-    },
-    "developmentPain": {
-      "title": "Developmental Pain Management",
-      "description": "Understanding the characteristics and management of menstrual pain during adolescence."
-    },
-    "emotionalSupport": {
-      "title": "Emotional Support",
-      "description": "Mental health guidance for coping with period-related emotional changes."
-    },
-    "communicationGuide": {
-      "title": "Communication Guide",
-      "description": "How to talk about periods with parents, teachers, and friends."
+    "meta": {
+      "title": "Teen Health Guide",
+      "description": "Educational resources designed for teenagers about menstrual health, providing scientific and practical period management knowledge"
     }
   },
   "toolPage": {
@@ -1899,12 +1874,6 @@
           }
         }
       }
-    }
-  },
-  "teenHealth": {
-    "meta": {
-      "title": "Teen Health Guide",
-      "description": "Educational resources designed for teenagers about menstrual health, providing scientific and practical period management knowledge"
     }
   },
   "home": {

@@ -1036,6 +1036,42 @@
           ]
         }
       }
+    },
+    "title": "互动工具",
+    "symptomAssessment": {
+      "title": "症状评估工具",
+      "description": "回答几个关于症状的问题，获取个性化的缓解建议。",
+      "toolTitle": "症状评估工具",
+      "toolDescription": "该工具将帮助您评估经期症状的严重程度，并提供个性化建议。",
+      "selectSymptom": "您当前的主要症状是什么？",
+      "selectSymptomPlaceholder": "请选择症状",
+      "menstrualPain": "经期疼痛",
+      "irregularPeriods": "经期不规律",
+      "abnormalFlow": "经期量异常",
+      "otherSymptoms": "其他症状",
+      "severity": "症状严重程度（1-10）",
+      "assessing": "评估中...",
+      "startAssessment": "开始评估"
+    },
+    "painTracker": {
+      "title": "经期疼痛追踪系统",
+      "description": "记录疼痛程度与位置，分析疼痛模式，获取个性化建议。",
+      "toolTitle": "疼痛记录",
+      "toolDescription": "记录您今天的疼痛情况，帮助我们更好地了解您的疼痛模式。",
+      "painLevel": "疼痛程度（1-10）",
+      "painLocation": "疼痛位置",
+      "painLocationPlaceholder": "请选择位置",
+      "painType": "疼痛类型",
+      "painTypePlaceholder": "请选择类型",
+      "lowerAbdomen": "下腹部",
+      "lowerBack": "腰部",
+      "thighs": "大腿",
+      "other": "其他",
+      "cramping": "绞痛",
+      "dullPain": "钝痛",
+      "sharpPain": "刺痛",
+      "recording": "记录中...",
+      "recordPain": "记录疼痛"
     }
   },
   "scenarioSolutionsPage": {
@@ -1674,6 +1710,14 @@
     }
   },
   "home": {
+    "hero": {
+      "title": "经期健康管理专家",
+      "subtitle": "科学的经期追踪、健康建议和个性化护理方案",
+      "cta": {
+        "primary": "开始使用",
+        "secondary": "了解更多"
+      }
+    },
     "features": {
       "title": "专业功能特色",
       "subtitle": "为您提供全方位的经期健康管理服务",
@@ -1902,42 +1946,5 @@
     "description": "快速评估您的疼痛程度",
     "loading": "加载中...",
     "error": "加载失败，请刷新页面重试"
-  },
-  "home": {
-    "hero": {
-      "title": "经期健康管理专家",
-      "subtitle": "科学的经期追踪、健康建议和个性化护理方案",
-      "cta": {
-        "primary": "开始使用",
-        "secondary": "了解更多"
-      }
-    },
-    "features": {
-      "title": "专业功能特色",
-      "subtitle": "为您提供全方位的经期健康管理服务",
-      "tracking": {
-        "title": "智能追踪系统",
-        "description": "精准预测经期周期，科学记录症状变化，提供个性化健康洞察"
-      },
-      "assessment": {
-        "title": "专业健康评估",
-        "description": "基于医学研究的症状评估工具，为您量身定制健康管理方案"
-      },
-      "resources": {
-        "title": "丰富专业资源",
-        "description": "42篇专业文章、24个PDF资源、PDF指南，全面支持您的健康需求"
-      }
-    },
-    "quickLinks": {
-      "title": "快速导航",
-      "healthGuide": "健康指南",
-      "healthGuideDesc": "全面的痛经知识和科学管理方法",
-      "assessment": "症状评估",
-      "assessmentDesc": "专业工具帮助了解您的痛经类型",
-      "resources": "PDF资源",
-      "resourcesDesc": "可下载的专业健康指导和工具",
-      "solutions": "场景方案",
-      "solutionsDesc": "针对不同生活环境的应对方案"
-    }
   }
 }
