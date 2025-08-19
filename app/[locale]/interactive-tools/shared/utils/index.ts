@@ -1,5 +1,9 @@
 import { PainEntry, PainStatistics, ValidationError, StorageData } from '../types';
 
+// SSR-safe runtime flags
+const isServer = typeof window === 'undefined';
+const isBrowser = !isServer;
+
 // 日期工具函数
 export const formatDate = (date: string | Date, locale: string = 'en'): string => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
@@ -200,13 +204,14 @@ export const createStorageKey = (userId: string, dataType: string): string => {
 };
 
 export const saveToStorage = <T>(key: string, data: T): boolean => {
+  if (!isBrowser) return false;
   try {
     const storageData: StorageData<T> = {
       data,
       version: '1.0.0',
       timestamp: new Date().toISOString()
     };
-    localStorage.setItem(key, JSON.stringify(storageData));
+    window.localStorage?.setItem(key, JSON.stringify(storageData));
     return true;
   } catch (error) {
     console.error('Failed to save to localStorage:', error);
@@ -215,10 +220,10 @@ export const saveToStorage = <T>(key: string, data: T): boolean => {
 };
 
 export const loadFromStorage = <T>(key: string): T | null => {
+  if (!isBrowser) return null;
   try {
-    const item = localStorage.getItem(key);
+    const item = window.localStorage?.getItem(key);
     if (!item) return null;
-    
     const storageData: StorageData<T> = JSON.parse(item);
     return storageData.data;
   } catch (error) {
@@ -228,8 +233,9 @@ export const loadFromStorage = <T>(key: string): T | null => {
 };
 
 export const clearStorage = (key: string): boolean => {
+  if (!isBrowser) return false;
   try {
-    localStorage.removeItem(key);
+    window.localStorage?.removeItem(key);
     return true;
   } catch (error) {
     console.error('Failed to clear localStorage:', error);
@@ -271,15 +277,20 @@ export const exportToCSV = (entries: PainEntry[]): string => {
 };
 
 export const downloadFile = (content: string, filename: string, mimeType: string): void => {
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  if (!isBrowser) return;
+  try {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Failed to trigger download:', error);
+  }
 };
 
 // 颜色工具函数
