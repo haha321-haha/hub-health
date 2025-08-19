@@ -34,4 +34,48 @@
   .mobile-touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  /* Interactive range slider styles used in tools (e.g., pain scale) */
+  .pain-scale {
+    /* Remove native styling so our gradient background becomes visible */
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 9999px;
+    background: #e5e7eb; /* fallback; actual fill is controlled via inline backgroundImage */
+    outline: none;
+  }
+  .pain-scale::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: transparent; /* reveal input's own background (our gradient) */
+  }
+  .pain-scale::-moz-range-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: transparent;
+  }
+  .pain-scale::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background: #7c3aed; /* primary-600 */
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    margin-top: -5px; /* vertically center on 8px track */
+  }
+  .pain-scale::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background: #7c3aed;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  }
+  .pain-scale:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
