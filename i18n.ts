@@ -4,8 +4,8 @@ import {getRequestConfig} from 'next-intl/server';
 export const locales = ['zh', 'en'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale = 'zh';
-// Keep URLs clean when possible
-export const localePrefix = 'as-needed' as const;
+// 改为 never，让 next-intl 自动处理根路径重定向
+export const localePrefix = 'never' as const;
 
 export default getRequestConfig(async ({locale}) => {
   const safeLocale = locales.includes(locale as any) ? locale : defaultLocale;

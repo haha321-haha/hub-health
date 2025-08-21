@@ -11,14 +11,8 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 根路径直接重定向到中文首页，使用临时重定向避免循环
-  if (pathname === '/') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/zh';
-    return NextResponse.redirect(url, 302); // 改为302临时重定向
-  }
-
-  // 其他路径交给 next-intl 处理
+  // 完全移除手动重定向，让 next-intl 自己处理
+  // 这样可以避免重定向循环
   return intlMiddleware(request);
 }
 
