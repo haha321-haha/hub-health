@@ -1,4 +1,4 @@
-const withNextIntl = require('next-intl/plugin')();
+const withNextIntl = require('next-intl/plugin')('./i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -145,17 +145,17 @@ const nextConfig = {
     ];
   },
 
-  // 重定向优化
-  async redirects() {
-    return [
-      // 根路径重定向到中文版本
-      {
-        source: '/',
-        destination: '/zh',
-        permanent: false,
-      },
-    ];
-  },
+  // 重定向优化 - 已移除，避免与middleware.ts冲突
+  // async redirects() {
+  //   return [
+  //     // 根路径重定向到中文版本
+  //     {
+  //       source: '/',
+  //       destination: '/zh',
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = withNextIntl(nextConfig);
