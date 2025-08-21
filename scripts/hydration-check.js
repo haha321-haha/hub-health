@@ -190,6 +190,15 @@ function checkSSRComponents() {
 function checkBuildSuccess() {
   const issues = [];
   
+  // 在Vercel环境中跳过构建检查，避免循环调用
+  if (process.env.VERCEL === '1') {
+    console.log('   在Vercel环境中跳过构建检查...');
+    return {
+      issues: [],
+      message: '在Vercel环境中跳过构建检查'
+    };
+  }
+  
   try {
     console.log('   正在执行构建检查...');
     // 使用 build:unsafe 避免循环调用

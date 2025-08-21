@@ -1,76 +1,129 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
-import { useAppStore, useToasts } from '../../lib/stores/appStore';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
+import { useAppStore, useToasts } from '@/lib/stores/appStore';
+import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 
 // Toast类型
-export type ToastType = 'success' | 'error' | 'warning' | 'info';
-
-// Toast配置
-export interface ToastConfig {
-  type: ToastType;
-  message: string;
+export interface Toast {
+  id: string;
+  type: 'success' | 'error' | 'warning' | 'info';
   title?: string;
-  duration?: number; // 0 表示不自动关闭
+  message: string;
+  duration?: number;
+  closable?: boolean;
   action?: {
     label: string;
     onClick: () => void;
   };
-  closable?: boolean;
 }
 
-// 单个Toast组件
-interface ToastProps {
-  id: string;
-  type: ToastType;
-  message: string;
-  title?: string;
-  duration?: number;
-  action?: ToastConfig['action'];
-  closable?: boolean;
-  onClose: (id: string) => void;
+// Toast上下文
+interface ToastContextType {
+  toasts: Toast[];
+  addToast: (toast: Omit<Toast, 'id'>) => string;
+  removeToast: (id: string) => void;
+  clearToasts: () => void;
 }
 
-const Toast: React.FC<ToastProps> = ({
-  id,
-  type,
-  message,
-  title,
-  duration = 5000,
-  action,
-  closable = true,
-  onClose,
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false);
+const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-  useEffect(() => {
-    // 入场动画
-    const timer = setTimeout(() => setIsVisible(true), 10);
-    return () => clearTimeout(timer);
+// Toast Provider
+export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
+    const id = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const newToast: Toast = {
+      id,
+      duration: 5000,
+      closable: true,
+      ...toast
+    };
+
+    setToasts(prev => [...prev, newToast]);
+
+    // 记录到应用状态
+    const { recordToastAction } = useAppStore.getState();
+    recordToastAction({
+      action: 'add',
+      toastId: id,
+      toastType: newToast.type,
+      timestamp: new Date().toISOString()
+    });
+
+    return id;
   }, []);
 
+  const removeToast = useCallback((id: string) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id));
+
+    // 记录到应用状态
+    const { recordToastAction } = useAppStore.getState();
+    recordToastAction({
+      action: 'remove',
+      toastId: id,
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
+  const clearToasts = useCallback(() => {
+    setToasts([]);
+  }, []);
+
+  return (
+    <ToastContext.Provider value={{ toasts, addToast, removeToast, clearToasts }}>
+      {children}
+      <ToastContainer />
+    </ToastContext.Provider>
+  );
+};
+
+// 使用Toast Hook
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+};
+
+// Toast容器
+export const ToastContainer: React.FC = () => {
+  const { toasts, removeToast } = useToast();
+
+  if (toasts.length === 0) return null;
+
+  return (
+    <div className="fixed top-4 right-4 z-50 space-y-2">
+      {toasts.map((toast) => (
+        <ToastItem key={toast.id} toast={toast} onRemove={removeToast} />
+      ))}
+    </div>
+  );
+};
+
+// Toast项目
+interface ToastItemProps {
+  toast: Toast;
+  onRemove: (id: string) => void;
+}
+
+const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
+  const { duration = 5000 } = toast;
+
   useEffect(() => {
-    // 自动关闭
     if (duration > 0) {
       const timer = setTimeout(() => {
-        handleClose();
+        onRemove(toast.id);
       }, duration);
+
       return () => clearTimeout(timer);
     }
-  }, [duration]);
-
-  const handleClose = () => {
-    setIsLeaving(true);
-    setTimeout(() => {
-      onClose(id);
-    }, 300); // 等待退场动画完成
-  };
+  }, [toast.id, duration, onRemove]);
 
   const getIcon = () => {
-    switch (type) {
+    switch (toast.type) {
       case 'success':
         return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'error':
@@ -80,222 +133,75 @@ const Toast: React.FC<ToastProps> = ({
       case 'info':
         return <Info className="w-5 h-5 text-blue-500" />;
       default:
-        return <Info className="w-5 h-5 text-gray-500" />;
+        return <Info className="w-5 h-5 text-blue-500" />;
     }
   };
 
-  const getBackgroundColor = () => {
-    switch (type) {
+  const getTypeClasses = () => {
+    switch (toast.type) {
       case 'success':
-        return 'bg-green-50 border-green-200';
+        return 'border-green-200 bg-green-50 text-green-800';
       case 'error':
-        return 'bg-red-50 border-red-200';
+        return 'border-red-200 bg-red-50 text-red-800';
       case 'warning':
-        return 'bg-yellow-50 border-yellow-200';
+        return 'border-yellow-200 bg-yellow-50 text-yellow-800';
       case 'info':
-        return 'bg-blue-50 border-blue-200';
+        return 'border-blue-200 bg-blue-50 text-blue-800';
       default:
-        return 'bg-gray-50 border-gray-200';
-    }
-  };
-
-  const getTextColor = () => {
-    switch (type) {
-      case 'success':
-        return 'text-green-800';
-      case 'error':
-        return 'text-red-800';
-      case 'warning':
-        return 'text-yellow-800';
-      case 'info':
-        return 'text-blue-800';
-      default:
-        return 'text-gray-800';
+        return 'border-gray-200 bg-gray-50 text-gray-800';
     }
   };
 
   return (
     <div
-      className={`
-        transform transition-all duration-300 ease-in-out
-        ${isVisible && !isLeaving 
-          ? 'translate-x-0 opacity-100' 
-          : 'translate-x-full opacity-0'
-        }
-        max-w-sm w-full ${getBackgroundColor()} border rounded-lg shadow-lg p-4 mb-3
-      `}
+      className={`flex items-start space-x-3 p-4 rounded-lg border shadow-lg max-w-sm ${getTypeClasses()}`}
+      role="alert"
     >
-      <div className="flex items-start space-x-3">
-        {/* 图标 */}
-        <div className="flex-shrink-0 mt-0.5">
-          {getIcon()}
-        </div>
-
-        {/* 内容 */}
-        <div className="flex-1 min-w-0">
-          {title && (
-            <h4 className={`text-sm font-semibold ${getTextColor()} mb-1`}>
-              {title}
-            </h4>
-          )}
-          <p className={`text-sm ${getTextColor()}`}>
-            {message}
-          </p>
-
-          {/* 操作按钮 */}
-          {action && (
-            <button
-              onClick={action.onClick}
-              className={`
-                mt-2 text-xs font-medium underline hover:no-underline
-                ${type === 'success' ? 'text-green-700 hover:text-green-800' : ''}
-                ${type === 'error' ? 'text-red-700 hover:text-red-800' : ''}
-                ${type === 'warning' ? 'text-yellow-700 hover:text-yellow-800' : ''}
-                ${type === 'info' ? 'text-blue-700 hover:text-blue-800' : ''}
-              `}
-            >
-              {action.label}
-            </button>
-          )}
-        </div>
-
-        {/* 关闭按钮 */}
-        {closable && (
+      <div className="flex-shrink-0 mt-0.5">
+        {getIcon()}
+      </div>
+      
+      <div className="flex-1 min-w-0">
+        {toast.title && (
+          <h4 className="text-sm font-medium mb-1">{toast.title}</h4>
+        )}
+        <p className="text-sm">{toast.message}</p>
+        
+        {toast.action && (
           <button
-            onClick={handleClose}
-            className={`
-              flex-shrink-0 p-1 rounded-md hover:bg-white/50 transition-colors
-              ${getTextColor()}
-            `}
+            onClick={toast.action.onClick}
+            className="mt-2 text-sm font-medium underline hover:no-underline"
           >
-            <X className="w-4 h-4" />
+            {toast.action.label}
           </button>
         )}
       </div>
-
-      {/* 进度条（如果有持续时间） */}
-      {duration > 0 && (
-        <div className="mt-3 w-full bg-white/30 rounded-full h-1">
-          <div
-            className={`
-              h-1 rounded-full transition-all ease-linear
-              ${type === 'success' ? 'bg-green-500' : ''}
-              ${type === 'error' ? 'bg-red-500' : ''}
-              ${type === 'warning' ? 'bg-yellow-500' : ''}
-              ${type === 'info' ? 'bg-blue-500' : ''}
-            `}
-            style={{
-              width: '100%',
-              animation: `shrink ${duration}ms linear`,
-            }}
-          />
-        </div>
+      
+      {toast.closable && (
+        <button
+          onClick={() => onRemove(toast.id)}
+          className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          <X className="w-4 h-4" />
+        </button>
       )}
     </div>
   );
 };
 
-// Toast容器组件
-export const ToastContainer: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-  const toasts = useToasts();
-  const removeToast = useAppStore(state => state.removeToast);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const container = (
-    <div className="fixed top-4 right-4 z-50 space-y-2">
-      {toasts.map((toast) => (
-        <Toast
-          key={toast.id}
-          id={toast.id}
-          type={toast.type}
-          message={toast.message}
-          duration={toast.duration}
-          onClose={removeToast}
-        />
-      ))}
-    </div>
-  );
-
-  return createPortal(container, document.body);
-};
-
-// Toast Hook
-export const useToast = () => {
-  const addToast = useAppStore(state => state.addToast);
-  const removeToast = useAppStore(state => state.removeToast);
-  const clearToasts = useAppStore(state => state.clearToasts);
-
-  const toast = {
-    success: (message: string, options?: Partial<ToastConfig>) => {
-      return addToast({
-        type: 'success',
-        message,
-        ...options,
-      });
-    },
-
-    error: (message: string, options?: Partial<ToastConfig>) => {
-      return addToast({
-        type: 'error',
-        message,
-        duration: 0, // 错误消息默认不自动关闭
-        ...options,
-      });
-    },
-
-    warning: (message: string, options?: Partial<ToastConfig>) => {
-      return addToast({
-        type: 'warning',
-        message,
-        ...options,
-      });
-    },
-
-    info: (message: string, options?: Partial<ToastConfig>) => {
-      return addToast({
-        type: 'info',
-        message,
-        ...options,
-      });
-    },
-
-    custom: (config: ToastConfig) => {
-      return addToast(config);
-    },
-
-    dismiss: (id: string) => {
-      removeToast(id);
-    },
-
-    dismissAll: () => {
-      clearToasts();
-    },
-  };
-
-  return toast;
-};
-
-// 添加CSS动画
-const toastStyles = `
-  @keyframes shrink {
-    from {
-      width: 100%;
-    }
-    to {
-      width: 0%;
-    }
+// 便捷的Toast函数
+export const showToast = {
+  success: (message: string, title?: string) => {
+    // 这里需要访问Toast上下文，实际使用时应该通过useToast hook
+    console.log('Success toast:', { message, title });
+  },
+  error: (message: string, title?: string) => {
+    console.log('Error toast:', { message, title });
+  },
+  warning: (message: string, title?: string) => {
+    console.log('Warning toast:', { message, title });
+  },
+  info: (message: string, title?: string) => {
+    console.log('Info toast:', { message, title });
   }
-`;
-
-// 注入样式
-if (typeof document !== 'undefined') {
-  const styleElement = document.createElement('style');
-  styleElement.textContent = toastStyles;
-  document.head.appendChild(styleElement);
-}
+};

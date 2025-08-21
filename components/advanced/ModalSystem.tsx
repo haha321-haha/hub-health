@@ -1,327 +1,211 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
-import { createPortal } from 'react-dom';
-import { X, AlertTriangle, CheckCircle, Info } from 'lucide-react';
-import { useAppStore } from '../../lib/stores/appStore';
+import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import { useAppStore } from '@/lib/stores/appStore';
 
 // 模态框类型
-export type ModalType = 'default' | 'confirm' | 'alert' | 'custom';
-
-// 模态框配置
-export interface ModalConfig {
-  type?: ModalType;
+export interface Modal {
+  id: string;
   title?: string;
-  content?: React.ReactNode;
+  content: ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   closable?: boolean;
-  maskClosable?: boolean;
-  showFooter?: boolean;
+  onClose?: () => void;
+  onConfirm?: () => void;
   confirmText?: string;
   cancelText?: string;
-  onConfirm?: () => void | Promise<void>;
-  onCancel?: () => void;
-  className?: string;
-  zIndex?: number;
+  type?: 'info' | 'warning' | 'error' | 'success';
 }
 
-// 确认对话框配置
-export interface ConfirmConfig {
-  title?: string;
-  content: React.ReactNode;
-  confirmText?: string;
-  cancelText?: string;
-  type?: 'warning' | 'danger' | 'info';
-  onConfirm?: () => void | Promise<void>;
-  onCancel?: () => void;
+// 模态框上下文
+interface ModalContextType {
+  modals: Modal[];
+  openModal: (modal: Omit<Modal, 'id'>) => string;
+  closeModal: (id: string) => void;
+  closeAllModals: () => void;
 }
 
-// 模态框组件
-interface ModalProps extends ModalConfig {
-  isOpen: boolean;
-  onClose: () => void;
-  children?: React.ReactNode;
-}
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  type = 'default',
-  title,
-  content,
-  children,
-  size = 'md',
-  closable = true,
-  maskClosable = true,
-  showFooter = false,
-  confirmText = '确认',
-  cancelText = '取消',
-  onConfirm,
-  onCancel,
-  className = '',
-  zIndex = 1000,
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+// 模态框Provider
+export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [modals, setModals] = useState<Modal[]>([]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setIsVisible(true);
-      setIsAnimating(true);
-      document.body.style.overflow = 'hidden';
-    } else {
-      setIsAnimating(false);
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-        document.body.style.overflow = '';
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-
-    return () => {
-      document.body.style.overflow = '';
+  const openModal = useCallback((modal: Omit<Modal, 'id'>) => {
+    const id = `modal-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const newModal: Modal = {
+      id,
+      size: 'md',
+      closable: true,
+      confirmText: '确认',
+      cancelText: '取消',
+      type: 'info',
+      ...modal
     };
-  }, [isOpen]);
 
-  const handleMaskClick = useCallback((e: React.MouseEvent) => {
-    if (e.target === e.currentTarget && maskClosable) {
+    setModals(prev => [...prev, newModal]);
+
+    // 记录到应用状态
+    const { recordModalAction } = useAppStore.getState();
+    recordModalAction({
+      action: 'open',
+      modalId: id,
+      modalType: newModal.type || 'info',
+      timestamp: new Date().toISOString()
+    });
+
+    return id;
+  }, []);
+
+  const closeModal = useCallback((id: string) => {
+    setModals(prev => prev.filter(modal => modal.id !== id));
+
+    // 记录到应用状态
+    const { recordModalAction } = useAppStore.getState();
+    recordModalAction({
+      action: 'close',
+      modalId: id,
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
+  const closeAllModals = useCallback(() => {
+    setModals([]);
+  }, []);
+
+  return (
+    <ModalContext.Provider value={{ modals, openModal, closeModal, closeAllModals }}>
+      {children}
+      <ModalManager />
+    </ModalContext.Provider>
+  );
+};
+
+// 使用模态框Hook
+export const useModal = () => {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error('useModal must be used within a ModalProvider');
+  }
+  return context;
+};
+
+// 模态框管理器
+export const ModalManager: React.FC = () => {
+  const { modals, closeModal } = useModal();
+
+  if (modals.length === 0) return null;
+
+  return (
+    <>
+      {modals.map((modal) => (
+        <ModalOverlay key={modal.id} modal={modal} onClose={() => closeModal(modal.id)} />
+      ))}
+    </>
+  );
+};
+
+// 模态框覆盖层
+interface ModalOverlayProps {
+  modal: Modal;
+  onClose: () => void;
+}
+
+const ModalOverlay: React.FC<ModalOverlayProps> = ({ modal, onClose }) => {
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget && modal.closable) {
       onClose();
     }
-  }, [maskClosable, onClose]);
+  };
 
-  const handleConfirm = useCallback(async () => {
-    if (onConfirm) {
-      try {
-        await onConfirm();
-        onClose();
-      } catch (error) {
-        console.error('Modal confirm error:', error);
-      }
-    } else {
-      onClose();
-    }
-  }, [onConfirm, onClose]);
-
-  const handleCancel = useCallback(() => {
-    if (onCancel) {
-      onCancel();
-    }
+  const handleConfirm = () => {
+    modal.onConfirm?.();
     onClose();
-  }, [onCancel, onClose]);
+  };
+
+  const handleClose = () => {
+    modal.onClose?.();
+    onClose();
+  };
 
   const getSizeClasses = () => {
-    switch (size) {
+    switch (modal.size) {
       case 'sm':
         return 'max-w-sm';
-      case 'md':
-        return 'max-w-md';
       case 'lg':
-        return 'max-w-lg';
+        return 'max-w-2xl';
       case 'xl':
-        return 'max-w-xl';
+        return 'max-w-4xl';
       case 'full':
         return 'max-w-full mx-4';
       default:
-        return 'max-w-md';
+        return 'max-w-lg';
     }
   };
 
-  const getTypeIcon = () => {
-    switch (type) {
-      case 'confirm':
-        return <AlertTriangle className="w-6 h-6 text-yellow-500" />;
-      case 'alert':
-        return <Info className="w-6 h-6 text-blue-500" />;
+  const getTypeClasses = () => {
+    switch (modal.type) {
+      case 'warning':
+        return 'border-yellow-500 bg-yellow-50';
+      case 'error':
+        return 'border-red-500 bg-red-50';
+      case 'success':
+        return 'border-green-500 bg-green-50';
       default:
-        return null;
+        return 'border-blue-500 bg-blue-50';
     }
   };
 
-  if (!isVisible) return null;
-
-  const modalContent = (
+  return (
     <div
-      className={`fixed inset-0 flex items-center justify-center p-4`}
-      style={{ zIndex }}
-      onClick={handleMaskClick}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+      onClick={handleBackdropClick}
     >
-      {/* 背景遮罩 */}
-      <div
-        className={`
-          absolute inset-0 bg-black transition-opacity duration-200
-          ${isAnimating ? 'opacity-50' : 'opacity-0'}
-        `}
-      />
-
-      {/* 模态框内容 */}
-      <div
-        className={`
-          relative bg-white rounded-lg shadow-xl w-full ${getSizeClasses()}
-          transform transition-all duration-200
-          ${isAnimating 
-            ? 'scale-100 opacity-100' 
-            : 'scale-95 opacity-0'
-          }
-          ${className}
-        `}
-      >
+      <div className={`w-full ${getSizeClasses()} bg-white rounded-lg shadow-xl border ${getTypeClasses()}`}>
         {/* 头部 */}
-        {(title || closable) && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <div className="flex items-center space-x-3">
-              {getTypeIcon()}
-              {title && (
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {title}
-                </h3>
-              )}
-            </div>
-            {closable && (
+        {modal.title && (
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900">{modal.title}</h3>
+            {modal.closable && (
               <button
-                onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                onClick={handleClose}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             )}
           </div>
         )}
 
         {/* 内容 */}
-        <div className="p-6">
-          {content || children}
+        <div className="p-4">
+          {modal.content}
         </div>
 
-        {/* 底部 */}
-        {showFooter && (
-          <div className="flex justify-end space-x-3 p-6 border-t border-gray-200">
-            <button
-              onClick={handleCancel}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 transition-colors"
-            >
-              {cancelText}
-            </button>
-            <button
-              onClick={handleConfirm}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors"
-            >
-              {confirmText}
-            </button>
+        {/* 底部按钮 */}
+        {(modal.onConfirm || modal.closable) && (
+          <div className="flex items-center justify-end space-x-3 p-4 border-t border-gray-200">
+            {modal.closable && (
+              <button
+                onClick={handleClose}
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                {modal.cancelText}
+              </button>
+            )}
+            {modal.onConfirm && (
+              <button
+                onClick={handleConfirm}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                {modal.confirmText}
+              </button>
+            )}
           </div>
         )}
       </div>
     </div>
   );
-
-  return createPortal(modalContent, document.body);
-};
-
-// 模态框管理器
-export const ModalManager: React.FC = () => {
-  const modal = useAppStore(state => state.ui.modal);
-  const closeModal = useAppStore(state => state.closeModal);
-
-  return (
-    <Modal
-      isOpen={modal.isOpen}
-      onClose={closeModal}
-      {...(modal.data as ModalConfig)}
-    />
-  );
-};
-
-// 模态框Hook
-export const useModal = () => {
-  const openModal = useAppStore(state => state.openModal);
-  const closeModal = useAppStore(state => state.closeModal);
-
-  const modal = {
-    open: (config: ModalConfig) => {
-      openModal('custom', config);
-    },
-
-    close: () => {
-      closeModal();
-    },
-
-    confirm: (config: ConfirmConfig): Promise<boolean> => {
-      return new Promise((resolve) => {
-        const modalConfig: ModalConfig = {
-          type: 'confirm',
-          title: config.title || '确认操作',
-          content: config.content,
-          showFooter: true,
-          confirmText: config.confirmText || '确认',
-          cancelText: config.cancelText || '取消',
-          onConfirm: async () => {
-            if (config.onConfirm) {
-              await config.onConfirm();
-            }
-            resolve(true);
-          },
-          onCancel: () => {
-            if (config.onCancel) {
-              config.onCancel();
-            }
-            resolve(false);
-          },
-        };
-
-        openModal('confirm', modalConfig);
-      });
-    },
-
-    alert: (content: React.ReactNode, title?: string): Promise<void> => {
-      return new Promise((resolve) => {
-        const modalConfig: ModalConfig = {
-          type: 'alert',
-          title: title || '提示',
-          content,
-          showFooter: true,
-          confirmText: '确定',
-          onConfirm: () => {
-            resolve();
-          },
-        };
-
-        openModal('alert', modalConfig);
-      });
-    },
-
-    // 便捷方法
-    success: (content: React.ReactNode, title?: string) => {
-      return modal.alert(
-        <div className="flex items-center space-x-3">
-          <CheckCircle className="w-6 h-6 text-green-500" />
-          <div>{content}</div>
-        </div>,
-        title || '成功'
-      );
-    },
-
-    error: (content: React.ReactNode, title?: string) => {
-      return modal.alert(
-        <div className="flex items-center space-x-3">
-          <AlertTriangle className="w-6 h-6 text-red-500" />
-          <div>{content}</div>
-        </div>,
-        title || '错误'
-      );
-    },
-
-    warning: (content: React.ReactNode, title?: string) => {
-      return modal.confirm({
-        title: title || '警告',
-        content: (
-          <div className="flex items-center space-x-3">
-            <AlertTriangle className="w-6 h-6 text-yellow-500" />
-            <div>{content}</div>
-          </div>
-        ),
-        type: 'warning',
-      });
-    },
-  };
-
-  return modal;
 };

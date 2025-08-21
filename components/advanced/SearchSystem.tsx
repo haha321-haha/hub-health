@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Search, X, Filter, SortAsc, SortDesc, Clock, Bookmark } from 'lucide-react';
-import { useAppStore } from '../../lib/stores/appStore';
 
 // 搜索结果类型
 export interface SearchResult {
